@@ -1,8 +1,11 @@
+//Home
+
 import React from 'react'
+import '../global.css'
 
 function app() {
   return (
-    <div>app</div>
+    <h1>App</h1>
   )
 }
 

@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+* {
+  margin : 0;
+  padding : 0;
+  box-sizing : border-box;
+  font-family:  Verdana, sans-serif;
+}
+html,body {
+  height : 100%;
+  width : 100%;
+}
+
+/* xs */
+@media (max-width: 475px) {
+}
+
+/* sm */
+@media (min-width: 640px) {
+}
+/* md */
+@media (min-width: 768px) {
+}
+
+/* lg */
+@media (min-width: 1024px) {
+}
+
+/* xl */
+@media (min-width: 1280px) {
+}
+
+/* 2xl */
+@media (min-width: 1536px) {
+}
