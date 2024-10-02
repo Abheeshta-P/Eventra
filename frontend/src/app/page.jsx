@@ -1,16 +1,18 @@
 //Home
 "use client"
 
-import React from 'react'
+import React, { useState } from 'react'
 import '../global.css'
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { authService } from '@/components/utils';
+import { ProviderDashboard,CreatorDashboard,HomePage, Loading } from '@/components';
 
 function app() {
    // at first when app loads get the user status
    const dispatch = useDispatch();
- 
+   const {userType,isLoggedIn} = useSelector(state => state.auth);
+   const [loading,setLoading] = useState(true);
    // when app loads useEffect is invoked
    useEffect (()=>{
      // check whether there is any logged in user
@@ -24,13 +26,27 @@ function app() {
        }
      }). catch( error=>{
        console.log("page.jsx useEffect and getCurrentUser :: error",error);
-     })
+     }).finally(()=>setLoading(false));
     
    },[])
+
+   const ConditionalRender = ()=>{
+    // if logged in directly render dashboard
+    if(isLoggedIn){
+      if(userType == 'eventCreator')
+        return <CreatorDashboard/>
+      else 
+       return <ProviderDashboard/>
+    }
+
+    // else render home page
+    else 
+   return <HomePage/>
+    
+   }
  
-  return (
-   <h1> App</h1>
-  )
+ 
+  return loading?<Loading className={'sm:-mt-16'}/>:<ConditionalRender/>;
 }
 
 export default app

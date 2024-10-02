@@ -1,6 +1,6 @@
 .container-spinner {
-  --uib-size: 45px;
-  --uib-color: black;
+  --uib-size: 100px;
+  --uib-color: #03089a;
   --uib-speed: 1.75s;
   --uib-bg-opacity: .1;
   position: relative;
