@@ -1,11 +1,13 @@
 import React from 'react'
-import { Hero } from '.'
+import { Hero,Features, Contact } from '.'
 
 // grouping
 function HomePage() {
   return (
     <main>
     <Hero/>
+    <Features/>
+    <Contact/>
     </main>
   )
 }
