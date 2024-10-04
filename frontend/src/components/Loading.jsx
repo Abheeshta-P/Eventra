@@ -4,9 +4,9 @@ import '../loading-spinner.css';
 function Loading({className}) {
   return (
     <div className={`w-full min-h-screen flex justify-center items-center ${className}`}>
-      <div class="container-spinner">
-        <div class="half"></div>
-        <div class="half"></div>
+      <div className="container-spinner">
+        <div className="half"></div>
+        <div className="half"></div>
       </div>
     </div>
 

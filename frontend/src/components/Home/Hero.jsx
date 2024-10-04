@@ -16,7 +16,9 @@ function Hero() {
     <div>
       <img src="../../../hero2.png" alt="" className='w-[300px] md:w-[350px] lg:w-[450px]' style={{pointerEvents:'none'}}/>
     </div>
-  </section></Container>
+    
+  </section>
+  </Container>
   )
 }
 

@@ -41,10 +41,10 @@ function NavItems (){
     href : '/',
   },{
     name : 'Features',
-    href : '/#features',
+    href : '#features',
   },{
     name : 'Contact',
-    href : '/#contact',
+    href : '#contact',
   }];
 
  if (isLoggedIn && userType === 'eventCreator') {
