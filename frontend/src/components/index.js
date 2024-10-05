@@ -6,8 +6,8 @@ import Container from "./Container/Container";
 import Loading from "./Loading";
 import Input from "./Input";
 
-import ProviderDashboard from "./Dashboard/ProviderDashboard";
-import CreatorDashboard from "./Dashboard/CreatorDashboard";
+import ProviderDashboard from "./dashboard/ProviderDashboard";
+import CreatorDashboard from "./dashboard/CreatorDashboard";
 
 
 import HomePage from "./Home/HomePage";
