@@ -1,30 +1,21 @@
 import express from 'express'
 import cors from 'cors'
 import nodemailer from 'nodemailer'
-// import { google } from 'googleapis'
-// import { config } from 'dotenv'
+import { companyEmail,pass } from './conf.js';
 const app = express();
-
-// const dotenv = require('dotenv');
-// config({ path: '/.env' });
-//process.env.VARIABLE_NAME
-
-// const oAuth2Client = new google.auth.OAuth2(process.env.CLIENT_ID,process.env.CLIENT_SECRET,process.env.REDIRECT_URI)
-// oAuth2Client.setCredentials({refresh_token:process.env.REFRESH_TOKEN})
 
 // Configure CORS 
 app.use(cors({
-  origin: '*', // Allow only your Next.js app to access the API
-  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed methods
-  credentials: true, // Allow credentials (cookies, authorization headers, etc.)
+  origin: '*', 
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], 
+  credentials: true, 
 }));
+
 // Body parser middleware
-// app.use(express.json());
+app.use(express.json());
 // app.use(express.urlencoded({ extended: true }));
 
-// Your routes here
-
-//contact form 
+// ROUTES :
 // contact route
 app.post('/api/contact-us', async (req, res) => {
   console.log(req)
@@ -37,18 +28,20 @@ app.post('/api/contact-us', async (req, res) => {
 
    // Nodemailer setup
    const transporter = nodemailer.createTransport({
-    service: 'Gmail', // Or another email service provider (e.g., Outlook, Yahoo)
+    service: 'gmail', 
     auth: {
-      user: 'eventa.sass@email.com', // Your email
-      pass: 'your-password', // Your email password or app password
+      user: companyEmail, 
+      pass: pass, 
     },
   });
 
   const mailOptions = {
-    from: 'EVENTRA.SASS 📧 <eventra.sass@gmail.com>',
-    to: 'eventra.sass@email.com', // Who will receive the email
-    subject: `New Contact Form Submission from ${name}`,
-    text: `You received a new message from ${name} (${email}):\n\n${message}`,
+    from: `EVENTRA.SASS 📧 ${companyEmail}`,
+    to: companyEmail, 
+    subject: `Contact Form Submission from ${name}`,
+    text: `From ${name} (${email}):\n\n${message}`,
+    html: `<h1>From : ${name} (${email})</h1><br><h2>${message}</h2>`,
+
   };
 
   // Send email
@@ -97,6 +90,6 @@ app.post('/api/logout', (req, res) => {
 
 
 app.listen(5000, () => {
-  console.log('Server is running on port 5000');
+  console.log(`Server is running on port 5000 http://localhost:${5000}`);
 });
  

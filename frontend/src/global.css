@@ -11,6 +11,15 @@ html,body {
   height : 100%;
   width : 100%;
 }
+::-moz-selection { 
+  color: rgb(218, 215, 215);
+  background: #03089a;
+}
+
+::selection {
+  color: rgb(218, 215, 215);
+  background: #03089a;
+}
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 120px; /* Adjust the value based on your header height */

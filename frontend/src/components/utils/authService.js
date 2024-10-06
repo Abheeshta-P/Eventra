@@ -1,7 +1,8 @@
+import { url } from "@/conf";
 const authService = {
   getCurrentUser: async () => {
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/current-user`, {
+      const response = await fetch(`${url}/api/current-user`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -22,7 +23,7 @@ const authService = {
   },
   logoutUser : async () => {
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/logout`, {
+      const response = await fetch(`${url}/api/logout`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

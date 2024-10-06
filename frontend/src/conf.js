@@ -1,0 +1,1 @@
+export const url = String(process.env.NEXT_PUBLIC_API_URL);

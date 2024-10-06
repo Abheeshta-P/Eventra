@@ -2,14 +2,14 @@
 import React from 'react';
 import { Button, Container, Input } from '..';
 import { useForm } from 'react-hook-form';
+import { url } from '@/conf';
 
 function ContactForm(){
   const {register,handleSubmit,formState:{errors},setValue} = useForm();
 
   const onSubmit = async(data) => {
-    console.log("clicked")
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/contact-us`, {
+      const response = await fetch(`${url}/api/contact-us`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -36,13 +36,13 @@ function ContactForm(){
     <h2 className="text-4xl font-semibold text-center mb-8 text-[#03089a]">Contact Us</h2>      
     <section>
     <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col items-center w-[300px] gap-4'>
-    <Input label = {'Name : '} placeholder = {'Enter your name'} {...register('name',{
+    <Input label = {'Name : '} placeholder = {'Enter your name'} required {...register('name',{
         required : true
       })}/>
         {errors.name && (
             <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>
           )}
-      <Input label = {'Email : '} placeholder = {'Enter your mail'} {...register('email',{
+      <Input label = {'Email : '} placeholder = {'Enter your mail'} required {...register('email',{
         required : true,
         pattern: {
           value: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/,
@@ -54,7 +54,7 @@ function ContactForm(){
           )}
       <div className="message flex flex-col w-full">
       <label htmlFor="message" className='mb-2 mt-2'>Message : </label>
-      <textarea name="message" id="message" placeholder = {'Enter your message'} className = 'px-3 py-2 rounded-lg h-40 border-none resize-none' {...register('message',{
+      <textarea name="message" id="message" placeholder = {'Enter your message'} required className = 'px-3 py-2 rounded-lg h-40 border-none resize-none' {...register('message',{
         required : true
       })}></textarea>
         {errors.message && (
