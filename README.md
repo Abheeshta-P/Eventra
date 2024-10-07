@@ -1,8 +1,4 @@
-Certainly! Here's a sample `README.md` file that highlights your project, **Eventera**, and provides essential information in a visually appealing format:
-
----
-
-# 🎉 Eventera - Your Ultimate Event Management Portal 🎉
+<h1 align='center'> 🎉 Eventera - Event Management Portal 🎉</h1>
 
 **Eventera** is a comprehensive event management platform that connects users with service providers like caterers, decorators, and venues. Users can create events, manage guest lists, send invitations, and much more—all through a seamless, user-friendly interface.
 
