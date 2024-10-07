@@ -13,6 +13,7 @@ function LogoutBtn({className}) {
     }).catch(error =>{
       console.log("Logout button :: logout api :: error",error);
     })
+    // dispacth(logout());
   }
   return (
     <>

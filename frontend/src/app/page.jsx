@@ -34,9 +34,9 @@ function app() {
    const ConditionalRender = ()=>{
     // if logged in directly render dashboard
     if(isLoggedIn){
-      if(userType == 'eventCreator')
+      if(userType === 'eventCreator')
         return <CreatorDashboard/>
-      else 
+      else if(userType === 'serviceProvider')
        return <ProviderDashboard/>
     }
 

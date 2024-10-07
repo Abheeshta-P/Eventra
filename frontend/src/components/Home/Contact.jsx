@@ -33,7 +33,7 @@ function ContactForm(){
   }
   return(
    <Container className={'flex flex-col items-center'}>
-    <h2 className="text-4xl font-semibold text-center mb-8 text-[#03089a]">Contact Us</h2>      
+    <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-center mb-8 text-[#03089a]">Contact Us</h2>      
     <section>
     <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col items-center w-[300px] gap-4'>
     <Input label = {'Name : '} placeholder = {'Enter your name'} required {...register('name',{
@@ -53,8 +53,8 @@ function ContactForm(){
             <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
           )}
       <div className="message flex flex-col w-full">
-      <label htmlFor="message" className='mb-2 mt-2'>Message : </label>
-      <textarea name="message" id="message" placeholder = {'Enter your message'} required className = 'px-3 py-2 rounded-lg h-40 border-none resize-none' {...register('message',{
+      <label htmlFor="message" className='text-sm md:text-base inline-block mb-2 pl-1 text-zinc-900'>Message : </label>
+      <textarea name="message" id="message" placeholder = {'Enter your message'} required className = 'px-3 py-2 rounded-lg h-40 border-none resize-none text-sm md:text-base' {...register('message',{
         required : true
       })}></textarea>
         {errors.message && (

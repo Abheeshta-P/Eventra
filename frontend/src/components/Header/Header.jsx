@@ -12,6 +12,7 @@ function NavItems (){
   const [dropdownVisible, setDropdownVisible] = React.useState(false);
   const userNameFirstLetter = userData?.name?.charAt(0).toUpperCase() || 'U'; 
   const pathname = usePathname();
+  const dashboardPath = userType==='eventCreator'?'event-creator':'service-provider';
 
   const toggleDropdown = () => {
     setDropdownVisible((prevState) => !prevState);
@@ -29,7 +30,7 @@ function NavItems (){
     </div>
   
     <div className={`absolute text-sm md:text-base -right-8 top-12 mt-2 bg-zinc-50 rounded-md shadow-lg ${dropdownVisible ? 'flex flex-col justify-center items-center gap-2 p-2' : 'hidden'} transition-all duration-200`}>
-      <Link href="/dashboard" className="block px-4 py-2 text-zinc-800 hover:bg-gray-100 rounded-md transition-all duration-200">Dashboard</Link>
+      <Link href={`/dashboard/${dashboardPath}`} className="block px-4 py-2 text-zinc-800 hover:bg-gray-100 rounded-md transition-all duration-200">Dashboard</Link>
       <LogoutBtn className="transition-all duration-200" />
     </div>
   </div>
@@ -50,8 +51,8 @@ function NavItems (){
  if (isLoggedIn && userType === 'eventCreator') {
     return (
       <div className='flex justify-around w-[250px] md:w-[300px] items-center '>
-        <Link href={'/'} className={`${ pathname.startsWith('/') ? 'text-[#03089a] font-semibold' : 'text-zinc-900'} hover:text-[#03089a] transition-all duration-200 text-sm md:text-base`}>Home</Link>
-        <Button className='font-semibold '>Create Event</Button>
+        <Link href={'/home'} className={`${ pathname.startsWith('/') ? 'text-[#03089a] font-semibold' : 'text-zinc-900'} hover:text-[#03089a] transition-all duration-200 text-sm md:text-base`}>Home</Link>
+       <Link href = {'/dashboard/event-creator/create-event'}> <Button className='font-semibold '>Create Event</Button></Link>
         {/* Dashboard and logout drop down in profile section */}
        <ProfileSection/>
     </div>
@@ -61,7 +62,7 @@ function NavItems (){
   else if (isLoggedIn && userType === 'serviceProvider'){
     return (
       <div className='flex justify-around w-[150px] items-center '>
-      <Link href={'/'}  className={`${ pathname.startsWith('/') ? 'text-[#03089a] font-semibold' : 'text-zinc-900'} hover:text-[#03089a] transition-all duration-200 text-sm md:text-base`}>Home</Link>
+      <Link href={'/home'}  className={`${ pathname.startsWith('/') ? 'text-[#03089a] font-semibold' : 'text-zinc-900'} hover:text-[#03089a] transition-all duration-200 text-sm md:text-base`}>Home</Link>
       {/* Dashboard and logout drop down in profile section */}
      <ProfileSection/>
       </div>
