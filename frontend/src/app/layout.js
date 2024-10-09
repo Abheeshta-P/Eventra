@@ -1,5 +1,6 @@
 // app/layout.js
 import { LayoutRender } from "@/components";
+import '../global.css'
 
 export const metadata = {
   title: 'Eventra',

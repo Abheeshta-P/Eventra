@@ -36,6 +36,7 @@ function Signup() {
           <Input
           label="Name: "
           placeholder="Enter your full name"
+          required
           {...register("name", {
               required: true,
           })}
@@ -44,6 +45,7 @@ function Signup() {
           label="Email: "
           placeholder="Enter your email"
           type="email"
+          required
           {...register("email", {
               required: true,
               validate: {
@@ -55,12 +57,13 @@ function Signup() {
           <Input
           label="Password: "
           type="password"
+          required
           placeholder="Enter your password"
           {...register("password", {
               required: true,})}
           />
           <p className='text-black font-bold text-base text-center'> Password should be atleast 8 character long </p>
-          <Button children={'Sign up'} type = 'submit' className={'w-full'}/>
+          <Button type = 'submit' className={'w-full'}>Sign up</Button>
           </div>
         </form>
         </div>

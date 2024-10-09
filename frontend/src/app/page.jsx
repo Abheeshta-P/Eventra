@@ -9,7 +9,7 @@ import { authService } from '@/components/utils';
 import { ProviderDashboard,CreatorDashboard,HomePage, Loading } from '@/components';
 import { login, logout } from '../store/features/authSlice';  
 
-function app() {
+function App() {
    // at first when app loads get the user status
    const dispatch = useDispatch();
    const {userType,isLoggedIn} = useSelector(state => state.auth);
@@ -50,4 +50,4 @@ function app() {
   return loading?<Loading className={'sm:-mt-16'}/>:<ConditionalRender/>;
 }
 
-export default app
+export default App
