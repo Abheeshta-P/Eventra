@@ -1,9 +1,9 @@
 import React from 'react'
 
-function ServiceProvider() {
+function ServiceProviderDashBoard() {
   return (
-    <div>ServiceProvider</div>
+    <div>ServiceProviderDashBoard</div>
   )
 }
 
-export default ServiceProvider
+export default ServiceProviderDashBoard
