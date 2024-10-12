@@ -4,6 +4,8 @@ import nodemailer from 'nodemailer'
 import { companyEmail,pass } from './conf.js';
 const app = express();
 
+// there is a need to upload images
+
 // Configure CORS 
 app.use(cors({
   origin: '*', 

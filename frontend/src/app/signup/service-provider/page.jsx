@@ -26,7 +26,7 @@ const ServiceProviderSignup = () => {
         <Logo/>
       <h2 className="text-2xl font-semibold text-gray-900 mt-3 mb-4 text-center">Service Provider Sign up</h2>
       
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6" encType='multipart/form-data'>
         <div>
           <Input
             label="Name"
@@ -50,6 +50,21 @@ const ServiceProviderSignup = () => {
           })}
           />
           {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
+        </div>
+        <div>
+        <Input
+          label="Phone: "
+          placeholder="Enter your phone number"
+          type="number"
+          {...register("phone", {
+              required: 'Phone number is required',
+              pattern: {
+                  value: /^[6-9]\d{9}$/,
+                  message: 'Phone number must be a valid 10-digit Indian number',
+              },
+          })}
+        />
+          {errors.phone && <p className="text-red-500 text-sm">{errors.phone.message}</p>}
         </div>
 
         <div>
