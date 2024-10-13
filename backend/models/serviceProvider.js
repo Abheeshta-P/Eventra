@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const categories = ['Catering', 'Decorating', 'Photography', 'Venue', 'Music', 'Emcee', 'Makeup', 'Cakeshop'];
+const categories = ['Catering', 'Decorating', 'Photography', 'Venue', 'Music', 'Emcee', 'Makeup', 'Cakeshop','Purohit'];
 
 const ProviderSchema = new mongoose.Schema({
   name: { type: String, required: true },

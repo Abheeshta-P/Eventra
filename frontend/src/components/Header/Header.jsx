@@ -104,7 +104,7 @@ function NavItems (){
 }
 function Header() {
   return (
-    <nav className="fixed top-0 left-0 w-full h-14 bg-[#fcfcfc55] backdrop-blur-sm border-b border-gray-200 shadow-md ">
+    <nav className="fixed top-0 left-0 w-full h-14 bg-[#fcfcfc55] backdrop-blur-sm border-b border-gray-200 shadow-md z-50 ">
   <div className="container mx-auto flex items-center justify-between h-full px-4 ">
         <Link href={'/'}><Logo/></Link>
       {

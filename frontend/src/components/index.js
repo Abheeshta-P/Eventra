@@ -6,12 +6,14 @@ import Container from "./Container/Container";
 import Loading from "./Loading";
 import Input from "./Input";
 import Card from "./Card";
+import EventsCard from "./eventsCard";
 import Select from "./Select";
 import ProviderDashboard from "./dashboard/ProviderDashboard";
 import CreatorDashboard from "./dashboard/CreatorDashboard";
+import ProfileSection from "./Dashboard/ProfileCommon";
 
 
 import HomePage from "./Home/HomePage";
 
 import LayoutRender from "./LayoutRender";
-export {Header,Footer,LayoutRender,Logo,Button,ProviderDashboard,CreatorDashboard,HomePage,Container,Loading,Input,Card,Select}
+export {Header,Footer,LayoutRender,Logo,Button,ProviderDashboard,CreatorDashboard,HomePage,Container,Loading,Input,Card,Select,ProfileSection,EventsCard}
