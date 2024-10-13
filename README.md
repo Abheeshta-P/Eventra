@@ -19,7 +19,7 @@
 - **Backend**: Node.js, Express.js
 - **Database**: MongoDB
 - **Authentication**: JWT
-- **Email**: Nodemailer (Google SMTP integration)
+- **Email**: Nodemailer
 - **Styling**: Tailwind CSS
 
 
