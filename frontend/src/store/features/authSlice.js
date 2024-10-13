@@ -5,7 +5,7 @@ const initialState = {
   userType : "eventCreator",
   userData : {
     name : 'abh',
-    
+    email : "abh@gmail.com",
   }
 }
 
@@ -27,5 +27,4 @@ const authSlice = createSlice({
 });
 
 export const {login,logout} = authSlice.actions;
-
 export default authSlice.reducer;

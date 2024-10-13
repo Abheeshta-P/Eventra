@@ -6,12 +6,14 @@ import '../global.css'
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { authService } from '@/components/utils';
-import { ProviderDashboard,CreatorDashboard,HomePage, Loading } from '@/components';
+import { HomePage, Loading } from '@/components';
 import { login, logout } from '../store/features/authSlice';  
+import { useRouter } from 'next/navigation';
 
 function App() {
    // at first when app loads get the user status
    const dispatch = useDispatch();
+   const router = useRouter();
    const {userType,isLoggedIn} = useSelector(state => state.auth);
    const [loading,setLoading] = useState(false);
    // when app loads useEffect is invoked
@@ -35,9 +37,9 @@ function App() {
     // if logged in directly render dashboard
     if(isLoggedIn){
       if(userType === 'eventCreator')
-        return <CreatorDashboard/>
+        router.push('/dashboard/event-creator')
       else if(userType === 'serviceProvider')
-       return <ProviderDashboard/>
+       router.push('/dashboard/service-provider')
     }
 
     // else render home page

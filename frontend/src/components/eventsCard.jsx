@@ -2,7 +2,7 @@
 import { useRouter } from 'next/navigation';
 import React from 'react';
 
-function EventsCard({ eventName, eventType, date, location, className = '', ...props}) {
+function EventsCard({ eventId, eventName, eventType, date, location, className = '', ...props}) {
 
   const route = useRouter();
   const imageSources = {
@@ -12,20 +12,16 @@ function EventsCard({ eventName, eventType, date, location, className = '', ...p
   };
 
 
-  const editEvent = () =>{
-    route.push('/')
+  const displayEventDetails = () =>{
+    route.push(`/dashboard/event-creator/event/${eventId}`); 
   }
 
   return (
     <div
-      className={`relative flex flex-col shadow-md border border-black/10 rounded-lg w-[300px] h-[300px] bg-zinc-100 justify-between p-5 transition-opacity duration-300 ${className}`}
+      className={`relative flex flex-col shadow-md border border-black/10 rounded-lg w-[300px] h-[300px] bg-zinc-100 justify-between p-5 transition-opacity duration-300 cursor-pointer ${className}`}
       {...props}
+      onClick={displayEventDetails}
     >
-    
-      {/* Edit button at top-right */}
-      <button className="absolute top-0 right-0" onClick={editEvent}>
-        <img src="../../eventType/edit.svg" alt="edit" className='w-6' />
-      </button>
 
       {/* Event Image */}
       <div className="border border-black/30 w-full h-[150px]">
