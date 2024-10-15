@@ -28,6 +28,17 @@ html {
   background-image: linear-gradient(rgba(188, 188, 188, 0.8) .1em, transparent .1em), linear-gradient(90deg, rgba(163, 163, 163, 0.2) .1em, transparent .1em);
   background-size: 3em 3em;
 }
+/* Hide the scrollbar for Webkit browsers (Chrome, Safari) */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide the scrollbar for IE, Edge, and Firefox */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
 img {
   pointer-events: none;
 }

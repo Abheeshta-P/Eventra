@@ -9,9 +9,13 @@ import Card from "./Card";
 import EventsCard from "./eventsCard";
 import Select from "./Select";
 import ProfileSection from "./Dashboard/ProfileCommon";
+import ServicesCard from "./ServicesCard";
+import ServicesList from "./ServiceListScroll.jsx";
+import DetailedEventDisplayer from "./Dashboard/DetailedEvent";
+import ParticipantList from "./ParticipantsList";
 
 import HomePage from "./Home/HomePage";
 
 import LayoutRender from "./LayoutRender";
 
-export {Header,Footer,LayoutRender,Logo,Button,HomePage,Container,Loading,Input,Card,Select,ProfileSection,EventsCard}
+export {Header,Footer,LayoutRender,ParticipantList,Logo,Button,HomePage,Container,Loading,Input,Card,Select,ProfileSection,EventsCard,ServicesCard,DetailedEventDisplayer,ServicesList}

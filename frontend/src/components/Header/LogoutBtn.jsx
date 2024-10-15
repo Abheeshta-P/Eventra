@@ -1,19 +1,23 @@
+"use client"
 import React from 'react'
 // need to have logout from backend
 import { logout } from '@/store/features/authSlice';
 import { useDispatch } from 'react-redux'
 import { authService } from '../utils';
+import { useRouter } from 'next/navigation';
 
 function LogoutBtn({className}) {
   const dispacth = useDispatch();
+  const router = useRouter();
   const inputHandler = ()=>{
-    authService.logoutUser().then((e)=>{
-      console.log(e)
-      dispacth(logout());
-    }).catch(error =>{
-      console.log("Logout button :: logout api :: error",error);
-    })
-    // dispacth(logout());
+    // authService.logoutUser().then((e)=>{
+    //   console.log(e)
+    //   dispacth(logout());
+    // }).catch(error =>{
+    //   console.log("Logout button :: logout api :: error",error);
+    // })
+    router.replace("/");
+    dispacth(logout());
   }
   return (
     <>
