@@ -6,14 +6,31 @@ import { useDispatch } from 'react-redux';
 // import {login as storeLogin} from '../features/authSlice'
 import { Button,Container,Input,Logo } from '@/components';
 import Link from 'next/link';
+import { authService } from '@/components/utils';
+import { useRouter } from 'next/navigation';
 
 function Signup() {
   const [error,setError] = useState('');
   const dispatch = useDispatch();
-  const {register,handleSubmit, formState: { errors } } =useForm();
+  const {register,handleSubmit, reset, formState: { errors } } = useForm();
 
   const signup = async (data) =>{
-      
+    try {
+        const userData = await authService.signUpUser(JSON.stringify(data),'event-creator');
+        // if(userData) dispatch(storeLogin({userData}));
+        // navigate('/');
+        if(userData){
+            reset({name : '', email : '', password : ''})
+            if(userData.status === 400)
+                alert("The user with current email already exists, login instead");
+            else {
+                alert("Signup done!")
+                Router.push('/login');
+            }
+        }
+      } catch (error){
+        console.log(" Signup form :: signUpUser :: error ", error);
+      }
   }
   return (
    <Container className={'flex justify-center items-center login-bg'}>

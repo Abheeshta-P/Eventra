@@ -35,7 +35,7 @@ function Input({ type = 'text', className = '', label, ...props }, ref) {
         <button
           type="button"
           onClick={togglePasswordVisibility}
-          className="absolute bottom-3 right-3 flex items-center text-sm text-zinc-600 hover:text-gray-800"
+          className="absolute bottom-2 right-3 flex items-center text-sm text-zinc-600 hover:text-gray-800"
         >
           {showPassword ? 'Hide' : 'Show'}
         </button>

@@ -21,6 +21,28 @@ const authService = {
       return null; // Return null if an error occurs
     }
   },
+  signUpUser: async (body,type) => {
+    try {
+      const response = await fetch(`${url}/api/signup/${type}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body
+        ,
+      });
+
+      if (response.ok || response.status === 400) {
+        return response;
+      } 
+      else {
+        return null; // Return null if the user is not authenticated
+      }
+    } catch (error) {
+      console.error('Error : signUpUser', error);
+      return null; // Return null if an error occurs
+    }
+  },
   logoutUser : async () => {
     try {
       const response = await fetch(`${url}/api/logout`, {

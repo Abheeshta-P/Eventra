@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import Event from "./event";
+import Event from "./event.js";
 
 const eventCreatorSchema = new mongoose.Schema({
   name: { type: String, required: true },
