@@ -2,6 +2,7 @@ import express from 'express'
 import cors from 'cors'
 import nodemailer from 'nodemailer'
 import { companyEmail,pass } from './conf.js';
+import eventCreator from './models/eventCreator.js';
 const app = express();
 
 // there is a need to upload images
@@ -57,7 +58,37 @@ app.post('/api/contact-us', async (req, res) => {
 });
 
 
-app.post('/api/signup', (req, res) => {
+app.post('/api/signup/eventCreator',async (req, res) => {
+  // Handle signup
+  try {
+    const { name, email, password } = req.body;
+
+    // Check if user already exists
+    const existingUser = await eventCreator.findOne({ email });
+    if (existingUser) {
+      return res.status(400).send({ error: 'Email already in use' });
+    }
+
+    // Hash the password
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Create a new user
+    const newUser = new eventCreator({ name, email, password: hashedPassword});
+    await newUser.save();
+
+    // Send welcome email (optional)
+
+    res.send({ message: 'User created successfully!' }); // Or redirect to login
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ error: 'Internal server error' });
+  }
+
+  console.log("Registered")
+});
+
+
+app.post('/api/signup/serviceProvider', (req, res) => {
   // Handle signup
   console.log("Registered")
 });
