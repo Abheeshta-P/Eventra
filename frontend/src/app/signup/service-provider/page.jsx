@@ -1,17 +1,40 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { Input, Button, Select, Container, Logo } from '@/components';
-const categories = ['Catering', 'Decorating', 'Photography', 'Venue', 'Music', 'Emcee', 'Makeup', 'Cakeshop'];
+import { useDispatch } from 'react-redux';
+import { authService } from '@/components/utils';
+import { useRouter } from 'next/navigation';
+
+const categories = ['Catering', 'Decorating', 'Photography', 'Venue', 'Music', 'Emcee', 'Makeup', 'Cakeshop','Purohit'];
 
 const ServiceProviderSignup = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { register, handleSubmit, formState: { errors },reset } = useForm();
   const [galleryImages, setGalleryImages] = useState([]);
+  const fileInputRef = useRef(null);
 
-  const onSubmit = (data) => {
-    // You can now send 'data' to the server
-    console.log('Form Submitted Data:', data);
+  const onSubmit = async (data) => {
+    try {
+      const userData = await authService.signUpUser(JSON.stringify(data),'service-provider');
+      // if(userData) dispatch(storeLogin({userData}));
+      // navigate('/');
+      if(userData){
+          reset({name : '', email : '', phone : '', location : '', category : '', details : '', cost : '', password : ''});
+          if (fileInputRef.current) {
+            fileInputRef.current.value = ''; 
+          }
+          setGalleryImages([]);
+          if(userData.status === 400)
+              alert("The user with current email already exists, login instead");
+          else {
+              alert("Signup done!")
+              Router.push('/login');
+          }
+      }
+    } catch (error){
+      console.log(" Signup form :: signUpUser serviceprovider :: error ", error);
+    }
   };
 
   const handleImageChange = (e) => {
@@ -89,6 +112,7 @@ const ServiceProviderSignup = () => {
         <div>
           <label className="text-sm md:text-base inline-block mb-2 pl-1 mt-2 text-zinc-900">Details about the Service</label>
           <textarea
+          spellCheck = 'false'
             placeholder = 'Provide deatils about your service, facilities offered, constraints etc'
             className="px-3 py-2 rounded-lg bg-white text-black outline-none focus:bg-gray-50 duration-200 border border-gray-200 w-full text-sm md:text-base focus:outline-[#03089a] h-[150px] resize-none"
             {...register('details', { required: 'Please provide details about your service' })}
@@ -108,6 +132,7 @@ const ServiceProviderSignup = () => {
 
         <div>
           <Input
+            ref={fileInputRef}
             label="Gallery / Images"
             type="file"
             accept="image/*"

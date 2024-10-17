@@ -5,7 +5,7 @@ const serviceSchema = new mongoose.Schema({
   category: { 
     type: String, 
     required: true, 
-    enum: ['Catering', 'Decorating', 'Photography', 'Venue', 'Music', 'Emcee', 'Makeup', 'Cakeshop'] 
+    enum: ['Catering', 'Decorating', 'Photography', 'Venue', 'Music', 'Emcee', 'Makeup', 'Cakeshop','Purohit'] 
   },
   name: { type: String, required: true },
   cost: { type: Number, required: true },

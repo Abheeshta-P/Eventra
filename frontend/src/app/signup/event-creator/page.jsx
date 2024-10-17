@@ -29,7 +29,7 @@ function Signup() {
             }
         }
       } catch (error){
-        console.log(" Signup form :: signUpUser :: error ", error);
+        console.log(" Signup form :: signUpUser eventcreator :: error ", error);
       }
   }
   return (
@@ -82,7 +82,6 @@ function Signup() {
           {...register("password", {
               required: true,})}
           />
-          <p className='text-black font-bold text-base text-center'> Password should be atleast 8 character long </p>
           <Button type = 'submit' className={'w-full'}>Sign up</Button>
           </div>
         </form>

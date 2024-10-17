@@ -15,7 +15,6 @@ const ProviderSchema = new mongoose.Schema({
   details: { type: String, required: true },
   cost: { type: String, required: true },
   gallery: [{ type: String }], // URLs or image IDs
-  about: { type: String, required: true },
   password: { type: String, required: true },
   userType: { 
     type: String, 
