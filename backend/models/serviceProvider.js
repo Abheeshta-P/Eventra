@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
-
-const categories = ['Catering', 'Decorating', 'Photography', 'Venue', 'Music', 'Emcee', 'Makeup', 'Cakeshop','Purohit'];
+import { serviceCategories } from "../constants/index.js";
 
 const ProviderSchema = new mongoose.Schema({
   name: { type: String, required: true },
@@ -10,7 +9,7 @@ const ProviderSchema = new mongoose.Schema({
   category: { 
     type: String, 
     required: true, 
-    enum: categories 
+    enum: serviceCategories
   },
   details: { type: String, required: true },
   cost: { type: String, required: true },

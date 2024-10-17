@@ -1,11 +1,12 @@
 import mongoose from "mongoose";
+import { status } from "../constants/index.js";
 
 const todoSchema = new mongoose.Schema({
   taskName: { type: String, required: true },
   status: { 
     type: String, 
     default: 'pending', 
-    enum: ['pending', 'completed'] 
+    enum: status
   }
 });
 

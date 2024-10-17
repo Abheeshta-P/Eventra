@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import Service from "./service.js";
 import Participant from "./participant.js";
 import Todo from "./Todo.js";
+import { eventTypes } from "../constants/index.js";
 
 const eventSchema = new mongoose.Schema({
   eventName: { type: String, required: true },
@@ -11,7 +12,7 @@ const eventSchema = new mongoose.Schema({
   eventType: { 
     type: String, 
     required: true, 
-    enum: ['wedding', 'party', 'entertainment']
+    enum: eventTypes
   },
   services: [Service.schema], 
   participants: [Participant.schema], 

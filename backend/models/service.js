@@ -1,11 +1,12 @@
 // models/Service.js
 import mongoose from "mongoose";
+import { serviceCategories } from "../constants/index.js";
 
 const serviceSchema = new mongoose.Schema({
   category: { 
     type: String, 
     required: true, 
-    enum: ['Catering', 'Decorating', 'Photography', 'Venue', 'Music', 'Emcee', 'Makeup', 'Cakeshop','Purohit'] 
+    enum: serviceCategories
   },
   name: { type: String, required: true },
   cost: { type: Number, required: true },

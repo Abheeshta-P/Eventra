@@ -20,7 +20,7 @@ function ServicesList({ services }) {
   };
 
   return (
-    <div className="relative w-[65%] md:w-full">
+    <div className="relative w-[90%] sm:w-[65%] md:w-full">
       <button
         onClick={scrollLeft}
         className="absolute top-1/2 left-0 transform -translate-y-1/2 z-10 bg-white shadow-md p-2 rounded-full"
@@ -30,10 +30,10 @@ function ServicesList({ services }) {
 
       <div
         ref={scrollContainerRef}
-        className="flex overflow-x-scroll scrollbar-hide space-x-6 px-6 py-4"
+        className="flex overflow-x-scroll scrollbar-hide space-x-4 px-6 py-4 pr-0"
         style={{ scrollBehavior: 'smooth' }}
       >
-        {services.map((service, index) => (
+        {services.map((service) => (
           <ServicesCard service={service} key={service.email} />
         ))}
       </div>

@@ -13,8 +13,9 @@ export default function RootLayout({ children }) {
       <head>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="shortcut icon" href="../../favicon.png" type="image/x-icon"/>
+        <link rel="shortcut icon" href="/favicon.png" type="image/x-icon" />
       </head>
+
       
       <body className="bg-zinc-100 text-black">
       <LayoutRender>{children}</LayoutRender> 
