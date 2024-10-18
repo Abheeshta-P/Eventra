@@ -53,25 +53,22 @@ function DetailedEventDisplayer({ event, isCreating = false, eventName, eventTyp
 
   // whenever change happens update in db
   // event?.participants change this in reduxSlice
-  const localStorageInitialState = useSelector(state => state.participantsList.participantList)
-  const [participants, setParticipants] = useState(event?.participants||localStorageInitialState|| []);
+  // const localStorageInitialState = useSelector(state => state.participantsList.participantList)
+  // const [participants, setParticipants] = useState(event?.participants||localStorageInitialState|| []);
+  const [participants, setParticipants] = useState(event?.participants || []);
   const addParticipant = (participant) => {
     // Create a new array with the added participant
     const updatedParticipants = [...participants, participant];
-    console.log(...participants)
-    console.log(updatedParticipants)
+    
     // Update the state with the new array
     setParticipants(updatedParticipants);
 
     // db call to store/local for now
     // add participant to db
     
-    // Store the updated array in localStorage
-    localStorage.setItem('participants', JSON.stringify(updatedParticipants)); // Convert array to JSON string
-  
-    // Optional: Log the participants from localStorage
-    const participantsFromLocalStorage = JSON.parse(localStorage.getItem('participants'));
-    console.log(participantsFromLocalStorage);
+    // // Store the updated array in localStorage
+    // localStorage.setItem('participants', JSON.stringify(updatedParticipants)); // Convert array to JSON string
+    
   };
   
   return (

@@ -1,6 +1,7 @@
 "use client"
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { nanoid } from '@reduxjs/toolkit';
 import { addParticipant,toggleParticipant,deleteParticipant } from '@/store/features/participantSlice';
 
 function ParticipantList({onAddParticipant}) {
@@ -12,8 +13,9 @@ function ParticipantList({onAddParticipant}) {
 
   const handleAdd = () => {
     if (newParticipant.trim() && phone.trim()) {
-      dispatch(addParticipant({ sno: participants.length + 1, name: newParticipant, phone }));
-      onAddParticipant({ sno: participants.length + 1, name: newParticipant, phone })
+      const participantInfo = { id:nanoid(), sno: participants.length + 1, name: newParticipant, phone }
+      dispatch(addParticipant(participantInfo));
+      onAddParticipant(participantInfo)
       setNewParticipant('');
       setPhoneNumber('');
     }
@@ -30,8 +32,9 @@ function ParticipantList({onAddParticipant}) {
   return (
     <div className="p-4 w-[400px] sm:w-[500px] md:w-[550px] lg:w-[650px] text-nowrap  text-xs sm:text-sm md:text-base">
       <ul>
-        {participants?.map((participant, index) => (
-          <div key={participant.id} className={`flex gap-1 w-fit sm:w-full items-center sm:gap-3 p-3 bg-zinc-50 rounded-md shadow-md mb-2 ${participant.completed?'blur-[2px]':''}`}>
+        {Array.isArray(participants) && participants.length > 0 ? (
+        participants.map((participant, index) => (
+          <div key={participant.id} className={`flex gap-1 w-fit sm:w-full items-center sm:gap-3 p-3 bg-zinc-50 rounded-md shadow-md mb-2 ${participant.completed ? 'blur-[2px]' : ''}`}>
             {/* Checkbox */}
             <input
               type="checkbox"
@@ -41,30 +44,34 @@ function ParticipantList({onAddParticipant}) {
             />
 
             {/* Participant Number */}
-            <div className="bg-zinc-200  ml-1 sm:ml-0 text-center px-2 py-1 sm:py-2 sm:px-4 rounded-md  font-semibold">
+            <div className="bg-zinc-200 ml-1 sm:ml-0 text-center px-2 py-1 sm:py-2 sm:px-4 rounded-md font-semibold">
               {index + 1}
             </div>
 
             {/* Participant Name */}
-            <div className="flex-grow py-2 px-4  rounded-md shadow-sm text-zinc-800">
+            <div className="flex-grow py-2 px-4 rounded-md shadow-sm text-zinc-800">
               <p className="font-semibold">{participant.name}</p>
             </div>
 
             {/* Participant Phone */}
-            <div className="flex-grow py-2 px-4  rounded-md shadow-sm text-zinc-800">
-              <p className=" text-zinc-600">{participant.phone}</p>
+            <div className="flex-grow py-2 px-4 rounded-md shadow-sm text-zinc-800">
+              <p className="text-zinc-600">{participant.phone}</p>
             </div>
 
             {/* Delete Button */}
             <button
               onClick={() => handleDelete(participant.id)}
-              className=" text-white rounded-md shadow-sm px-2 py-2 bg-red-500 hover:bg-red-600 transition-all"
+              className="text-white rounded-md shadow-sm px-2 py-2 bg-red-500 hover:bg-red-600 transition-all"
             >
               Delete
             </button>
           </div>
-        ))}
+        ))
+        ) : (
+        <p className='pl-2'>No participants found.</p> // Optional: Show this message if the array is empty or undefined.
+        )}
       </ul>
+
 
       <div className="mt-4 flex items-center gap-3 w-full">
         <input

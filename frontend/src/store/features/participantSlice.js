@@ -3,22 +3,22 @@ import {createSlice,nanoid} from '@reduxjs/toolkit'
 
 const loadInitialState = (apiCallParticipants) => {
   if (apiCallParticipants) {
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('participants', JSON.stringify(apiCallParticipants));
-    }
+    // if (typeof window !== 'undefined') {
+    //   localStorage.setItem('participants', JSON.stringify(apiCallParticipants));
+    // }
     return { participantList: apiCallParticipants };
   } else {
-    if (typeof window !== 'undefined') {
-      // Get the item from localStorage only if we are in the browser
-      const storedParticipants = localStorage.getItem('participants');
+    // if (typeof window !== 'undefined') {
+    //   // Get the item from localStorage only if we are in the browser
+    //   const storedParticipants = localStorage.getItem('participants');
       
-      // Parse it if it's not null or an empty string
-      const participantsFromLocalStorage = storedParticipants ? JSON.parse(storedParticipants) : [];
-      return { participantList: participantsFromLocalStorage };
-    } else {
+    //   // Parse it if it's not null or an empty string
+    //   const participantsFromLocalStorage = storedParticipants ? JSON.parse(storedParticipants) : [];
+    //   return { participantList: participantsFromLocalStorage };
+    // } else {
       // Return an empty list if on the server-side (SSR)
       return { participantList: [] };
-    }
+    // }
   }
 };
 
@@ -30,7 +30,7 @@ export const participantSlice = createSlice({
   reducers: {
     addParticipant: (state, action) => {
       const participant = {
-        id: nanoid(),
+        id: action.payload.id,
         sno : action.payload.sno,
         name: action.payload.name,
         phone : action.payload.phone,
