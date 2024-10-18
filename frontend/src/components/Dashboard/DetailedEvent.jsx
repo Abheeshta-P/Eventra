@@ -2,7 +2,8 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import React from 'react'
-import { Container,ParticipantList,ServicesList,Button } from '..'
+import { Container,ParticipantList,ServicesList,Button, TodoList } from '..'
+import { useSelector } from 'react-redux'
 
 
 function DetailedEventDisplayer({ event, isCreating = false, eventName, eventType, date, location }) {
@@ -52,12 +53,13 @@ function DetailedEventDisplayer({ event, isCreating = false, eventName, eventTyp
 
   // whenever change happens update in db
   // event?.participants change this in reduxSlice
-  const [participants, setParticipants] = useState(event?.participants || []);
-  const [todo, setTodo] = useState(event?.todo || []);
+  const localStorageInitialState = useSelector(state => state.participantsList.participantList)
+  const [participants, setParticipants] = useState(event?.participants||localStorageInitialState|| []);
   const addParticipant = (participant) => {
     // Create a new array with the added participant
     const updatedParticipants = [...participants, participant];
-  
+    console.log(...participants)
+    console.log(updatedParticipants)
     // Update the state with the new array
     setParticipants(updatedParticipants);
 
@@ -72,13 +74,6 @@ function DetailedEventDisplayer({ event, isCreating = false, eventName, eventTyp
     console.log(participantsFromLocalStorage);
   };
   
-
-  const toggleTodoStatus = (index) => {
-    const updatedTodo = todo.map((task, i) =>
-      i === index ? { ...task, status: task.status === 'completed' ? 'pending' : 'completed' } : task
-    );
-    setTodo(updatedTodo);
-  };
   return (
       <Container className={'mb-5'}>
         <div className="flex flex-col px-3 md:px-8 w-full justify-center items-center gap-6">
@@ -95,6 +90,8 @@ function DetailedEventDisplayer({ event, isCreating = false, eventName, eventTyp
     <ServicesList services={services}/>
     <h2 className="text-gray-800 text-2xl lg:text-3xl font-semibold mt-8">Invitees List</h2>
     <ParticipantList onAddParticipant={addParticipant}/>
+    <h2 className="text-gray-800 text-2xl lg:text-3xl font-semibold mt-8">Todo List</h2>
+    <TodoList/>
     
     {isCreating && (
       <>

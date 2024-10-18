@@ -1,17 +1,24 @@
+"use client"
 import {createSlice,nanoid} from '@reduxjs/toolkit'
 
 const loadInitialState = (apiCallParticipants) => {
   if (apiCallParticipants) {
-    localStorage.setItem('participants', JSON.stringify(apiCallParticipants));
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('participants', JSON.stringify(apiCallParticipants));
+    }
     return { participantList: apiCallParticipants };
   } else {
-    // Get the item from localStorage
-    const storedParticipants = localStorage.getItem('participants');
-
-    // Parse it if it's not null or an empty string
-    const participantsFromLocalStorage = storedParticipants ? JSON.parse(storedParticipants) : [];
-    
-    return { participantList: participantsFromLocalStorage };
+    if (typeof window !== 'undefined') {
+      // Get the item from localStorage only if we are in the browser
+      const storedParticipants = localStorage.getItem('participants');
+      
+      // Parse it if it's not null or an empty string
+      const participantsFromLocalStorage = storedParticipants ? JSON.parse(storedParticipants) : [];
+      return { participantList: participantsFromLocalStorage };
+    } else {
+      // Return an empty list if on the server-side (SSR)
+      return { participantList: [] };
+    }
   }
 };
 
