@@ -30,7 +30,7 @@ function DetailedEventDisplayer({ event, isCreating = false, eventName, eventTyp
       "category": "Photography",
       "name": "Capturing Moments",
       "cost": 20000,
-      "email": "contact@capturingmoments.com",
+      "email": "contact@caturingmoments.com",
       "phone": "9123456789",
       "location" : "mankude"
     }
@@ -39,7 +39,7 @@ function DetailedEventDisplayer({ event, isCreating = false, eventName, eventTyp
       "category": "Photography",
       "name": "Capturing Moments",
       "cost": 20000,
-      "email": "contact@capturingmoments.com",
+      "email": "contact@capuringmoments.com",
       "phone": "9123456789",
       "location" : "mankude"
     }

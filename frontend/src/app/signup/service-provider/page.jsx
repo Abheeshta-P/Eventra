@@ -29,6 +29,7 @@ const ServiceProviderSignup = () => {
               alert("The user with current email already exists, login instead");
           else {
               alert("Signup done!")
+              // or login automatically and push to dashboard
               Router.push('/login');
           }
       }

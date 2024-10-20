@@ -52,7 +52,7 @@ function NavItems (){
     return (
       <div className='flex justify-around w-[250px] md:w-[300px] items-center '>
         <Link href={'/home'} className={`${ pathname.startsWith('/') ? 'text-[#03089a] font-semibold' : 'text-zinc-900'} hover:text-[#03089a] transition-all duration-200 text-sm md:text-base`}>Home</Link>
-       <Link href = {'/dashboard/event-creator/create-event'}> <Button className='font-semibold '>Create Event</Button></Link>
+       <Link href = {'/dashboard/event-creator/event-types'}> <Button className='font-semibold '>Create Event</Button></Link>
         {/* Dashboard and logout drop down in profile section */}
        <ProfileSection/>
     </div>

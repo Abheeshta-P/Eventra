@@ -6,7 +6,7 @@ import Container from "./Container/Container";
 import Loading from "./Loading";
 import Input from "./Input";
 import Card from "./Card";
-import EventsCard from "./eventsCard";
+import EventsCard from "./EventsCard";
 import Select from "./Select";
 import ProfileSection from "./Dashboard/ProfileCommon";
 import ServicesCard from "./ServicesCard";

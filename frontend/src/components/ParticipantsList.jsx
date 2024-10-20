@@ -13,13 +13,17 @@ function ParticipantList({onAddParticipant}) {
 
   const handleAdd = () => {
     if (newParticipant.trim() && phone.trim()) {
-      const participantInfo = { id:nanoid(), sno: participants.length + 1, name: newParticipant, phone }
+      const participantInfo = { id: nanoid(), sno: participants.length + 1, name: newParticipant, phone };
       dispatch(addParticipant(participantInfo));
-      onAddParticipant(participantInfo)
+      onAddParticipant(participantInfo);
       setNewParticipant('');
       setPhoneNumber('');
     }
+    else {
+      alert("Enter valid name and phone")
+    }
   };
+  
 
   const handleToggle = (id) => {
     dispatch(toggleParticipant({ id }));
@@ -32,8 +36,7 @@ function ParticipantList({onAddParticipant}) {
   return (
     <div className="p-4 w-[400px] sm:w-[500px] md:w-[550px] lg:w-[650px] text-nowrap  text-xs sm:text-sm md:text-base">
       <ul>
-        {Array.isArray(participants) && participants.length > 0 ? (
-        participants.map((participant, index) => (
+        { participants.map((participant, index) => (
           <div key={participant.id} className={`flex gap-1 w-fit sm:w-full items-center sm:gap-3 p-3 bg-zinc-50 rounded-md shadow-md mb-2 ${participant.completed ? 'blur-[2px]' : ''}`}>
             {/* Checkbox */}
             <input
@@ -67,9 +70,7 @@ function ParticipantList({onAddParticipant}) {
             </button>
           </div>
         ))
-        ) : (
-        <p className='pl-2'>No participants found.</p> // Optional: Show this message if the array is empty or undefined.
-        )}
+      }
       </ul>
 
 
@@ -84,10 +85,16 @@ function ParticipantList({onAddParticipant}) {
         <input
           type="number"
           value={phone}
-          onChange={(e) => setPhoneNumber(e.target.value)}
+          onChange={(e) => {
+            const value = e.target.value;
+            if (/^\d*$/.test(value)) { 
+              setPhoneNumber(value);
+            }
+          }}
           className="border rounded p-2 flex-grow focus:outline-[#03089a] shadow-sm w-36 sm:w-48 h-12"
           placeholder="Phone number"
-        />
+          />
+
         <button
           onClick={handleAdd}
           className="px-4 py-2 bg-[#03089a] text-white rounded-md shadow-sm hover:bg-[#02087c] transition-all"
