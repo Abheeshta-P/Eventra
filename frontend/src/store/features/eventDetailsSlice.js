@@ -14,7 +14,7 @@ const eventDetailsSlice = createSlice({
   reducers: {
     setEventDetails: (state, action) => {
       console.log(action)
-      state.eventName = action.payload.name;
+      state.eventName = action.payload.eventName;
       state.location = action.payload.location;
       state.date = action.payload.date;
       state.eventType = action.payload.eventType;
@@ -32,12 +32,15 @@ const eventDetailsSlice = createSlice({
       saveToLocalStorage(state);
     },
     resetEventDetails: (state) => {
+      console.log("reset")
       state.eventName = '';
       state.location = '';
       state.date = '';
       state.eventType = ''; 
       state.selectedCategories = [];
+      // remove the whole event progress
       saveToLocalStorage(state);
+      removeFromLocalStorage();
     },
   },
 });
@@ -47,6 +50,12 @@ const saveToLocalStorage = (state) => {
     localStorage.setItem('eventDetails', JSON.stringify(state));
   }
 };
+
+const removeFromLocalStorage = () =>{
+  if (typeof window !== 'undefined') {
+    localStorage.removeItem('eventDetails');
+  }
+}
 
 export const { setEventDetails, addCategoryWithService, resetEventDetails } = eventDetailsSlice.actions;
 export default eventDetailsSlice.reducer;

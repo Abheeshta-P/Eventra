@@ -1,21 +1,13 @@
 "use client"
 import { useRouter } from 'next/navigation';
 import React from 'react';
+import { imageSources } from '@/constants';
 
 function EventsCard({ eventId, eventName, eventType, date, location, className = '', ...props}) {
-
   const route = useRouter();
-  const imageSources = {
-    wedding: '../../eventType/wedding.jpg',
-    party: '../../eventType/party.jpg',
-    entertainment: '../../eventType/concert.jpg'
-  };
-
-
   const displayEventDetails = () =>{
     route.push(`/dashboard/event-creator/event/${eventId}`); 
   }
-
   return (
     <div
       className={`relative flex flex-col shadow-md border border-black/10 rounded-lg w-[300px] h-[300px] bg-zinc-100 justify-between p-5 transition-opacity duration-300 cursor-pointer ${className}`}

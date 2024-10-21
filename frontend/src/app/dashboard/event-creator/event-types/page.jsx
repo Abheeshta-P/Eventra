@@ -3,21 +3,17 @@ import { Card, Container } from '@/components';
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { useDispatch } from 'react-redux';
-import { setEventDetails } from '@/store/features/eventDetailsSlice';// Import your action
+import { useDispatch, useSelector } from 'react-redux';
+import { setEventDetails } from '@/store/features/eventDetailsSlice';
+import { imageSources } from '@/constants';
 
 // EventTypes displays cards containing multiple events like wedding, party, etc.
 function EventTypes() {
-  const imageSources = {
-    wedding: '../../../../../../eventType/wedding.jpg',
-    party: '../../../../../../eventType/party.jpg',
-    entertainment: '../../../../../../eventType/concert.jpg'
-  };
-
   // State for the input fields
-  const [eventName, setEventName] = useState('');
-  const [location, setLocation] = useState('');
-  const [date, setDate] = useState('');
+  const EventDetails = useSelector(state=>state.eventDetails)
+  const [eventName, setEventName] = useState(''||EventDetails.eventName);
+  const [location, setLocation] = useState(''||EventDetails.location);
+  const [date, setDate] = useState(''||EventDetails.date);
   const [error, setError] = useState('');
 
   const dispatch = useDispatch();

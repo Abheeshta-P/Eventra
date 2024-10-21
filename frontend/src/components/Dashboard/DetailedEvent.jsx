@@ -4,6 +4,7 @@ import Link from 'next/link'
 import React from 'react'
 import { Container,ParticipantList,ServicesList,Button, TodoList } from '..'
 import { useSelector } from 'react-redux'
+import { canvaLink } from '@/constants'
 
 
 function DetailedEventDisplayer({ event, isCreating = false, eventName, eventType, date, location }) {
@@ -44,12 +45,6 @@ function DetailedEventDisplayer({ event, isCreating = false, eventName, eventTyp
       "location" : "mankude"
     }
   ]
-  // canva link constants
-  const canvaLink = {
-    wedding : 'https://www.canva.com/search?q=wedding',
-    party : 'https://www.canva.com/search?q=party%20posters',
-    entertainment : 'https://www.canva.com/search?q=entertainment%20posters'
-  }
 
   // whenever change happens update in db
   // event?.participants change this in reduxSlice

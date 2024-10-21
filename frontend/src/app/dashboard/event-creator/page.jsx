@@ -1,40 +1,44 @@
 "use client"
 import React from 'react'
-import { Button, Container,ProfileSection,EventsCard } from '@/components'
+import { Button, Container,ProfileSection,EventsCard,Loading } from '@/components'
 import Link from 'next/link'
 import { useSelector } from 'react-redux'
 
 function EventCreator() {
-  const {events} = useSelector(state => state.events);
+  const { events, loading } = useSelector(state => state.events);
 
-  const EventsDisplay = () =>{
-    if(events?.length == 0){
-      return <div className='text-zinc-700 font-semibold text-lg md:text-xl lg:text-2xl text-center w-full'>No events yet</div>
+  const EventsDisplay = () => {
+    if (loading) {
+      return <Loading/>; // Show loading spinner when loading is true
     }
-    else {
+
+    if (events?.length === 0) {
+      return <div className="text-zinc-700 font-semibold text-lg md:text-xl lg:text-2xl text-center w-full">No events yet</div>;
+    } else {
       return (
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 justify-items-center w-full transition-all" >
-        {
-           events?.map(event => (
-            <EventsCard eventId={event.id} eventName={event.eventName} eventType={event.eventType} location={event.location} date={event.date} key={event.eventName + event.date}/>
-          ))
-        }
-      </div>
-      )
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 justify-items-center w-full transition-all">
+          {events?.map(event => (
+            <EventsCard eventId={event.id} eventName={event.eventName} eventType={event.eventType} location={event.location} date={event.date} key={event.eventName + event.date} />
+          ))}
+        </div>
+      );
     }
+  };
+  if (loading) {
+    return <Loading/>; // Show loading spinner when loading is true
   }
-
   return (
     <Container className={'flex flex-col items-center md:items-start'}>
       {/* profile info */}
       <ProfileSection>
-      <Link href = {'/dashboard/event-creator/event-types'}> <Button className='font-semibold mt-3'>Create Event</Button></Link>
+        <Link href={'/dashboard/event-creator/event-types'}>
+          <Button className="font-semibold mt-3">Create Event</Button>
+        </Link>
       </ProfileSection>
       {/* event */}
-        <EventsDisplay/>
-     
+      <EventsDisplay />
     </Container>
-  )
+  );
 }
 
-export default EventCreator
+export default EventCreator;
