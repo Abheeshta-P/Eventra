@@ -9,6 +9,9 @@ import { canvaLink } from '@/constants'
 
 function DetailedEventDisplayer({ event, isCreating = false, eventName, eventType, date, location }) {
   // api call,
+  // get services based on event id in dashboard is got inside event from previos route or parent 
+  //BUT IF on creation this component used then
+  // get service details based on email stored in event.selectedCategories all service email id
   const services =  [
     {
       "category": "Catering",

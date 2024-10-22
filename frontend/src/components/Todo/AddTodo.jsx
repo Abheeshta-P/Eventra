@@ -15,7 +15,7 @@ function AddTodo() {
   }
 
   return (
-    <form onSubmit={addTodoHandler} className="mb-3 w-full flex gap-3">
+    <form onSubmit={addTodoHandler} className="mb-3 w-full flex gap-3 items-center">
       <input
         type="text"
         className="border rounded p-2 flex-grow focus:outline-[#03089a] shadow-sm w-36 sm:w-48 h-12"
@@ -25,7 +25,7 @@ function AddTodo() {
       />
       <button
         type="submit"
-        className="px-4 py-2 bg-[#03089a] text-white rounded-md shadow-sm hover:bg-[#02087c] transition-all">
+        className="px-2 py-3 bg-[#03089a] text-white rounded-md shadow-sm hover:bg-[#02087c] transition-all">
         Add Todo
       </button>
     </form>

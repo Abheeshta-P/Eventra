@@ -51,5 +51,13 @@ export const eventCategories = {
 
 
 export const eventCategoryImageSources = {
-  
+  'Cakeshop' : '/serviceCategory/cakeshop.jpg',
+  'Decorating' : '/serviceCategory/decor.jpg',
+  'Photography': '/serviceCategory/photography.jpeg', 
+  'Venue' : '/serviceCategory/venue.jpg', 
+  'Music' : '/serviceCategory/music.JPG', 
+  'Emcee' : '/serviceCategory/emcee.jpg', 
+  'Makeup' : '/serviceCategory/makeup.jpg', 
+  'Catering' : '/serviceCategory/cater.jpg', 
+  'Purohit' : '/serviceCategory/purohit.webp'
 }

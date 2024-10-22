@@ -1,5 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+/*
+selectedCategories: [
+  { category: "Catering", serviceEmail: "info@deliciouscatering.com" },
+  { category: "Photography", serviceEmail: "contact@capturingmoments.com" }
+]
+*/
+
 const loadInitialState = () => {
   if (typeof window !== 'undefined') {
     const savedState = localStorage.getItem('eventDetails');
@@ -21,16 +28,22 @@ const eventDetailsSlice = createSlice({
       saveToLocalStorage(state);
     },
     addCategoryWithService: (state, action) => {
-      const { category, service } = action.payload;
+      const { category, serviceEmail } = action.payload; // Get the category and service email from the payload
+    
       // Check if the category already exists
       const existingCategoryIndex = state.selectedCategories.findIndex(cat => cat.category === category);
+      
       if (existingCategoryIndex > -1) {
-        state.selectedCategories[existingCategoryIndex].services.push(service);
+        // If the category exists, replace the existing service email with the new one
+        state.selectedCategories[existingCategoryIndex].serviceEmail = serviceEmail;
       } else {
-        state.selectedCategories.push({ category, services: [service] });
+        // If the category doesn't exist, add a new category with the service email
+        state.selectedCategories.push({ category, serviceEmail });
       }
+    
+      // Optionally save to local storage
       saveToLocalStorage(state);
-    },
+    },    
     resetEventDetails: (state) => {
       console.log("reset")
       state.eventName = '';
