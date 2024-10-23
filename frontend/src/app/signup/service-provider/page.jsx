@@ -6,12 +6,14 @@ import { Input, Button, Select, Container, Logo } from '@/components';
 import { useDispatch } from 'react-redux';
 import { authService } from '@/components/utils';
 import { useRouter } from 'next/navigation';
+import Swal from 'sweetalert2';
 
 const categories = ['Catering', 'Decorating', 'Photography', 'Venue', 'Music', 'Emcee', 'Makeup', 'Cakeshop','Purohit'];
 
 const ServiceProviderSignup = () => {
   const { register, handleSubmit, formState: { errors },reset } = useForm();
   const [galleryImages, setGalleryImages] = useState([]);
+  const router = useRouter();
   const fileInputRef = useRef(null);
 
   const onSubmit = async (data) => {
@@ -28,9 +30,27 @@ const ServiceProviderSignup = () => {
           if(userData.status === 400)
               alert("The user with current email already exists, login instead");
           else {
-              alert("Signup done!")
-              // or login automatically and push to dashboard
-              Router.push('/login');
+            // or login automatically and push to dashboard
+            router.push('/login');
+            Swal.fire({
+              title: 'Signup Successful!',
+              text: 'You have successfully signed up.',
+              icon: 'success',
+              confirmButtonText: 'Awesome!',
+              timer: 3000, // Automatically close after 3 seconds
+              customClass: {
+                popup: 'bg-green-100 text-green-900',
+                title: 'text-green-700',
+                confirmButton: 'bg-green-600',
+              },
+              backdrop: `
+                rgba(0,255,0,0.3)
+                url("https://sweetalert2.github.io/images/success.gif")
+                left top
+                no-repeat
+              `,
+            });
+          
           }
       }
     } catch (error){

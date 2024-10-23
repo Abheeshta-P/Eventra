@@ -36,6 +36,13 @@ const saveToLocalStorage = (state) => {
   }
 };
 
+
+const removeFromLocalStorage = () =>{
+  if (typeof window !== 'undefined') {
+    localStorage.removeItem('todos');
+  }
+}
+
 const initialState = loadInitialState();
 
 
@@ -67,10 +74,14 @@ export const todoSlice = createSlice({
       state.todos = state.todos.map(todo => (todo.id===action.payload.id)?{...todo,completed:!todo.completed}:todo);
       saveToLocalStorage(state);
     },
-
+    resetTodo: (state) => {
+      state.todos = ''
+      saveToLocalStorage(state);
+      removeFromLocalStorage();
+    },
   },
 })
 
-export const {addTodo,deleteTodo,updateTodo,toggleTodo} = todoSlice.actions;
+export const {addTodo,deleteTodo,updateTodo,toggleTodo,resetTodo} = todoSlice.actions;
 
 export default todoSlice.reducer;

@@ -61,7 +61,7 @@ function CategoryInEventType({ params }) {
         );
       })}
     </div>
-  <Link href={'/dashboard/event-creator/submit-event'} replace><Button className="my-12">Go to Event Summary Page</Button> </Link>{/* The button you mentioned */}
+  <Link href={'/dashboard/event-creator/submit-event'}><Button className="my-12">Go to Event Summary Page</Button> </Link>{/* The button you mentioned */}
   </Container>
   );
 }

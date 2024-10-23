@@ -8,12 +8,13 @@ import { Button,Container,Input,Logo } from '@/components';
 import Link from 'next/link';
 import { authService } from '@/components/utils';
 import { useRouter } from 'next/navigation';
+import Swal from 'sweetalert2';
 
 function Signup() {
   const [error,setError] = useState('');
   const dispatch = useDispatch();
   const {register,handleSubmit, reset, formState: { errors } } = useForm();
-
+  const router = useRouter();
   const signup = async (data) =>{
     try {
         const userData = await authService.signUpUser(JSON.stringify(data),'event-creator');
@@ -24,8 +25,26 @@ function Signup() {
             if(userData.status === 400)
                 alert("The user with current email already exists, login instead");
             else {
-                alert("Signup done!")
-                Router.push('/login');
+                // or login automatically and push to dashboard
+                router.push('/login');
+                Swal.fire({
+                    title: 'Signup Successful!',
+                    text: 'You have successfully signed up.',
+                    icon: 'success',
+                    confirmButtonText: 'Awesome!',
+                    timer: 3000, // Automatically close after 3 seconds
+                    customClass: {
+                      popup: 'bg-green-100 text-green-900',
+                      title: 'text-green-700',
+                      confirmButton: 'bg-green-600',
+                    },
+                    backdrop: `
+                      rgba(0,255,0,0.3)
+                      url("https://sweetalert2.github.io/images/success.gif")
+                      left top
+                      no-repeat
+                    `,
+                  });
             }
         }
       } catch (error){

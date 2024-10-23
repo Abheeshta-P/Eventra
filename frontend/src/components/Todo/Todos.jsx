@@ -66,12 +66,12 @@ function TodoItem({todo}){
 
 function Todos() {
   // access to do from store
- const todos = useSelector(state => state.todoList.todos)
+ const todos = useSelector(state => state.todoList.todos)||[]
   
   return (
     <>
     <ul className="list-none">
-        {todos.map((todo) => (
+        {todos?.map((todo) => (
          <TodoItem key={todo.id} todo={todo}/>
         ))}
       </ul>
