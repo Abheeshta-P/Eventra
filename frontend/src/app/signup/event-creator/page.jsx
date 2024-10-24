@@ -1,14 +1,14 @@
 "use client"
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
-// backend signup
-import { useDispatch } from 'react-redux';
-// import {login as storeLogin} from '../features/authSlice'
 import { Button,Container,Input,Logo } from '@/components';
 import Link from 'next/link';
 import { authService } from '@/components/utils';
-import { useRouter } from 'next/navigation';
+import { useDispatch } from 'react-redux';
+import { login } from '@/store/features/authSlice';
+import { setEvents } from '@/store/features/eventsSlice';
 import Swal from 'sweetalert2';
+import { useRouter } from 'next/navigation';
 
 function Signup() {
   const [error,setError] = useState('');
@@ -18,15 +18,14 @@ function Signup() {
   const signup = async (data) =>{
     try {
         const userData = await authService.signUpUser(JSON.stringify(data),'event-creator');
-        // if(userData) dispatch(storeLogin({userData}));
-        // navigate('/');
+
         if(userData){
             reset({name : '', email : '', password : ''})
             if(userData.status === 400)
                 alert("The user with current email already exists, login instead");
             else {
                 // or login automatically and push to dashboard
-                router.push('/login');
+               
                 Swal.fire({
                     title: 'Signup Successful!',
                     text: 'You have successfully signed up.',
@@ -44,7 +43,64 @@ function Signup() {
                       left top
                       no-repeat
                     `,
-                  });
+                  }).then(async()=>{
+                    try {
+                      const response = await authService.loginUser(JSON.stringify(data));
+                  
+                      // Check if the response object is valid
+                      if (response) {
+                        // Parse the response as JSON
+                        const responseData = await response;
+                  
+                        console.log('Response Data:', responseData);
+                  
+                        // Check if the login is successful (status 200)
+                        if (responseData && responseData.isLoggedIn) {
+                          reset({ email: '', password: '' });
+                  
+                          // Extract userType, userData, and events from responseData
+                          const { userType, userData, events } = responseData;
+                  
+                          // Dispatch login action with userType and userData
+                          dispatch(login({ userType, userData }));
+                  
+                          // If userType is 'eventCreator', dispatch setEvents
+                          if (userType === 'eventCreator') {
+                            dispatch(setEvents(events));
+                          }
+                  
+                          // Display success message using SweetAlert
+                          Swal.fire({
+                            title: 'Logged in Successfully!',
+                            text: 'You have successfully logged in.',
+                            icon: 'success',
+                            confirmButtonText: 'Awesome!',
+                            timer: 3000, // Automatically close after 3 seconds
+                            customClass: {
+                              popup: 'bg-green-100 text-green-900',
+                              title: 'text-green-700',
+                              confirmButton: 'bg-green-600',
+                            },
+                            backdrop: `
+                              rgba(0,255,0,0.3)
+                              url("https://sweetalert2.github.io/images/success.gif")
+                              left top
+                              no-repeat
+                            `,
+                          }).then(()=> {router.replace('/');router.refresh()})
+                        } else {
+                          // If login failed
+                          alert('Login failed. Please check your credentials and try again.');
+                        }
+                      } else {
+                        console.error('No response from the server');
+                        alert('No response from the server');
+                      }
+                    } catch (error) {
+                      console.log("login form :: loginUser :: error", error);
+                      alert('An error occurred while logging in. Please try again later.');
+                    }
+                  })
             }
         }
       } catch (error){

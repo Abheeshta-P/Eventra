@@ -107,6 +107,7 @@ function DetailedEventDisplayer({ event, isCreating = false, eventName, eventTyp
     // api call to send message
     // after api route to dashboard
     // after api-----------
+    // send users email/id as well
 
         // Show success message
         Swal.fire(

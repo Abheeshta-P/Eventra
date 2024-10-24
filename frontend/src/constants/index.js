@@ -61,3 +61,5 @@ export const eventCategoryImageSources = {
   'Catering' : '/serviceCategory/cater.jpg', 
   'Purohit' : '/serviceCategory/purohit.webp'
 }
+
+export const serviceCategories = ['Catering', 'Decorating', 'Photography', 'Venue', 'Music', 'Emcee', 'Makeup', 'Cakeshop','Purohit'];

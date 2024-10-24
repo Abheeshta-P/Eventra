@@ -3,7 +3,7 @@ import cors from 'cors'
 
 import { mongoDB } from './conf.js';
 import { connectMongoDB } from './connection.js';
-import signUpRouter from './routes/signUp.js'
+import authRouter from './routes/auth.js'
 import handleContactUs from './controller/contact-us.js'
 
 const app = express();
@@ -27,11 +27,7 @@ connectMongoDB(mongoDB);
 // contact route
 app.post('/api/contact-us', handleContactUs);
 
-app.use('/api/signup',signUpRouter)
-
-app.post('/api/login', (req, res) => {
-  console.log("Logged in")
-});
+app.use('/api/auth',authRouter)
 
 app.get('/api/currentUser', (req, res) => {
   // Assuming you're storing user data in req.user (e.g., after authenticating with a JWT or session)

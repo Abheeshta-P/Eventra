@@ -5,3 +5,4 @@ config();
 export const companyEmail = String(process.env.EMAIL);
 export const pass = String(process.env.PASS);
 export const mongoDB = String(process.env.MONGODB);
+export const secret = String(process.env.JWT_SECRET)

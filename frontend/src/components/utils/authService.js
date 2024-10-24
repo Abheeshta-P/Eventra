@@ -2,7 +2,7 @@ import { url } from "@/conf";
 const authService = {
   getCurrentUser: async () => {
     try {
-      const response = await fetch(`${url}/api/current-user`, {
+      const response = await fetch(`${url}/api/auth/current-user`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -23,7 +23,7 @@ const authService = {
   },
   signUpUser: async (body,type) => {
     try {
-      const response = await fetch(`${url}/api/signup/${type}`, {
+      const response = await fetch(`${url}/api/auth/signup/${type}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -43,9 +43,39 @@ const authService = {
       return null; // Return null if an error occurs
     }
   },
+  loginUser: async (body) => {
+    try {
+      const response = await fetch(`${url}/api/auth/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body, // Sending the request body
+      });
+  
+      // Ensure response is not null
+      if (response) {
+        // If the response status is OK (200) or 400 (for bad request errors)
+        if (response.ok) {
+          const data = await response.json(); // Parse the response JSON
+          console.log('Response data:', data);
+          return data; // Return the parsed data
+        } else {
+          return null; // Return null if the response is neither OK nor a bad request
+        }
+      } else {
+        console.error('No response received');
+        return null;
+      }
+    } catch (error) {
+      console.error('Error in loginUser:', error);
+      return null; // Return null in case of an error
+    }
+  },
+  
   logoutUser : async () => {
     try {
-      const response = await fetch(`${url}/api/logout`, {
+      const response = await fetch(`${url}/api/auth/logout`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

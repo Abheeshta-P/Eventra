@@ -3,12 +3,77 @@ import React from 'react'
 import Link from 'next/link';
 import { useForm } from 'react-hook-form'
 import { Button,Container,Input,Logo } from '@/components';
+import { authService } from '@/components/utils';
+import { useDispatch } from 'react-redux';
+import { login } from '@/store/features/authSlice';
+import { setEvents } from '@/store/features/eventsSlice';
+import Swal from 'sweetalert2';
+import { useRouter } from 'next/navigation';
 
 function Login() {
-  const {register,handleSubmit,formState:{error}} = useForm();
-  const login = () =>{
-
-  }
+  const {register,handleSubmit,formState:{error},reset} = useForm();
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const Login = async (data) => {
+    try {
+      const response = await authService.loginUser(JSON.stringify(data));
+  
+      // Check if the response object is valid
+      if (response) {
+        // Parse the response as JSON
+        const responseData = await response;
+  
+        console.log('Response Data:', responseData);
+  
+        // Check if the login is successful (status 200)
+        if (responseData && responseData.isLoggedIn) {
+          reset({ email: '', password: '' });
+  
+          // Extract userType, userData, and events from responseData
+          const { userType, userData, events } = responseData;
+  
+          // Dispatch login action with userType and userData
+          dispatch(login({ userType, userData }));
+  
+          // If userType is 'eventCreator', dispatch setEvents
+          if (userType === 'eventCreator') {
+            dispatch(setEvents(events));
+          }
+  
+          // Display success message using SweetAlert
+          Swal.fire({
+            title: 'Logged in Successfully!',
+            text: 'You have successfully logged in.',
+            icon: 'success',
+            confirmButtonText: 'Awesome!',
+            timer: 3000, // Automatically close after 3 seconds
+            customClass: {
+              popup: 'bg-green-100 text-green-900',
+              title: 'text-green-700',
+              confirmButton: 'bg-green-600',
+            },
+            backdrop: `
+              rgba(0,255,0,0.3)
+              url("https://sweetalert2.github.io/images/success.gif")
+              left top
+              no-repeat
+            `,
+          }).then(()=> {router.replace('/');router.refresh()})
+        } else {
+          // If login failed
+          alert('Login failed. Please check your credentials and try again.');
+        }
+      } else {
+        console.error('No response from the server');
+        alert('No response from the server');
+      }
+    } catch (error) {
+      console.log("login form :: loginUser :: error", error);
+      alert('An error occurred while logging in. Please try again later.');
+    }
+  };  
+  
+      
   return (
     <Container className={'flex justify-center items-center login-bg'}>
       <div className='flex items-center justify-center w-full text-black '>
@@ -25,7 +90,7 @@ function Login() {
                 </Link>
     </p>
     {error && <p className="text-red-600 mt-8 text-center">{error}</p>}
-    <form onSubmit={handleSubmit(login)} className='mt-8 '>
+    <form onSubmit={handleSubmit(Login)} className='mt-8 '>
     <div className='space-y-5'>
       <Input
       label = 'Email : '

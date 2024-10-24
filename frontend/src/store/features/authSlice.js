@@ -1,15 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  // isLoggedIn : false,
-  isLoggedIn : true,
-  userType : "eventCreator",
-  // userType : null,
-  // userData : null
-  userData : {
-    name : 'abh',
-    email : "abh@gmail.com",
-  }
+  isLoggedIn : false,
+  userType : null,
+  userData : null
 }
 
 const authSlice = createSlice({
@@ -17,6 +11,7 @@ const authSlice = createSlice({
   initialState,
   reducers : {
     login : (state,action) =>{
+      console.log(action)
       state.isLoggedIn = true;
       state.userType = action.payload.userType;
       state.userData = action.payload.userData;
