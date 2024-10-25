@@ -9,7 +9,7 @@ function EventDetails({params}) {
   return (
     <>
     {/* <div>EventDetails full details with edit options {eventId}</div> */}
-    <DetailedEventDisplayer event={'api call event object'} eventName={'Chinmayi wedding'} eventType={'wedding'} date={'oct-2'} location={'mankude'}/>
+    <DetailedEventDisplayer event={'api call event object'} eventName={'Jane wedding'} eventType={'wedding'} date={'oct-2'} location={'Manglore'}/>
     </>
   )
 }

@@ -24,14 +24,13 @@ function Signup() {
             if(userData.status === 400)
                 alert("The user with current email already exists, login instead");
             else {
-                // or login automatically and push to dashboard
                
                 Swal.fire({
                     title: 'Signup Successful!',
                     text: 'You have successfully signed up.',
                     icon: 'success',
                     confirmButtonText: 'Awesome!',
-                    timer: 3000, // Automatically close after 3 seconds
+                    timer: 3000, 
                     customClass: {
                       popup: 'bg-green-100 text-green-900',
                       title: 'text-green-700',
@@ -47,35 +46,28 @@ function Signup() {
                     try {
                       const response = await authService.loginUser(JSON.stringify(data));
                   
-                      // Check if the response object is valid
                       if (response) {
-                        // Parse the response as JSON
                         const responseData = await response;
                   
                         console.log('Response Data:', responseData);
                   
-                        // Check if the login is successful (status 200)
                         if (responseData && responseData.isLoggedIn) {
                           reset({ email: '', password: '' });
                   
-                          // Extract userType, userData, and events from responseData
                           const { userType, userData, events } = responseData;
                   
-                          // Dispatch login action with userType and userData
                           dispatch(login({ userType, userData }));
                   
-                          // If userType is 'eventCreator', dispatch setEvents
                           if (userType === 'eventCreator') {
                             dispatch(setEvents(events));
                           }
                   
-                          // Display success message using SweetAlert
                           Swal.fire({
                             title: 'Logged in Successfully!',
                             text: 'You have successfully logged in.',
                             icon: 'success',
                             confirmButtonText: 'Awesome!',
-                            timer: 3000, // Automatically close after 3 seconds
+                            timer: 3000,
                             customClass: {
                               popup: 'bg-green-100 text-green-900',
                               title: 'text-green-700',
@@ -89,7 +81,6 @@ function Signup() {
                             `,
                           }).then(()=> {router.replace('/');router.refresh()})
                         } else {
-                          // If login failed
                           alert('Login failed. Please check your credentials and try again.');
                         }
                       } else {

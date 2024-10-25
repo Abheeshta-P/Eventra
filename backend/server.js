@@ -1,5 +1,6 @@
 import express from 'express'
 import cors from 'cors'
+import cookieParser from 'cookie-parser';
 
 import { mongoDB } from './conf.js';
 import { connectMongoDB } from './connection.js';
@@ -19,6 +20,7 @@ app.use(cors({
 
 // Body parser middleware
 app.use(express.json());
+app.use(cookieParser())
 app.use(express.urlencoded({ extended: true }));
 
 connectMongoDB(mongoDB);

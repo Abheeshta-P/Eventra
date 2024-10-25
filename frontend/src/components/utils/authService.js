@@ -56,7 +56,7 @@ const authService = {
       // Ensure response is not null
       if (response) {
         // If the response status is OK (200) or 400 (for bad request errors)
-        if (response.ok) {
+        if (response.ok || response.status===401) {
           const data = await response.json(); // Parse the response JSON
           console.log('Response data:', data);
           return data; // Return the parsed data

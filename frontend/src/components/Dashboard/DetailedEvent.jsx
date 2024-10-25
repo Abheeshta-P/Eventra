@@ -75,19 +75,15 @@ function DetailedEventDisplayer({ event, isCreating = false, eventName, eventTyp
   };
 
   const designInCanva = () => {
-    // Check if the eventType has a corresponding Canva link
     if (canvaLink[eventType]) {
-      // Open the link in a new tab
       window.open(canvaLink[eventType], '_blank');
     } else {
-      // Handle the case where the eventType doesn't have a Canva link
       console.log("Canva link for the selected event type does not exist.");
     }
   }
   
   
   const handleConfirm = () => {
-    // Show confirmation popup using SweetAlert2
     Swal.fire({
       title: 'Confirm Event Creation',
       text: "The service providers will receive your event details and you will receive information about them as well.",
@@ -147,7 +143,7 @@ function DetailedEventDisplayer({ event, isCreating = false, eventName, eventTyp
     {isCreating && (
       <>
      
-        <Button className='flex items-center justify-center gap-2 mt-4 bg-zinc-800' onClick={designInCanva}><span><img src="../../../canva.png" alt="canva" className='w-6' /></span><p>Create Design</p></Button>
+        <Button className='flex items-center justify-center gap-2 mt-4 bg-zinc-800' onClick={designInCanva}><span><img src="/canva.png" alt="canva" className='w-6' /></span><p>Create Design</p></Button>
        <Button className='font-bold md:px-12 md:py-2' onClick={handleConfirm}>Confirm</Button>
       </>
       )}
