@@ -65,7 +65,6 @@ function TodoItem({todo}){
 }
 
 function Todos() {
-  // access to do from store
  const todos = useSelector(state => state.todoList.todos)||[]
   
   return (

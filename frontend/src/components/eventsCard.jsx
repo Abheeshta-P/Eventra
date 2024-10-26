@@ -15,7 +15,6 @@ function EventsCard({ eventId, eventName, eventType, date, location, className =
       onClick={displayEventDetails}
     >
 
-      {/* Event Image */}
       <div className="border border-black/30 w-full h-[150px]">
         <img
           src={imageSources[eventType]}
@@ -24,7 +23,6 @@ function EventsCard({ eventId, eventName, eventType, date, location, className =
         />
       </div>
 
-      {/* Event Details */}
       <div className="flex flex-col mt-2">
         <h1 className="font-semibold text-zinc-900 text-lg md:text-xl text-center">
           {eventName}
@@ -32,7 +30,6 @@ function EventsCard({ eventId, eventName, eventType, date, location, className =
         <h3 className="text-zinc-800 text-base text-center">{eventType}</h3>
       </div>
 
-      {/* Location and Date */}
       <div className="flex justify-between w-full">
         <h1 className="text-zinc-700 text-base font-semibold">{location}</h1>
         <h3 className="text-zinc-700 text-base font-semibold">{date}</h3>

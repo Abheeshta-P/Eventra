@@ -11,7 +11,6 @@ function CategoryServices({ params }) {
   const router = useRouter();
   const dispatch = useDispatch();
 
-  // Sample services for the "Decoration" category
   const services = [
     {
       "category": "Decoration",
@@ -60,31 +59,24 @@ function CategoryServices({ params }) {
     }
   ];
 
-  // Retrieve the selected categories from Redux state
   const { selectedCategories } = useSelector((state) => state.eventDetails);
   const [selectedCategoriesState, setSelectedCategoriesState] = useState(selectedCategories || []);
 
-  // Function to check if the service is selected for the category
   const isSelected = (service) => {
     const selectedCategory = selectedCategoriesState.find((cat) => cat.category === categoryName);
     return selectedCategory && selectedCategory.serviceEmail === service.email;
   };
 
-  // Handle service selection, ensuring only one service is selected per category
   const handleSelectServiceClick = (service) => {
     const updatedCategories = selectedCategoriesState.filter((cat) => cat.category !== categoryName);
 
-    // Add the newly selected service for the current category
     updatedCategories.push({ category: categoryName, serviceEmail: service.email });
 
-    // Update state and dispatch the updated selection to Redux
     setSelectedCategoriesState(updatedCategories);
     dispatch(addCategoryWithService({ category: categoryName, serviceEmail: service.email }));
 
-    // Optionally route to the service details (if needed after selection)
   };
 
-  // Handle view details click to navigate to the service details page
   const handleViewDetailsClick = (serviceId) => {
     router.push(`/dashboard/event-creator/event-types/${eventType}/categories/${categoryName}/services/${serviceId}`);
   };
@@ -103,14 +95,11 @@ function CategoryServices({ params }) {
             <ServicesCard
               service={service}
             />
-            {/* Checkmark overlay for selected service */}
             {isSelected(service) && (
               <div className="absolute inset-0 flex items-center justify-center">
                 <span className="text-white w-8 h-8 rounded-full bg-green-700 text-center text-2xl font-bold">✓</span>
               </div>
             )}
-
-            {/* Buttons for viewing details and selecting the service */}
             <div className="flex space-x-4">
               <Button
                 onClick={() => handleViewDetailsClick(service.id)}

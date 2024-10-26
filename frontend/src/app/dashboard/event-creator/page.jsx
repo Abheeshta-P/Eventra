@@ -9,7 +9,7 @@ function EventCreator() {
 
   const EventsDisplay = () => {
     if (loading) {
-      return <Loading/>; // Show loading spinner when loading is true
+      return <Loading/>; 
     }
 
     if (events?.length === 0) {
@@ -25,17 +25,15 @@ function EventCreator() {
     }
   };
   if (loading) {
-    return <Loading/>; // Show loading spinner when loading is true
+    return <Loading/>; 
   }
   return (
     <Container className={'flex flex-col items-center md:items-start'}>
-      {/* profile info */}
       <ProfileSection>
         <Link href={'/dashboard/event-creator/event-types'}>
           <Button className="font-semibold mt-3">Create Event</Button>
         </Link>
       </ProfileSection>
-      {/* event */}
       <EventsDisplay />
     </Container>
   );

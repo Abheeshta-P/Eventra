@@ -34,7 +34,6 @@ function App() {
   //  },[])
 
    const ConditionalRender = ()=>{
-    // if logged in directly render dashboard
     if(isLoggedIn){
       if(userType === 'eventCreator')
         router.push('/dashboard/event-creator')
@@ -42,7 +41,6 @@ function App() {
        router.push('/dashboard/service-provider')
     }
 
-    // else render home page
     else 
    return <HomePage/>
     

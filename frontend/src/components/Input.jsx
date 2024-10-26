@@ -5,12 +5,10 @@ function Input({ type = 'text', className = '', label, ...props }, ref) {
   const [showPassword, setShowPassword] = useState(false);
   const id = useId();
 
-  // Function to toggle password visibility
   const togglePasswordVisibility = () => {
     setShowPassword((prev) => !prev);
   };
 
-  // Determine the actual input type
   const inputType = type === 'password' && showPassword ? 'text' : type;
 
   return (
@@ -30,7 +28,6 @@ function Input({ type = 'text', className = '', label, ...props }, ref) {
         ref={ref}
         {...props}
       />
-      {/* Show password toggle button only if it's a password field */}
       {type === 'password' && (
         <button
           type="button"

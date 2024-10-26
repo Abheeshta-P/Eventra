@@ -9,7 +9,6 @@ import { imageSources } from '@/constants';
 
 // EventTypes displays cards containing multiple events like wedding, party, etc.
 function EventTypes() {
-  // State for the input fields
   const EventDetails = useSelector(state=>state.eventDetails)
   const [eventName, setEventName] = useState(''||EventDetails.eventName);
   const [location, setLocation] = useState(''||EventDetails.location);
@@ -22,7 +21,6 @@ function EventTypes() {
   const handleSubmit = (e, eventType) => {
     e.preventDefault();
     
-    // Validate input fields
     if (!eventName || !location || !date) {
       setError('Please fill out all fields.');
       alert('Please fill out all fields.');

@@ -8,14 +8,12 @@ import { Container, Card,Button } from "@/components";
 import Link from "next/link"; 
 import { eventCategoryImageSources } from "@/constants";
 
-// event category per event type
 function CategoryInEventType({ params }) {
   const { eventType } = params;
-  const categories = eventCategories[eventType]; // Access the correct categories array
+  const categories = eventCategories[eventType];
   const router = useRouter();
   // const [hasUnsavedChanges, setHasUnsavedChanges] = useState(true); // Track unsaved changes
   const dispatch = useDispatch();
-  // Simulating selectedCategories, you can fetch this from Redux or props
   const {selectedCategories }= useSelector(state => state.eventDetails)
   const [selectedCategoriesState, setSelectedCategories] = useState(selectedCategories || []);
 
@@ -36,8 +34,7 @@ function CategoryInEventType({ params }) {
     </h1>
     <div className={'grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 justify-items-center w-full'}>
       {categories.map((category) => {
-        // tests whether at least one element in the array passes the test 
-       const isSelected = selectedCategoriesState.some(cat => cat.category === category);  // Check if category is selected
+       const isSelected = selectedCategoriesState.some(cat => cat.category === category);  
         
         return (
           <Link 
