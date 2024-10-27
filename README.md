@@ -1,6 +1,6 @@
-<h1 align='center'> 🎉 Eventera - Event Management Portal 🎉</h1>
+<h1 align='center'> 🎉 Eventra - Event Management Portal 🎉</h1>
 
-**Eventera** is a comprehensive event management platform that connects users with service providers like caterers, decorators, and venues. Users can create events, manage guest lists, send invitations, and much more—all through a seamless, user-friendly interface.
+**Eventra** is a comprehensive event management platform that connects users with service providers like caterers, decorators, and venues. Users can create events, manage guest lists, send invitations, and much more—all through a seamless, user-friendly interface.
 
 
 ## 🚀 Features
