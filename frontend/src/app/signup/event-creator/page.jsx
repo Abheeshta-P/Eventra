@@ -47,10 +47,7 @@ function Signup() {
                       const response = await authService.loginUser(JSON.stringify(data));
                   
                       if (response) {
-                        const responseData = await response;
-                  
-                        console.log('Response Data:', responseData);
-                  
+                        const responseData = await response;                  
                         if (responseData && responseData.isLoggedIn) {
                           reset({ email: '', password: '' });
                   

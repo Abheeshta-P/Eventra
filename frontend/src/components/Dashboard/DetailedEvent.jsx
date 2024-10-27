@@ -12,7 +12,6 @@ import { useRouter } from 'next/navigation'
 function DetailedEventDisplayer({ event, isCreating = false, eventName, eventType, date, location, servicesAPI }) {
   const router = useRouter();
   const dispatch = useDispatch();
-  console.log(eventType)
   // api call,
   // get services based on event id in dashboard is got inside event from previos route or parent 
   //BUT IF on creation this component used then

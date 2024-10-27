@@ -6,21 +6,22 @@ const authService = {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          // Include token here, e.g., 'Authorization': 'Bearer token'
         },
+        credentials: 'include', 
       });
-
+  
       if (response.ok) {
         const data = await response.json();
-        return [data.userData,data.userType]; // Return user data if the request was successful
+        return data; 
       } else {
-        return null; // Return null if the user is not authenticated
+        return null; 
       }
     } catch (error) {
       console.error('Error fetching current user:', error);
-      return null; // Return null if an error occurs
+      return null; 
     }
   },
+  
   signUpUser: async (body,type) => {
     try {
       const response = await fetch(`${url}/api/auth/signup/${type}`, {
@@ -50,7 +51,8 @@ const authService = {
         headers: {
           'Content-Type': 'application/json',
         },
-        body, // Sending the request body
+        body,
+        credentials: 'include', 
       });
   
       // Ensure response is not null
@@ -58,7 +60,6 @@ const authService = {
         // If the response status is OK (200) or 400 (for bad request errors)
         if (response.ok || response.status===401) {
           const data = await response.json(); // Parse the response JSON
-          console.log('Response data:', data);
           return data; // Return the parsed data
         } else {
           return null; // Return null if the response is neither OK nor a bad request
@@ -72,7 +73,6 @@ const authService = {
       return null; // Return null in case of an error
     }
   },
-  
   logoutUser : async () => {
     try {
       const response = await fetch(`${url}/api/auth/logout`, {
@@ -80,14 +80,15 @@ const authService = {
         headers: {
           'Content-Type': 'application/json',
         },
+        credentials : 'include'
       });
       if (!response.ok) {
         throw new Error('Logout failed');
       }
-      return await response.json(); // Assuming the response contains JSON
+      return response; 
     } catch (error) {
       console.error("Logout error: ", error);
-      throw error; // Re-throw the error for further handling
+      throw error; 
     }
   }
 };
