@@ -1,8 +1,11 @@
+import { DashboardLayout } from '@/components'
 import React from 'react'
 
 function ServiceDetail() {
   return (
-    <div>ServiceDetail perticular service details</div>
+    <DashboardLayout>
+      <div>ServiceDetail perticular service details</div>
+    </DashboardLayout>
   )
 }
 

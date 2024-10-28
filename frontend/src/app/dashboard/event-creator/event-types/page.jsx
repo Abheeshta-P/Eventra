@@ -1,5 +1,5 @@
 "use client"
-import { Card, Container } from '@/components';
+import { Card, Container, DashboardLayout } from '@/components';
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
@@ -31,7 +31,8 @@ function EventTypes() {
   };
 
   return (
-    <Container className={'flex justify-center items-center flex-col'}>
+   <DashboardLayout>
+     <Container className={'flex justify-center items-center flex-col'}>
       <h1 className={'mb-10 text-2xl md:text-3xl lg:text-4xl text-zinc-900 font-semibold'}>Provide event details</h1>
       
       {error && <p className="text-red-500 mb-5">{error}</p>}
@@ -77,6 +78,7 @@ function EventTypes() {
         </Link>
       </div>
     </Container>
+   </DashboardLayout>
   );
 }
 

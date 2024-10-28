@@ -1,5 +1,5 @@
 "use client";
-import { Container, ServicesCard,Button } from '@/components';
+import { Container, ServicesCard,Button, DashboardLayout } from '@/components';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
@@ -82,7 +82,8 @@ function CategoryServices({ params }) {
   };
 
   return (
-    <Container className={'flex flex-col justify-center items-center'}>
+   <DashboardLayout>
+     <Container className={'flex flex-col justify-center items-center'}>
       <h1 className={'mb-10 text-2xl md:text-3xl lg:text-4xl text-zinc-900 font-semibold'}>
         Services for {categoryName}
       </h1>
@@ -120,6 +121,7 @@ function CategoryServices({ params }) {
         ))}
       </div>
     </Container>
+   </DashboardLayout>
   );
 }
 

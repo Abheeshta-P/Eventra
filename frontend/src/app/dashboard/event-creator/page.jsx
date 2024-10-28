@@ -1,6 +1,6 @@
 "use client"
 import React from 'react'
-import { Button, Container,ProfileSection,EventsCard,Loading } from '@/components'
+import { Button, Container,ProfileSection,EventsCard,Loading, DashboardLayout } from '@/components'
 import Link from 'next/link'
 import { useSelector } from 'react-redux'
 
@@ -28,7 +28,8 @@ function EventCreator() {
     return <Loading/>; 
   }
   return (
-    <Container className={'flex flex-col items-center md:items-start'}>
+   <DashboardLayout>
+     <Container className={'flex flex-col items-center md:items-start'}>
       <ProfileSection>
         <Link href={'/dashboard/event-creator/event-types'}>
           <Button className="font-semibold mt-3">Create Event</Button>
@@ -36,6 +37,7 @@ function EventCreator() {
       </ProfileSection>
       <EventsDisplay />
     </Container>
+   </DashboardLayout>
   );
 }
 

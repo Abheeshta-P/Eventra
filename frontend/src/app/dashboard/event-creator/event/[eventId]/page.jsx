@@ -1,4 +1,4 @@
-import { DetailedEventDisplayer } from '@/components'
+import { DashboardLayout, DetailedEventDisplayer } from '@/components'
 import React from 'react'
 function EventDetails({params}) {
   // apii call pass 
@@ -6,11 +6,13 @@ function EventDetails({params}) {
   // return the event either store it some where or just call agin on refresh
   // send participant list to partiipationList slice
   const {eventId} = params;
+  {/* EventDetails full details with edit options  */}
   return (
-    <>
-    {/* EventDetails full details with edit options  */}
-    <DetailedEventDisplayer event={'api call event object'} eventName={'Jane wedding'} eventType={'wedding'} date={'oct-2'} location={'Manglore'}/>
-    </>
+
+    <DashboardLayout>
+      <DetailedEventDisplayer event={'api call event object'} eventName={'Jane wedding'} eventType={'wedding'} date={'oct-2'} location={'Manglore'}/>
+    </DashboardLayout>
+
   )
 }
 export default EventDetails

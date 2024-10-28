@@ -1,8 +1,9 @@
+import { DashboardLayout } from '@/components'
 import React from 'react'
 
 function ServiceProviderDashBoard() {
   return (
-    <div>ServiceProviderDashBoard</div>
+    <DashboardLayout><div>ServiceProviderDashBoard</div></DashboardLayout>
   )
 }
 

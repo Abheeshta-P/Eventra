@@ -88,7 +88,6 @@ const authService = {
       throw error; 
     }
   },
-
 };
 
 export default authService;
