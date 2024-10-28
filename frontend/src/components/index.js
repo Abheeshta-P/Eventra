@@ -18,5 +18,6 @@ import TodoList from "./Todo/TodoList";
 import HomePage from "./Home/HomePage";
 
 import LayoutRender from "./LayoutRender";
+import ClientProvider from "./ClientProvider";
 
-export {Header,Footer,LayoutRender,ParticipantList,Logo,Button,HomePage,Container,Loading,Input,Card,Select,ProfileSection,EventsCard,ServicesCard,DetailedEventDisplayer,ServicesList,TodoList}
+export {Header,Footer,LayoutRender,ParticipantList,Logo,Button,HomePage,Container,Loading,Input,Card,Select,ProfileSection,EventsCard,ServicesCard,DetailedEventDisplayer,ServicesList,TodoList,ClientProvider}

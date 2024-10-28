@@ -4,9 +4,6 @@ const authService = {
     try {
       const response = await fetch(`${url}/api/auth/current-user`, {
         method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
         credentials: 'include', 
       });
   
@@ -90,7 +87,8 @@ const authService = {
       console.error("Logout error: ", error);
       throw error; 
     }
-  }
+  },
+
 };
 
 export default authService;

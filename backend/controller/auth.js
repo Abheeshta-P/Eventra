@@ -128,7 +128,6 @@ export async function handleGetCurrentUser(req,res){
     try {
       const { id, userType } = req.user;
   
-      // Fetch user information based on userType
       let user;
       let userEvents = [];
   

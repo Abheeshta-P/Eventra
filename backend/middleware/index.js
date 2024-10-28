@@ -3,7 +3,6 @@ import { secret } from '../conf.js';
 
 export function verifyToken(req, res, next) {
   const token = req.cookies.jwt;
-
   if (!token) {
     return res.status(401).json({ message: 'No token provided' });
   }
