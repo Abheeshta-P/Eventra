@@ -50,7 +50,7 @@ export async function handleSignupServiceProvider(req,res) {
 }
 
 export async function handleLogin(req, res) {
-  console.log("try login")
+  console.log("login")
   try {
     const { email, password } = req.body;
 
@@ -96,6 +96,10 @@ export async function handleLogin(req, res) {
         name: user.name,
         email: user.email,
         _id: user._id,
+        phone : userType === 'serviceProvider' ? user.phone : '',
+        location : userType === 'serviceProvider' ? user.location : '',
+        category : userType === 'serviceProvider' ? user.category : '',
+        cost : userType === 'serviceProvider' ? user.cost : '',
       },
       events: userType === 'eventCreator' ? userEvents : [], 
       isLoggedIn: true,

@@ -7,19 +7,15 @@ import { authService } from '@/components/utils';
 import { useRouter } from 'next/navigation';
 import Swal from 'sweetalert2';
 import { serviceCategories } from '@/constants';
-import { authService } from '@/components/utils';
 import { useDispatch } from 'react-redux';
 import { login } from '@/store/features/authSlice';
-import { setEvents } from '@/store/features/eventsSlice';
-import Swal from 'sweetalert2';
-import { useRouter } from 'next/navigation';
 
 const ServiceProviderSignup = () => {
   const { register, handleSubmit, formState: { errors },reset } = useForm();
   const [galleryImages, setGalleryImages] = useState([]);
   const router = useRouter();
   const fileInputRef = useRef(null);
-
+  const dispatch = useDispatch();
   const onSubmit = async (data) => {
     try {
       const userData = await authService.signUpUser(JSON.stringify(data),'service-provider');
@@ -53,38 +49,15 @@ const ServiceProviderSignup = () => {
             }).then(async()=>{
               try {
                 const response = await authService.loginUser(JSON.stringify(data));
-            
+                console.log(response)
                 if (response) {
                   const responseData = await response;            
                   if (responseData && responseData.isLoggedIn) {
                     reset({ email: '', password: '' });
             
-                    const { userType, userData, events } = responseData;
+                    const { userType, userData} = responseData;
             
                     dispatch(login({ userType, userData }));
-            
-                    if (userType === 'eventCreator') {
-                      dispatch(setEvents(events));
-                    }
-            
-                    Swal.fire({
-                      title: 'Logged in Successfully!',
-                      text: 'You have successfully logged in.',
-                      icon: 'success',
-                      confirmButtonText: 'Awesome!',
-                      timer: 3000, 
-                      customClass: {
-                        popup: 'bg-green-100 text-green-900',
-                        title: 'text-green-700',
-                        confirmButton: 'bg-green-600',
-                      },
-                      backdrop: `
-                        rgba(0,255,0,0.3)
-                        url("https://sweetalert2.github.io/images/success.gif")
-                        left top
-                        no-repeat
-                      `,
-                    }).then(()=> {router.replace('/');router.refresh()})
                   } else {
                     alert('Login failed. Please check your credentials and try again.');
                   }
@@ -93,7 +66,7 @@ const ServiceProviderSignup = () => {
                   alert('No response from the server');
                 }
               } catch (error) {
-                console.log("login form :: loginUser :: error", error);
+                console.log("signup form :: loginUser :: service provider :: error", error);
                 alert('An error occurred while logging in. Please try again later.');
               }
             })

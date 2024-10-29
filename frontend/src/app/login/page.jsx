@@ -20,7 +20,6 @@ function Login() {
   
       if (response) {
         const responseData = await response;
-
         if (responseData && responseData.isLoggedIn) {
           reset({ email: '', password: '' });
   

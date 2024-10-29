@@ -20,5 +20,6 @@ import HomePage from "./Home/HomePage";
 import LayoutRender from "./LayoutRender";
 import ClientProvider from "./ClientProvider";
 import DashboardLayout from "./Dashboard/DashboardLayout";
+import HeaderServiceProviderDashboard from "./Dashboard/HeaderServiceProviderDashboard";
 
-export {Header,Footer,LayoutRender,ParticipantList,Logo,Button,HomePage,Container,Loading,Input,Card,Select,ProfileSection,EventsCard,ServicesCard,DetailedEventDisplayer,ServicesList,TodoList,ClientProvider,DashboardLayout}
+export {Header,Footer,LayoutRender,ParticipantList,Logo,Button,HomePage,Container,Loading,Input,Card,Select,ProfileSection,EventsCard,ServicesCard,DetailedEventDisplayer,ServicesList,TodoList,ClientProvider,DashboardLayout,HeaderServiceProviderDashboard}
