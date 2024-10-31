@@ -7,7 +7,7 @@ function ServiceProviderDashboard() {
 
   useEffect(() => {
     router.replace('/dashboard/service-provider/details'); 
-  }, [router]);
+  }, []);
 
   return null;
 }

@@ -9,9 +9,7 @@ function ServiceProviderDashboard() {
     router.replace('/dashboard/service-provider/details'); 
   }, []);
 
-  return (
-    <div>ServiceProviderDashboard</div>
-  );
+  return null;
 }
 
 export default ServiceProviderDashboard;

@@ -15,7 +15,7 @@ function App() {
       if(userType === 'eventCreator')
         router.push('/dashboard/event-creator')
       else if(userType === 'serviceProvider')
-       router.push('/dashboard/service-provider')
+       router.push('/dashboard/service-provider/details')
     }
 
     else 

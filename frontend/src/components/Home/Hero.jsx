@@ -18,7 +18,7 @@ function Hero() {
   }
   const ListService = ()=>{
     if(isLoggedIn && userType === 'serviceProvider')
-      router.push('/dashboard/service-provider');
+      router.push('/dashboard/service-provider/details');
     else if(isLoggedIn && userType === 'eventCreator')
       alert("You are event creator cannot add a service!");
     else 

@@ -1,6 +1,6 @@
 "use client"
 import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useSelector } from 'react-redux';
 import { Loading } from '..';
 
@@ -8,8 +8,8 @@ const DashboardLayout = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [authenticated, setAuthenticated] = useState(false);
   const router = useRouter();
-  const {isLoggedIn} = useSelector(state=>state.auth);
-
+  const {isLoggedIn,userType} = useSelector(state=>state.auth);
+  const pathname = usePathname();
   useEffect(() => {
     const checkAuth = async () => {
       setAuthenticated(isLoggedIn);
@@ -17,21 +17,32 @@ const DashboardLayout = ({ children }) => {
 
       if (!isLoggedIn) {
         router.push('/login'); 
+        return;
+      }
+
+      if(userType === 'eventCreator' && !pathname.endsWith('event-creator')){
+        alert("You are not service provider");
+        router.replace('/');
+        return;
+      }
+      if(userType === 'serviceProvider' && !pathname.includes('service-provider')){
+        alert("You are not event creator");
+        router.replace('/');
+        return;
       }
     };
 
     checkAuth();
-  }, [router]);
+  }, [router, isLoggedIn, userType, pathname]);
 
   if (loading) {
-    return <Loading/>; // Show a loading state while checking auth
+    return <Loading/>; 
   }
 
   return (
     <div>
       {authenticated ? (
         <>
-          {/* Render the dashboard content */}
           {children}
         </>
       ) : (

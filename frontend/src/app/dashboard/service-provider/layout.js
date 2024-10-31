@@ -1,16 +1,14 @@
-import { Container,DashboardLayout,HeaderServiceProviderDashboard } from '@/components';
 
-
-export default function ServiceProviderDashboardLayout({ profile, additionaldetails }) {
+import { Container, DashboardLayout, HeaderServiceProviderDashboard } from '@/components';
+export default function ServiceProviderDashboardLayout({ children,additionaldetails,profile }) {
   return (
-     <DashboardLayout>
+    <DashboardLayout>
       <Container>
-      {profile}
-      {/* header to toggle */}
-
-    <HeaderServiceProviderDashboard/>
-      {additionaldetails}
+        {profile}
+        <HeaderServiceProviderDashboard />
+        {additionaldetails}
+        {children}
       </Container>
-     </DashboardLayout>
+    </DashboardLayout>
   );
 }
