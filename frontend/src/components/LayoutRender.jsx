@@ -31,10 +31,10 @@ function LayoutRender({children}) {
           throw new Error('No valid response');
         }
       } catch (error) {
-        console.error("Retrying to fetch user data due to error:", error);
-        if (isFetching) {
-          setTimeout(fetchCurrentUser, 3000); 
-        }
+        console.error("Retrying to fetch user data due to error: not logged in", error);
+        // if (isFetching) {
+        //   setTimeout(fetchCurrentUser, 3000); 
+        // }
       }finally{
         setLoading(false); 
       }

@@ -139,7 +139,7 @@ export async function handleGetCurrentUser(req,res){
         user = await eventCreator.findById(id).select('name email');
         userEvents = await Event.find({ creatorEmail: user.email }).select('eventName location date eventType');
       } else if (userType === 'serviceProvider') {
-        user = await serviceProvider.findById(id).select('name email');
+        user = await serviceProvider.findById(id).select('name email phone location category cost');
       }
   
       if (!user) {
@@ -154,6 +154,10 @@ export async function handleGetCurrentUser(req,res){
           name: user.name,
           email: user.email,
           _id: user._id,
+          phone : userType === 'serviceProvider' ? user.phone : '',
+          location : userType === 'serviceProvider' ? user.location : '',
+          category : userType === 'serviceProvider' ? user.category : '',
+          cost : userType === 'serviceProvider' ? user.cost : '',
         },
         events: userType === 'eventCreator' ? userEvents : [], // Only return events for eventCreators
         isLoggedIn: true,
