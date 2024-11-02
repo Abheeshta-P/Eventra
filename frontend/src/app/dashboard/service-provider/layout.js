@@ -6,7 +6,7 @@ export default function ServiceProviderDashboardLayout({ children,additionaldeta
       <Container>
         {profile}
         <HeaderServiceProviderDashboard />
-        {additionaldetails}
+        <div className='relative transition-all bg-zinc-200 p-4 py-12'>{additionaldetails}</div>
         {children}
       </Container>
     </DashboardLayout>

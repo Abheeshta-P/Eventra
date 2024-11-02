@@ -7,11 +7,10 @@ function ServiceProviderDashBoardProfile() {
   const {userData} = useSelector(state => state.auth);
   return (
       <ProfileSection>
-      <p className="text-zinc-700">Category : {userData?.category}</p>
-      <p className="text-zinc-700">Location : {userData?.location}</p>
-      <p className="text-zinc-700">Estimated cost : {userData?.cost}</p>
-        </ProfileSection>
-     
+      <p className="text-zinc-700 text-base">Category : {userData?.category}</p>
+      <p className="text-zinc-700 text-base">Location : {userData?.location}</p>
+      <p className="text-zinc-700 text-base">Estimated cost : {userData?.cost}</p>
+      </ProfileSection>
   )
 }
 

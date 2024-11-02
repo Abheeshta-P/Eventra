@@ -79,7 +79,7 @@ export async function handleLogin(req, res) {
     const token = jwt.sign(
       { id: user._id, userType }, 
       secret,
-      { expiresIn: '1h' }
+      { expiresIn: '1d' }
     );
 
     res.cookie('jwt', token, {
@@ -100,6 +100,7 @@ export async function handleLogin(req, res) {
         location : userType === 'serviceProvider' ? user.location : '',
         category : userType === 'serviceProvider' ? user.category : '',
         cost : userType === 'serviceProvider' ? user.cost : '',
+        details : userType === 'serviceProvider' ? user.details : '',
       },
       events: userType === 'eventCreator' ? userEvents : [], 
       isLoggedIn: true,
@@ -139,7 +140,7 @@ export async function handleGetCurrentUser(req,res){
         user = await eventCreator.findById(id).select('name email');
         userEvents = await Event.find({ creatorEmail: user.email }).select('eventName location date eventType');
       } else if (userType === 'serviceProvider') {
-        user = await serviceProvider.findById(id).select('name email phone location category cost');
+        user = await serviceProvider.findById(id).select('name email phone location category cost details');
       }
   
       if (!user) {
@@ -158,6 +159,7 @@ export async function handleGetCurrentUser(req,res){
           location : userType === 'serviceProvider' ? user.location : '',
           category : userType === 'serviceProvider' ? user.category : '',
           cost : userType === 'serviceProvider' ? user.cost : '',
+          details : userType === 'serviceProvider' ? user.details : '',
         },
         events: userType === 'eventCreator' ? userEvents : [], // Only return events for eventCreators
         isLoggedIn: true,

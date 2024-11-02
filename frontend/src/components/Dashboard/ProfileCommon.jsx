@@ -15,8 +15,8 @@ const ProfileSection = ({ children }) => {
     </div>
         <div className='mt-8 md:mt-0 flex flex-col  items-center md:items-start gap-1'>
           <h2 className="text-xl md:text-2xl font-bold text-zinc-950">{userData?.name}</h2>
-          <p className="text-zinc-600">{userType}</p>
-          <p className="text-zinc-700">{userData?.email}</p>
+          <p className="text-zinc-600 text-base ">{userType}</p>
+          <p className="text-zinc-700 text-base ">{userData?.email}</p>
         {children} 
         </div>
       </div>

@@ -80,6 +80,14 @@ const ServiceProviderSignup = () => {
 
   const handleImageChange = (e) => {
     const files = Array.from(e.target.files);
+    
+    if (files.length > 6) {
+      alert(`You can only upload a maximum of 6 images.`);
+      fileInputRef.current.value = ''; 
+      setGalleryImages([]);
+      return;
+    }
+
     setGalleryImages(files);
   };
 
@@ -154,7 +162,9 @@ const ServiceProviderSignup = () => {
           <label className="text-sm md:text-base inline-block mb-2 pl-1 mt-2 text-zinc-900">Details about the Service</label>
           <textarea
           spellCheck = 'false'
-            placeholder = 'Provide deatils about your service, facilities offered, constraints etc'
+          minLength={'20'}
+          maxLength={'1000'}
+            placeholder = 'Please include information about the facilities offered, any constraints, and what makes your service unique. Max length is 1000 characters, min length is 20 characters'
             className="px-3 py-2 rounded-lg bg-white text-black outline-none focus:bg-gray-50 duration-200 border border-gray-200 w-full text-sm md:text-base focus:outline-[#03089a] h-[150px] resize-none"
             {...register('details', { required: 'Please provide details about your service' })}
           />
