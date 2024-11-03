@@ -17,9 +17,9 @@ const eventSchema = new mongoose.Schema({
   services: [Service.schema], 
   participants: [Participant.schema], 
   todo: [Todo.schema], 
-  canvaTemplateLink: { type: String } ,// based on event type
+  canvaTemplateLink: { type: String } ,
   creator: { type: mongoose.Schema.Types.ObjectId, ref: 'eventCreator', required: true }, // Use ObjectId reference, 
-});
+},{ timestamps: true });
 
 const Event = mongoose.model('Event',eventSchema);
 export default Event;

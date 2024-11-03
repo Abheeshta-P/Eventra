@@ -81,8 +81,8 @@ const ServiceProviderSignup = () => {
   const handleImageChange = (e) => {
     const files = Array.from(e.target.files);
     
-    if (files.length > 6) {
-      alert(`You can only upload a maximum of 6 images.`);
+    if (files.length > 8) {
+      alert(`You can only upload a maximum of 8 images.`);
       fileInputRef.current.value = ''; 
       setGalleryImages([]);
       return;

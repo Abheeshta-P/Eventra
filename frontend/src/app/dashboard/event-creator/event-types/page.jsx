@@ -66,15 +66,15 @@ function EventTypes() {
       <h3 className={'mb-3 text-2xl md:text-3xl  text-zinc-900 font-semibold'}>Select Event Type</h3>
       <div className={'grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 justify-items-center w-full'}>
         <Link href='/dashboard/event-creator/event-types/wedding/categories' onClick={(e) => handleSubmit(e, 'wedding')}>
-          <Card title={'Wedding'} description={'Includes various ceremonies like Engagement, Reception etc'} photo={`${imageSources.wedding}`} descriptionClass='lg:text-base'/>
+          <Card title={'Wedding'} description={'Includes various ceremonies like Engagement, Reception etc'} photo={`${imageSources.wedding}`} descriptionClass='lg:text-base' key={`${imageSources.wedding}`}/>
         </Link>
         
         <Link href='/dashboard/event-creator/event-types/party/categories' onClick={(e) => handleSubmit(e, 'party')}>
-          <Card title={'Party'} description={'Includes various parties like Birthday, Farewell etc'} photo={`${imageSources.party}`} descriptionClass='lg:text-base'/>
+          <Card title={'Party'} description={'Includes various parties like Birthday, Farewell etc'} photo={`${imageSources.party}`} descriptionClass='lg:text-base' key={`${imageSources.party}`}/>
         </Link>
         
         <Link href='/dashboard/event-creator/event-types/entertainment/categories' onClick={(e) => handleSubmit(e, 'entertainment')}>
-          <Card title={'Entertainment'} description={'Includes various entertainment types like concert, dramas etc'} photo={`${imageSources.entertainment}`} descriptionClass='lg:text-base'/>
+          <Card title={'Entertainment'} description={'Includes various entertainment types like concert, dramas etc'} photo={`${imageSources.entertainment}`} descriptionClass='lg:text-base' key={`${imageSources.entertainment}`}/>
         </Link>
       </div>
     </Container>

@@ -14,6 +14,7 @@ import ServicesList from "./ServiceListScroll.jsx";
 import DetailedEventDisplayer from "./Dashboard/DetailedEvent";
 import ParticipantList from "./ParticipantsList";
 import TodoList from "./Todo/TodoList";
+import GalleryCard from "./GalleryCard";
 
 import HomePage from "./Home/HomePage";
 
@@ -22,4 +23,4 @@ import ClientProvider from "./ClientProvider";
 import DashboardLayout from "./Dashboard/DashboardLayout";
 import HeaderServiceProviderDashboard from "./Dashboard/HeaderServiceProviderDashboard";
 
-export {Header,Footer,LayoutRender,ParticipantList,Logo,Button,HomePage,Container,Loading,Input,Card,Select,ProfileSection,EventsCard,ServicesCard,DetailedEventDisplayer,ServicesList,TodoList,ClientProvider,DashboardLayout,HeaderServiceProviderDashboard}
+export {Header,Footer,LayoutRender,ParticipantList,Logo,Button,HomePage,Container,Loading,Input,Card,Select,ProfileSection,EventsCard,ServicesCard,DetailedEventDisplayer,ServicesList,TodoList,ClientProvider,DashboardLayout,HeaderServiceProviderDashboard,GalleryCard}

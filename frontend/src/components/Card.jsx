@@ -1,8 +1,8 @@
 import React from 'react'
 
-function Card({children,photo,title,description,className='',imgClass='',titleClass='',descriptionClass=''}) {
+function Card({children,photo,title,description,className='',imgClass='',titleClass='',descriptionClass='',...props}) {
   return (
-    <div className={`flex flex-col shadow-xl border border-black/10 rounded-lg w-[350px] lg:w-[400px] h-[300px] md:h-[400px] lg:h-[420px] justify-between p-5  ${className}`}>
+    <div className={`flex flex-col shadow-xl border border-black/10 rounded-lg w-[350px] lg:w-[400px] h-[300px] md:h-[400px] lg:h-[420px] justify-between p-5  ${className}`} {...props}>
       <div className={`border border-black/30 w-full h-[150px] md:h-[250px] ${imgClass}`}>
         <img src={photo} alt={title} className={'object-cover w-full h-full'}/>
       </div>

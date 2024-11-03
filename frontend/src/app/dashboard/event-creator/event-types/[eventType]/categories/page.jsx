@@ -45,6 +45,7 @@ function CategoryInEventType({ params }) {
            className="relative"
          >
            <Card 
+             key={category}
              title={category} 
              description={`Includes various services related to ${category}`} 
              photo={`${eventCategoryImageSources[category]}`} 

@@ -94,6 +94,7 @@ function CategoryServices({ params }) {
             className={`relative flex flex-col items-center space-y-4 p-4  ${isSelected(service) ? 'border-4 border-green-500 shadow-lg' : ''}`}
           >
             <ServicesCard
+              key={service.email}
               service={service}
             />
             {isSelected(service) && (
