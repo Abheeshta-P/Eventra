@@ -12,7 +12,7 @@ function NavItems (){
   const [dropdownVisible, setDropdownVisible] = React.useState(false);
   const userNameFirstLetter = userData?.name?.charAt(0).toUpperCase() || 'U'; 
   const pathname = usePathname();
-  const dashboardPath = userType==='eventCreator'?'event-creator':'service-provider';
+  const dashboardPath = userType==='eventCreator'?'event-creator':'service-provider/details';
 
   const toggleDropdown = () => {
     setDropdownVisible((prevState) => !prevState);

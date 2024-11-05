@@ -79,14 +79,14 @@ export async function handleLogin(req, res) {
     const token = jwt.sign(
       { id: user._id, userType }, 
       secret,
-      { expiresIn: '1d' }
+      { expiresIn: '24h' }
     );
 
     res.cookie('jwt', token, {
       httpOnly: true, 
       sameSite: 'Strict', 
       secure: process.env.NODE_ENV === 'production',
-      maxAge: 3600000, 
+      maxAge: 24 * 60 * 60 * 1000, 
     });
 
     res.status(200).json({

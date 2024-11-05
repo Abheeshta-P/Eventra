@@ -25,10 +25,12 @@ function ServicesCard({ service, ...props }) {
         <p className="text-zinc-800 text-base">{service?.phone}</p>
       </div>
 
-      <div className="flex items-center">
-        <HiOutlineLocationMarker className="text-[#03089a]  mr-2" size={20} />
-        <p className="text-zinc-800 text-base">{service?.location}</p>
-      </div>
+     {
+      service?.category==='Venue' ?  <div className="flex items-center">
+      <HiOutlineLocationMarker className="text-[#03089a]  mr-2" size={20} />
+      <p className="text-zinc-800 text-base">{service?.location}</p>
+    </div> : null
+     }
     </div>
   );
 }

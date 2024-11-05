@@ -20,7 +20,7 @@ const DashboardLayout = ({ children }) => {
         return;
       }
 
-      if(userType === 'eventCreator' && !pathname.endsWith('event-creator')){
+      if(userType === 'eventCreator' && !pathname.includes('event-creator')){
         alert("You are not service provider");
         router.replace('/');
         return;

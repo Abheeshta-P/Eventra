@@ -1,6 +1,5 @@
 "use client";
 import { Container, ServicesCard,Button, DashboardLayout } from '@/components';
-import Link from 'next/link';
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useRouter } from 'next/navigation';
@@ -13,7 +12,7 @@ function CategoryServices({ params }) {
 
   const services = [
     {
-      "category": "Decoration",
+      "category": "Venue",
       "name": "Elegant Wedding Decorators",
       "cost": 40000,
       "email": "info@elegantweddingdecor.com",
