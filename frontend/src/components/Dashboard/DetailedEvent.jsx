@@ -122,7 +122,7 @@ function DetailedEventDisplayer({ event, isCreating = false, eventName, eventTyp
   }
   return (
       <Container className={'mb-5'}>
-        <div className="flex flex-col px-3 md:px-8 w-full justify-center items-center gap-6">
+      <div className="flex flex-col px-3 md:px-8 w-full justify-center items-center gap-6">
       <div className="flex flex-col justify-center items-center md:gap-3">
       <h1 className="text-3xl lg:text-4xl font-semibold text-gray-950 text-center text-nowrap">{eventName}</h1>
       <h3 className="text-lg text-gray-600 md:text-xl">{eventType}</h3>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { MdCancel } from 'react-icons/md';
 
-function GalleryCard({ imgSrc,isEditing = true,onDelete,...props }) {
+function GalleryCard({ imgSrc,isEditing=false,onDelete = ()=>{},...props }) {
   return (
     <div className="relative gallery-card w-full h-48 rounded-lg overflow-hidden shadow-md bg-white" {...props}>
        {
