@@ -14,6 +14,7 @@ function EventTypes() {
   const [location, setLocation] = useState(''||EventDetails.location);
   const [date, setDate] = useState(''||EventDetails.date);
   const [error, setError] = useState('');
+  const today = new Date().toISOString().split('T')[0];
 
   const dispatch = useDispatch();
   const route = useRouter();
@@ -60,6 +61,7 @@ function EventTypes() {
             value={date}
             onChange={(e) => setDate(e.target.value)}
             className="border rounded p-2 focus:outline-[#03089a] shadow-sm"
+            min={today}
             required
           />
       </form>
