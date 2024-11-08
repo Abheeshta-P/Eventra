@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { eventCategories } from "@/constants";
 import { useRouter } from "next/navigation";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Container, Card,Button, DashboardLayout } from "@/components";
 // import { resetEventDetails } from "@/store/features/eventDetailsSlice";
 import Link from "next/link"; 
@@ -12,8 +12,6 @@ function CategoryInEventType({ params }) {
   const { eventType } = params;
   const categories = eventCategories[eventType];
   const router = useRouter();
-  // const [hasUnsavedChanges, setHasUnsavedChanges] = useState(true); // Track unsaved changes
-  const dispatch = useDispatch();
   const {selectedCategories }= useSelector(state => state.eventDetails)
   const [selectedCategoriesState, setSelectedCategories] = useState(selectedCategories || []);
 
