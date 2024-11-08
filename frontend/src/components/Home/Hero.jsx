@@ -12,7 +12,7 @@ function Hero() {
     if(isLoggedIn && userType === 'eventCreator')
       router.push('/dashboard/event-creator/event-types');
     else if(isLoggedIn && userType === 'serviceProvider')
-      alert("You are service provider cannot create event!");
+      alert("You are service provider cannot plan event!");
     else 
       router.push('/login');
   }

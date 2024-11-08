@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Button,Container,Input,Logo } from '@/components';
 import Link from 'next/link';
-import { authService } from '@/components/utils';
+import { authService } from '@/utils';
 import { useDispatch } from 'react-redux';
 import { login } from '@/store/features/authSlice';
 import { setEvents } from '@/store/features/eventsSlice';

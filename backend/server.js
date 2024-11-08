@@ -5,7 +5,9 @@ import cookieParser from 'cookie-parser';
 import { mongoDB } from './conf.js';
 import { connectMongoDB } from './connection.js';
 import authRouter from './routes/auth.js'
+import eventCreatorRouter from './routes/eventCreator.js'
 import handleContactUs from './controller/contact-us.js'
+import { verifyToken } from './middleware/index.js';
 
 const app = express();
 
@@ -30,6 +32,7 @@ connectMongoDB(mongoDB);
 app.post('/api/contact-us', handleContactUs);
 
 app.use('/api/auth',authRouter)
+app.use('/api/eventCreator',verifyToken,eventCreatorRouter)
 
 app.get('/api/currentUser', (req, res) => {
   // Assuming you're storing user data in req.user (e.g., after authenticating with a JWT or session)

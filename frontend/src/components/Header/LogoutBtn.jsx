@@ -2,7 +2,7 @@
 import React from 'react'
 import { logout } from '@/store/features/authSlice';
 import { useDispatch } from 'react-redux'
-import { authService } from '../utils';
+import { authService } from '../../utils';
 import { useRouter } from 'next/navigation';
 import { resetEventDetails } from '@/store/features/eventDetailsSlice';
 import { resetTodo } from '@/store/features/todoSlice';

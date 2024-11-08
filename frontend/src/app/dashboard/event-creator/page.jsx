@@ -32,7 +32,7 @@ function EventCreator() {
      <Container className={'flex flex-col items-center md:items-start'}>
       <ProfileSection>
         <Link href={'/dashboard/event-creator/event-types'}>
-          <Button className="font-semibold mt-3">Create Event</Button>
+          <Button className="font-semibold mt-3">Plan Event</Button>
         </Link>
       </ProfileSection>
       <EventsDisplay />

@@ -28,20 +28,23 @@ const eventDetailsSlice = createSlice({
       saveToLocalStorage(state);
     },
     addCategoryWithService: (state, action) => {
-      const { category, serviceEmail } = action.payload; // Get the category and service email from the payload
+      const { category, serviceEmail } = action.payload; 
     
-      // Check if the category already exists
       const existingCategoryIndex = state.selectedCategories.findIndex(cat => cat.category === category);
       
       if (existingCategoryIndex > -1) {
-        // If the category exists, replace the existing service email with the new one
         state.selectedCategories[existingCategoryIndex].serviceEmail = serviceEmail;
       } else {
-        // If the category doesn't exist, add a new category with the service email
         state.selectedCategories.push({ category, serviceEmail });
       }
     
-      // Optionally save to local storage
+      saveToLocalStorage(state);
+    },    
+    removeServiceWithCategory: (state, action) => {
+      const { category } = action.payload; 
+      state.selectedCategories = state.selectedCategories.filter(
+        (cat) => cat.category !== category
+      );
       saveToLocalStorage(state);
     },    
     resetEventDetails: (state) => {
@@ -70,5 +73,5 @@ const removeFromLocalStorage = () =>{
   }
 }
 
-export const { setEventDetails, addCategoryWithService, resetEventDetails } = eventDetailsSlice.actions;
+export const { setEventDetails, addCategoryWithService, resetEventDetails, removeServiceWithCategory } = eventDetailsSlice.actions;
 export default eventDetailsSlice.reducer;

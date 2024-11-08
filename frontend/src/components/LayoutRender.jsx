@@ -3,7 +3,7 @@ import { usePathname } from 'next/navigation'
 import React, { useEffect,useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { Footer,Header, Loading } from '.';
-import { authService } from './utils';
+import { authService } from '../utils';
 import { login } from '@/store/features/authSlice';
 import { setEvents } from '@/store/features/eventsSlice';
 

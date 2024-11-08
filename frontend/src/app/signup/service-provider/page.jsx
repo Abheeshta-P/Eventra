@@ -3,7 +3,7 @@
 import React, { useState, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { Input, Button, Select, Container, Logo } from '@/components';
-import { authService } from '@/components/utils';
+import { authService } from '@/utils';
 import { useRouter } from 'next/navigation';
 import Swal from 'sweetalert2';
 import { serviceCategories } from '@/constants';
