@@ -17,3 +17,29 @@ export async function handleGetCategoryServices(req, res) {
     return res.status(500).json({ message: 'Server error' });
   }
 }
+
+export async function handleGetServiceDetails(req,res){
+    try {
+      const { id } = req.params;
+  
+      const service = await serviceProvider.findById(id).select('-password'); 
+  
+      if (!service) {
+        return res.status(404).json({ message: 'Service not found' });
+      }
+  
+      res.json({
+        name: service.name,
+        details: service.details,
+        email: service.email,
+        phone: service.phone,
+        category: service.category,
+        location: service.location,
+        estimatedCost: service.cost,
+        galleryImages: service.gallery,
+      });
+    } catch (error) {
+      console.error('Error fetching service details:', error);
+      res.status(500).json({ message: 'Internal server error' });
+    }
+}
