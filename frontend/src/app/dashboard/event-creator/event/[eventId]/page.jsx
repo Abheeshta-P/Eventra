@@ -7,10 +7,16 @@ function EventDetails({params}) {
   // send participant list to partiipationList slice
   const {eventId} = params;
   {/* EventDetails full details with edit options  */}
+  const event = {
+    eventName:'Jane wedding',
+    eventType:'wedding',
+    date:'oct-2',
+    location:'Manglore'
+  }
   return (
 
     <DashboardLayout>
-      <DetailedEventDisplayer event={'api call event object'} eventName={'Jane wedding'} eventType={'wedding'} date={'oct-2'} location={'Manglore'}/>
+      <DetailedEventDisplayer event={event}/>
     </DashboardLayout>
 
   )

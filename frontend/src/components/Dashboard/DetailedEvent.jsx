@@ -9,7 +9,7 @@ import { resetTodo } from '@/store/features/todoSlice'
 import { canvaLink } from '@/constants'
 import { useRouter } from 'next/navigation'
 
-function DetailedEventDisplayer({ event, isCreating = false, eventName, eventType, date, location, servicesAPI }) {
+function DetailedEventDisplayer({ event, isCreating = false, servicesAPI }) {
   const router = useRouter();
   const dispatch = useDispatch();
   // api call,
@@ -68,14 +68,14 @@ function DetailedEventDisplayer({ event, isCreating = false, eventName, eventTyp
     // db call to store/local for now
     // add participant to db
     
-    // // Store the updated array in localStorage
+    // // Store the update array in localStorage
     // localStorage.setItem('participants', JSON.stringify(updatedParticipants)); // Convert array to JSON string
     
   };
 
   const designInCanva = () => {
-    if (canvaLink[eventType]) {
-      window.open(canvaLink[eventType], '_blank');
+    if (canvaLink[event.eventType]) {
+      window.open(canvaLink[event.eventType], '_blank');
     } else {
       console.log("Canva link for the selected event type does not exist.");
     }
@@ -124,12 +124,12 @@ function DetailedEventDisplayer({ event, isCreating = false, eventName, eventTyp
       <Container className={'mb-5'}>
       <div className="flex flex-col px-3 md:px-8 w-full justify-center items-center gap-6">
       <div className="flex flex-col justify-center items-center md:gap-3">
-      <h1 className="text-3xl lg:text-4xl font-semibold text-gray-950 text-center text-nowrap">{eventName}</h1>
-      <h3 className="text-lg text-gray-600 md:text-xl">{eventType}</h3>
+      <h1 className="text-3xl lg:text-4xl font-semibold text-gray-950 text-center text-nowrap">{event.eventName}</h1>
+      <h3 className="text-lg text-gray-600 md:text-xl">{event.eventType}</h3>
       </div>
       <div className="flex justify-between w-full mt-2 text-base md:text-xl">
-        <p className="text-gray-700">{date}</p>
-        <p className="text-gray-700">{location}</p>
+        <p className="text-gray-700">{event.date}</p>
+        <p className="text-gray-700">{event.location}</p>
       </div>
       
       <h2 className="text-gray-800 text-2xl lg:text-3xl font-semibold ">Services</h2>

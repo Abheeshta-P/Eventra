@@ -43,3 +43,17 @@ export async function handleGetServiceDetails(req,res){
       res.status(500).json({ message: 'Internal server error' });
     }
 }
+
+export async function handleGetServicesDetailsBatch(req,res){
+ try {
+   const emails = req.body;  
+   if (!Array.isArray(emails)) {
+     return res.status(400).json({ error: "Invalid request format" });
+   }
+   const services = await serviceProvider.find({ email: { $in: emails } })||[];
+   res.json(services);
+ } catch (error) {
+  console.error('Error fetching service details:', error);
+  res.status(500).json({ message: 'Internal server error' });
+ }
+}

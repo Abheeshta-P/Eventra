@@ -12,13 +12,7 @@ function ServiceDetail({ params }) {
     ;(async ()=>{
       try {
         const service = await eventCreatorService.getServiceDetails(serviceId);
-        if (service.status === 403) {
-          alert("You are not authorized to view this category.");
-          router.push('/login'); 
-          return;
-        }
-  
-        if (service) {
+        if (service && service.status !== 403) {
           setServiceDetails(service);
         } 
       } catch (error) {
