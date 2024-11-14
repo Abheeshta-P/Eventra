@@ -16,7 +16,7 @@ function DetailedEventDisplayer({ event, isCreating = false, servicesAPI }) {
   // get services based on event id in dashboard is got inside event from previos route or parent 
   //BUT IF on creation this component used then
   // get service details based on email stored in event.selectedCategories all service email id
-  const services =  [
+  let services =  [
     {
       "category": "Catering",
       "name": "Delicious Catering Co.",
@@ -52,6 +52,7 @@ function DetailedEventDisplayer({ event, isCreating = false, servicesAPI }) {
       "location" : "mankude"
     }
   ]
+  services=servicesAPI;
 
   // whenever change happens update in db
   // event?.participants change this in reduxSlice
@@ -59,10 +60,7 @@ function DetailedEventDisplayer({ event, isCreating = false, servicesAPI }) {
   // const [participants, setParticipants] = useState(event?.participants||localStorageInitialState|| []);
   const [participants, setParticipants] = useState(event?.participants || []);
   const addParticipant = (participant) => {
-    // Create a new array with the added participant
     const updatedParticipants = [...participants, participant];
-    
-    // Update the state with the new array
     setParticipants(updatedParticipants);
 
     // db call to store/local for now

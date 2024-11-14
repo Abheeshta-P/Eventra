@@ -1,5 +1,5 @@
 "use client"
-import { DashboardLayout, DetailedEventDisplayer } from '@/components'
+import { DashboardLayout, DetailedEventDisplayer, Loading } from '@/components'
 import { eventCreatorService } from '@/utils'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
@@ -37,11 +37,11 @@ function SubmitEvent() {
     if (emails.length > 0) {
       fetchServiceDetails(emails);
     } 
-  },[emails])
+  },[])
 
-  return (
+  return servicesDetails.length!=0?(
    <DashboardLayout> <DetailedEventDisplayer event={event} servicesAPI={servicesDetails} isCreating/></DashboardLayout>
-  )
+  ):<Loading/>
 }
 
 export default SubmitEvent

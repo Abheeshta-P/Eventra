@@ -7,7 +7,7 @@ router.get('/categoryServices/:serviceCategory', handleGetCategoryServices);
 // fetch details about perticular service using service id
 router.get('/service/:id', handleGetServiceDetails);
 // batch fetch details of service provider
-router.get('/services/batch',handleGetServicesDetailsBatch);
+router.post('/services/batch',handleGetServicesDetailsBatch);
 
 
 export default router;
