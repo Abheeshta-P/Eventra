@@ -36,7 +36,7 @@ function ServicesList({ services }) {
         className="flex overflow-x-scroll scrollbar-hide space-x-4 px-6 py-4 pr-0 lg:justify-center w-full"
         style={{ scrollBehavior: 'smooth' }}
       >
-        {services.map((service) => (
+        {services?.map((service) => (
           <ServicesCard service={service} key={service.email} />
         ))}
       </div>

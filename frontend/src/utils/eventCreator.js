@@ -69,6 +69,29 @@ const eventCreatorService = {
       console.error('Error fetching services details batch :', error);
       return null; 
     }
+  },
+  createEvent : async (details)=>{
+    try {
+      const response = await fetch(`${url}/api/eventCreator/event/createEvent`, {
+        method: 'POST',
+        credentials: 'include', 
+        headers: {
+          'Content-Type': 'application/json', 
+        },
+        body: JSON.stringify(details),
+      });
+  
+      if (response.status === 201) {
+        const data = await response.json();
+        return data; 
+      } 
+      else {
+        return null; 
+      }
+    } catch (error) {
+      console.error('Error creating event :', error);
+      return null; 
+    }
   }
 }
 export default eventCreatorService;

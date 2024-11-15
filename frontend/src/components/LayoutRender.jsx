@@ -21,6 +21,7 @@ function LayoutRender({children}) {
         const response = await authService.getCurrentUser();
         if (response && response.userType) {
           const { userType, userData, events } = response;
+          console.log(events)
           dispatch(login({ userType, userData }));
           if (userType === 'eventCreator') {
             dispatch(setEvents(events));

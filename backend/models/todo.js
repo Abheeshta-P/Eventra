@@ -2,7 +2,8 @@ import mongoose from "mongoose";
 import { status } from "../constants/index.js";
 
 const todoSchema = new mongoose.Schema({
-  taskName: { type: String, required: true },
+  id : { type: String, required: false },
+  text: { type: String, required: false },
   status: { 
     type: String, 
     default: 'pending', 

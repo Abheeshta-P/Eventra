@@ -2,21 +2,20 @@
 import { useState } from 'react'
 import Swal from 'sweetalert2'
 import React from 'react'
-import { Container,ParticipantList,ServicesList,Button, TodoList } from '..'
+import { Container,ParticipantList,ServicesList,Button, TodoList, Loading } from '..'
 import { useDispatch, useSelector } from 'react-redux'
 import { resetEventDetails } from '@/store/features/eventDetailsSlice';
 import { resetTodo } from '@/store/features/todoSlice'
 import { canvaLink } from '@/constants'
 import { useRouter } from 'next/navigation'
+import { eventCreatorService } from '@/utils'
+import { setEvents } from '@/store/features/eventsSlice'
 
 function DetailedEventDisplayer({ event, isCreating = false, servicesAPI }) {
   const router = useRouter();
   const dispatch = useDispatch();
   // api call,
-  // get services based on event id in dashboard is got inside event from previos route or parent 
-  //BUT IF on creation this component used then
-  // get service details based on email stored in event.selectedCategories all service email id
-  let services =  [
+  let services = servicesAPI || [
     {
       "category": "Catering",
       "name": "Delicious Catering Co.",
@@ -51,14 +50,17 @@ function DetailedEventDisplayer({ event, isCreating = false, servicesAPI }) {
       "phone": "9123456789",
       "location" : "mankude"
     }
-  ]
-  services=servicesAPI;
+  ];
 
   // whenever change happens update in db
   // event?.participants change this in reduxSlice
   // const localStorageInitialState = useSelector(state => state.participantsList.participantList)
   // const [participants, setParticipants] = useState(event?.participants||localStorageInitialState|| []);
   const [participants, setParticipants] = useState(event?.participants || []);
+  const todo = useSelector (state => state.todoList);
+  const {userData} = useSelector(state => state.auth);
+  const [sending,setSending] = useState(false);
+
   const addParticipant = (participant) => {
     const updatedParticipants = [...participants, participant];
     setParticipants(updatedParticipants);
@@ -90,34 +92,40 @@ function DetailedEventDisplayer({ event, isCreating = false, servicesAPI }) {
       cancelButtonColor: '#d33',
       confirmButtonText: 'Yes, Confirm',
       cancelButtonText: 'Cancel',
-    }).then((result) => {
+    }).then(async(result) => {
       if (result.isConfirmed) {
-        // Call API to create event
-        // Example: 
-        // await apiCallToCreateEvent();
-        // do api call to create event
-    // popup indicating that the info about service provider will be sent to our email as well info about you will be sent to service provider
-    // api call to send message
-    // after api route to dashboard
-    // after api-----------
-    // send users email/id as well
-
-        // Show success message
-        Swal.fire(
-          'Event Created!',
-          'Your event has been successfully created and emails have been sent to both you and the service providers.',
-          'success'
-        )
-
-        // Route to dashboard
-        router.replace('/dashboard/event-creator');
-
-        // Dispatch Redux actions to reset event details and to-do list
-        dispatch(resetEventDetails());
-        dispatch(resetTodo());
+        setSending(true);
+        try {
+          const response = await eventCreatorService.createEvent({
+            eventName : event.eventName,
+            location : event.location,
+            date : event.date,
+            eventType : event.eventType,
+            services,
+            participants,
+            todo,
+            creatorEmail : userData?.email
+          })
+          if(response){
+            dispatch(setEvents(response.userEvents));
+            Swal.fire(
+              'Event Created!',
+              'Your event has been successfully created and emails have been sent to both you and the service providers.',
+              'success'
+            )
+            router.replace('/dashboard/event-creator');
+            dispatch(resetEventDetails());
+            dispatch(resetTodo());
+          }
+        } catch (error){
+          console.log(" plan event :: submit event :: detail event displayer :: frontend :: error ", error);
+        } finally {
+          setSending(false)
+        }
       }
     });
   }
+  if(sending) return <Loading/>
   return (
       <Container className={'mb-5'}>
       <div className="flex flex-col px-3 md:px-8 w-full justify-center items-center gap-6">

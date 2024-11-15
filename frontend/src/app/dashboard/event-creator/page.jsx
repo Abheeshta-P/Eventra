@@ -18,7 +18,7 @@ function EventCreator() {
       return (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 justify-items-center w-full transition-all">
           {events?.map(event => (
-            <EventsCard eventId={event.id} eventName={event.eventName} eventType={event.eventType} location={event.location} date={event.date} key={event.eventName + event.date} />
+            <EventsCard eventId={event._id} eventName={event.eventName} eventType={event.eventType} location={event.location} date={event.date} key={event.eventName + event.date} />
           ))}
         </div>
       );

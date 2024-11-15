@@ -3,7 +3,6 @@ import {createSlice,nanoid} from '@reduxjs/toolkit'
 
 const loadInitialState = () => {
   if (typeof window === 'undefined') {
-    // If running on the server, return the default state
     return { todos: [] };
   }
 
@@ -24,7 +23,6 @@ const loadInitialState = () => {
 
 const saveToLocalStorage = (state) => {
   if (typeof window === 'undefined') {
-    // Prevent saving if on the server
     return;
   }
 

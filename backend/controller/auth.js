@@ -73,7 +73,7 @@ export async function handleLogin(req, res) {
     }
 
     if (userType === 'eventCreator') {
-      userEvents = await Event.find({ creatorEmail: user.email }).select('eventName location date eventType');
+      userEvents = await Event.find({ creator: id }).select('eventName location date eventType _id');
     }
 
     const token = jwt.sign(
@@ -82,7 +82,7 @@ export async function handleLogin(req, res) {
       { expiresIn: '24h' }
     );
 
-    res.cookie('jwt', token, {
+    res.cookie('jwt', token, { 
       httpOnly: true, 
       sameSite: 'Strict', 
       secure: process.env.NODE_ENV === 'production',
@@ -138,7 +138,7 @@ export async function handleGetCurrentUser(req,res){
   
       if (userType === 'eventCreator') {
         user = await eventCreator.findById(id).select('name email');
-        userEvents = await Event.find({ creatorEmail: user.email }).select('eventName location date eventType');
+        userEvents = await Event.find({ creator: id }).select('eventName location date eventType');
       } else if (userType === 'serviceProvider') {
         user = await serviceProvider.findById(id).select('name email phone location category cost details');
       }

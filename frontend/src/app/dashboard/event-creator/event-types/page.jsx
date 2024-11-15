@@ -27,7 +27,8 @@ function EventTypes() {
       alert('Please fill out all fields.');
       return;
     }
-    dispatch(setEventDetails({ eventName, location, date, eventType }));
+    const formattedDate = typeof date === 'string' ? date.slice(0, 10) : new Date(date).toISOString().slice(0, 10);
+    dispatch(setEventDetails({ eventName, location, date : formattedDate, eventType }));
     route.push(`/dashboard/event-creator/event-types/${eventType}/categories`)
   };
 

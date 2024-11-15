@@ -8,7 +8,7 @@ import { eventTypes } from "../constants/index.js";
 const eventSchema = new mongoose.Schema({
   eventName: { type: String, required: true },
   location: { type: String, required: true },
-  date: { type: Date, required: true },
+  date: { type: String, required: true },
   eventType: { 
     type: String, 
     required: true, 
@@ -17,8 +17,7 @@ const eventSchema = new mongoose.Schema({
   services: [Service.schema], 
   participants: [Participant.schema], 
   todo: [Todo.schema], 
-  canvaTemplateLink: { type: String } ,
-  creator: { type: mongoose.Schema.Types.ObjectId, ref: 'eventCreator', required: true }, // Use ObjectId reference, 
+  creator: { type: mongoose.Schema.Types.ObjectId, ref: 'eventCreator', required: true }, 
 },{ timestamps: true });
 
 const Event = mongoose.model('Event',eventSchema);

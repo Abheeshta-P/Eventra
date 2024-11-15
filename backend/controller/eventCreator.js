@@ -1,4 +1,8 @@
 import serviceProvider from '../models/serviceProvider.js';
+import nodemailer from 'nodemailer'
+import { companyEmail,pass } from '../conf.js';
+import Event from '../models/event.js'
+import { Parser } from 'json2csv';
 
 export async function handleGetCategoryServices(req, res) {
   const { serviceCategory } = req.params;
@@ -56,4 +60,81 @@ export async function handleGetServicesDetailsBatch(req,res){
   console.error('Error fetching service details:', error);
   res.status(500).json({ message: 'Internal server error' });
  }
+}
+
+
+export async function handleCreateEvent(req, res) {
+  const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: companyEmail,  
+      pass: pass           
+    }
+  });
+  try {
+    const {
+      eventName,
+      location,
+      date,
+      eventType,
+      services,
+      participants,
+      todo,
+      creatorEmail
+    } = req.body; 
+ 
+    const creator = req.user.id;
+    const newEvent = new Event({
+      eventName,
+      location,
+      date,
+      eventType,
+      services,
+      participants,
+      todo: todo.length?todo:[],
+      creator
+    });
+
+    const savedEvent = await newEvent.save();
+
+    const serviceFields = ['category', 'name', 'cost', 'email', 'phone', 'location'];
+    const json2csvParser = new Parser({ fields: serviceFields });
+    const csvData = json2csvParser.parse(services);
+
+    const mailOptions = {
+      from: `EVENTRA.SASS 📧 ${companyEmail}`,
+      to: creatorEmail, 
+      subject: `Your Event "${eventName}" Has Been Created!`,
+      text: `Dear User, \n\nYour event "${eventName}" scheduled for ${new Date(date).toLocaleDateString()} has been successfully created.\n\nLocation: ${location}\nEvent Type: ${eventType}\n\nPlease find attached the service details for your event.\n\nThank you for using our service!\n\nBest,\nEventra Team`,
+      attachments: [
+        {
+          filename: 'services.csv',
+          content: csvData,      
+          contentType: 'text/csv' 
+        }
+      ]
+    };
+
+    await transporter.sendMail(mailOptions);
+    for (const service of services) {
+      const providerMailOptions = {
+        from: `EVENTRA.SASS 📧 ${companyEmail}`,
+        to: service.email,
+        subject: `Upcoming Event Inquiry: "${eventName}"`,
+        text: `Dear ${service.name},\n\nYou have been selected as a service provider for an event. Here are the details:\n\nEvent: ${eventName}\nDate: ${new Date(date).toLocaleDateString()}\nLocation: ${location}\nEvent Type: ${eventType}\n\nYou may be contacted by the client regarding bookings or additional inquiries. Please be prepared to provide your services as requested.\n\nThank you for being part of Eventera!\n\nBest,\nEventera Team`
+      };
+
+      await transporter.sendMail(providerMailOptions);
+    }
+  
+    const userEvents = await Event.find({ creator: creator }).select('eventName location date eventType _id');
+
+    res.status(201).json({
+      message: "Event created successfully and notifications sent to service providers!",
+      userEvents
+    });
+  } catch (error) {
+    console.error("Error creating event:", error);
+    res.status(500).json({ message: "Error creating event", error });
+  }
 }
