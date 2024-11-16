@@ -12,9 +12,12 @@ function ServiceDetail({ params }) {
     ;(async ()=>{
       try {
         const service = await eventCreatorService.getServiceDetails(serviceId);
-        if (service && service.status !== 403) {
+        if (service) {
           setServiceDetails(service);
         } 
+        else if( service.status === 401 || service.status === 403){
+          router.replace('/login')
+        }
       } catch (error) {
         console.error("Error fetching service details :: serviceDetails Display :: frontend", error);
         return (

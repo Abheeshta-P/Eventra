@@ -62,7 +62,6 @@ export async function handleGetServicesDetailsBatch(req,res){
  }
 }
 
-
 export async function handleCreateEvent(req, res) {
   const transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -79,7 +78,7 @@ export async function handleCreateEvent(req, res) {
       eventType,
       services,
       participants,
-      todo,
+      todos,
       creatorEmail
     } = req.body; 
  
@@ -91,7 +90,7 @@ export async function handleCreateEvent(req, res) {
       eventType,
       services,
       participants,
-      todo: todo.length?todo:[],
+      todos: todos.length?todos:[],
       creator
     });
 
@@ -137,4 +136,18 @@ export async function handleCreateEvent(req, res) {
     console.error("Error creating event:", error);
     res.status(500).json({ message: "Error creating event", error });
   }
+}
+
+export async function handleEventFetchDashBoard(req,res){
+ try {
+   const { id } = req.params;
+   const event = await Event.findById(id);
+   if (!event) {
+     return res.status(404).json({ message: 'Event not found' });
+   }
+   res.status(200).json({ event });
+ } catch (error) {
+  console.error('Error fetching event details:', error);
+  res.status(500).json({ message: 'Internal server error' });
+ }
 }

@@ -36,7 +36,7 @@ function ParticipantList({onAddParticipant}) {
   return (
     <div className="p-4 w-[400px] sm:w-[500px] md:w-[550px] lg:w-[650px] text-nowrap  text-xs sm:text-sm md:text-base">
       <ul>
-        { participants.map((participant, index) => (
+        { participants?.map((participant, index) => (
           <div key={participant.id} className={`flex gap-1 w-full items-center sm:gap-3 p-3 bg-zinc-50 rounded-md shadow-md mb-2 ${participant.completed ? 'blur-[2px]' : ''}`}>
             {/* Checkbox */}
             <input

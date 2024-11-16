@@ -16,7 +16,7 @@ const eventSchema = new mongoose.Schema({
   },
   services: [Service.schema], 
   participants: [Participant.schema], 
-  todo: [Todo.schema], 
+  todos: [Todo.schema], 
   creator: { type: mongoose.Schema.Types.ObjectId, ref: 'eventCreator', required: true }, 
 },{ timestamps: true });
 

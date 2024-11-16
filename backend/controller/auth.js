@@ -53,8 +53,9 @@ export async function handleLogin(req, res) {
   console.log("login")
   try {
     const { email, password } = req.body;
-
+    let id;
     let user = await eventCreator.findOne({ email });
+    id = user?._id;
     let userType = 'eventCreator';
     let userEvents = [];
 

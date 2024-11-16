@@ -1,6 +1,7 @@
 "use client"
-import { DashboardLayout, DetailedEventDisplayer, Loading } from '@/components'
+import { DashboardLayout, DetailedEventDisplayer, Loading, Container } from '@/components'
 import { eventCreatorService } from '@/utils'
+import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 
@@ -12,14 +13,18 @@ function SubmitEvent() {
   const emails = event?.selectedCategories?.map(category => category.serviceEmail) || [];
 
   const [servicesDetails, setServicesDetails] = useState([]);
+  const router = useRouter()
 
   useEffect(()=>{
     async function fetchServiceDetails(emails) {
       try {
         const services = await eventCreatorService.getServicesBatch(JSON.stringify(emails));
-        if (services && services.status !== 403) {
+        if (services) {
           setServicesDetails(services);
         } 
+        else if( services.status === 401 || services.status === 403){
+          router.replace('/login')
+        }
       } catch (error) {
         console.error("Error fetching batch service details:: frontend :: submit event", error);
         return (

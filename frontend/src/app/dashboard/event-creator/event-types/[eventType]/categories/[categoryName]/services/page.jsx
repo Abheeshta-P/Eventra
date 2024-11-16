@@ -17,8 +17,7 @@ function CategoryServices({ params }) {
     const fetchServices = async () => {
       try {
         const services = await eventCreatorService.getServicesCategory(categoryName);
-        if (services.status === 403) {
-          alert("You are not authorized to view this category.");
+        if (services.status === 403 || services.status === 401) {
           router.push('/login'); 
           return;
         }

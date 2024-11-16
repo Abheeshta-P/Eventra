@@ -11,7 +11,7 @@ const eventCreatorService = {
         const data = await response.json();
         return data; 
       } 
-      else if (response.status === 403){
+      else if (response.status === 403 || response.status === 401){
         return response;
       } 
       else {
@@ -33,7 +33,7 @@ const eventCreatorService = {
         const data = await response.json();
         return data; 
       } 
-      else if (response.status === 403){
+      else if (response.status === 403 || response.status === 401){
         return response;
       } 
       else {
@@ -59,7 +59,7 @@ const eventCreatorService = {
         const data = await response.json();
         return data; 
       } 
-      else if (response.status === 403){
+      else if (response.status === 403 || response.status === 401){
         return response;
       } 
       else {
@@ -85,11 +85,36 @@ const eventCreatorService = {
         const data = await response.json();
         return data; 
       } 
+      else if (response.status === 403 || response.status === 401){
+        return response;
+      } 
       else {
         return null; 
       }
     } catch (error) {
       console.error('Error creating event :', error);
+      return null; 
+    }
+  },
+  getEventDetails : async (eventId)=>{
+    try {
+      const response = await fetch(`${url}/api/eventCreator/event/${eventId}`, {
+        method: 'GET',
+        credentials: 'include', 
+      });
+  
+      if (response.ok) {
+        const data = await response.json();
+        return data; 
+      } 
+      else if (response.status === 403 || response.status === 401){
+        return response;
+      } 
+      else {
+        return null; 
+      }
+    } catch (error) {
+      console.error('Error fetching event details :', error);
       return null; 
     }
   }

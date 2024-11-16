@@ -73,13 +73,17 @@ export const todoSlice = createSlice({
       saveToLocalStorage(state);
     },
     resetTodo: (state) => {
-      state.todos = ''
+      state.todos = []
       saveToLocalStorage(state);
       removeFromLocalStorage();
+    },
+    setInitialTodos: (state, action) => {
+      state.todos = action.payload;
+      saveToLocalStorage(state);
     },
   },
 })
 
-export const {addTodo,deleteTodo,updateTodo,toggleTodo,resetTodo} = todoSlice.actions;
+export const {addTodo,deleteTodo,updateTodo,toggleTodo,resetTodo,setInitialTodos} = todoSlice.actions;
 
 export default todoSlice.reducer;

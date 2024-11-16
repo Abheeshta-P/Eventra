@@ -9,6 +9,8 @@ import { login } from '@/store/features/authSlice';
 import { setEvents } from '@/store/features/eventsSlice';
 import Swal from 'sweetalert2';
 import { useRouter } from 'next/navigation';
+import { resetEventDetails } from '@/store/features/eventDetailsSlice';
+import { resetTodo } from '@/store/features/todoSlice';
 
 function Login() {
   const {register,handleSubmit,formState:{error},reset} = useForm();
@@ -16,6 +18,8 @@ function Login() {
   const router = useRouter();
   const Login = async (data) => {
     try {
+      dispatch(resetEventDetails());
+      dispatch(resetTodo());
       const response = await authService.loginUser(JSON.stringify(data));
   
       if (response) {
@@ -62,7 +66,6 @@ function Login() {
     }
   };  
   
-      
   return (
     <Container className={'flex justify-center items-center login-bg'}>
       <div className='flex items-center justify-center w-full text-black '>
