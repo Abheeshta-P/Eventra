@@ -1,36 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  events: [
-    {
-      "id" : "1",
-      "eventName": "John and Jane's Wedding",
-      "location": "City Hall",
-      "date": "2024-12-25",
-      "eventType": "wedding"
-    },
-    {
-      "id" : "2",
-      "eventName": "John and Jae's Wedding",
-      "location": "City Hall",
-      "date": "2024-12-25",
-      "eventType": "entertainment"
-    },
-    {
-      "id" : "3",
-      "eventName": "Jon and Jane's Wedding",
-      "location": "City Hall",
-      "date": "2024-12-25",
-      "eventType": "party"
-    },
-    {
-      "id" : "4",
-      "eventName": "John and ane's Wedding",
-      "location": "City Hall",
-      "date": "2024-12-25",
-      "eventType": "wedding"
-    },
-  ],
+  events: [],
   loading: false, 
 };
 

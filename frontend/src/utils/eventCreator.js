@@ -117,6 +117,32 @@ const eventCreatorService = {
       console.error('Error fetching event details :', error);
       return null; 
     }
-  }
+  },
+  updateEventDetails : async (eventId,updateTodoParticipants)=>{
+    try {
+      const response = await fetch(`${url}/api/eventCreator/event/updateTodoParticipants/${eventId}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include', 
+        body: JSON.stringify(updateTodoParticipants),
+      })
+
+    if (response.ok) {
+        const data = await response.json();
+        return data; 
+      } 
+      else if (response.status === 403 || response.status === 401){
+        return response;
+      } 
+      else {
+        return null; 
+      }
+    } catch (error) {
+      console.error('Error updating todo and participant details :', error);
+      return null; 
+    }
+  },
 }
 export default eventCreatorService;

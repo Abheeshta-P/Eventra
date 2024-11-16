@@ -2,9 +2,10 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { nanoid } from '@reduxjs/toolkit';
+import Swal from 'sweetalert2';
 import { addParticipant,toggleParticipant,deleteParticipant } from '@/store/features/participantSlice';
 
-function ParticipantList({onAddParticipant}) {
+function ParticipantList({setHasChanges}) {
   const dispatch = useDispatch();
   const participants = useSelector(state => state.participantsList.participantList);
 
@@ -12,12 +13,16 @@ function ParticipantList({onAddParticipant}) {
   const [phone, setPhoneNumber] = useState('');
 
   const handleAdd = () => {
+    if (participants.some((p) => p.name === newParticipant || p.phone === phone)) {
+      Swal.fire('Error', 'Duplicate participant name or phone number!', 'error');
+      return;
+    }
     if (newParticipant.trim() && phone.trim()) {
       const participantInfo = { id: nanoid(), sno: participants.length + 1, name: newParticipant, phone };
       dispatch(addParticipant(participantInfo));
-      onAddParticipant(participantInfo);
       setNewParticipant('');
       setPhoneNumber('');
+      setHasChanges(true);
     }
     else {
       alert("Enter valid name and phone")
@@ -27,10 +32,12 @@ function ParticipantList({onAddParticipant}) {
 
   const handleToggle = (id) => {
     dispatch(toggleParticipant({ id }));
+    setHasChanges(true);
   };
 
   const handleDelete = (id) => {
     dispatch(deleteParticipant({ id }));
+    setHasChanges(true);
   };
 
   return (

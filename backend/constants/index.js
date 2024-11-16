@@ -2,4 +2,4 @@ export const serviceCategories = ['Catering', 'Decorating', 'Photography', 'Venu
 
 export const eventTypes = ['wedding', 'party', 'entertainment']
 
-export const status = ['pending', 'completed']
+export const status = [true, false]

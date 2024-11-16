@@ -3,7 +3,7 @@ import { useState } from 'react'
 import {useDispatch} from 'react-redux'
 import { addTodo } from '@/store/features/todoSlice';
 
-function AddTodo() {
+function AddTodo({ setHasChanges }) {
   const [input,setInput] = useState('');
   const dispatch = useDispatch();
 
@@ -12,6 +12,7 @@ function AddTodo() {
     if(input!=''&&input!=' ')
     dispatch(addTodo({text : input}));
     setInput("");
+    setHasChanges(true);
   }
 
   return (

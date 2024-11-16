@@ -3,7 +3,7 @@ import { useSelector,useDispatch } from "react-redux"
 import { deleteTodo,updateTodo,toggleTodo } from "@/store/features/todoSlice"
 import { useState } from "react";
 
-function TodoItem({todo}){
+function TodoItem({todo,setHasChanges}){
   const dispatch = useDispatch();
   const [isTaskEditable,setIsTaskEditable] = useState(false)
   const [text,setText] = useState(todo.text);
@@ -16,7 +16,10 @@ function TodoItem({todo}){
     type="checkbox"
     className="cursor-pointer"
     checked={todo.completed}
-    onChange={()=>dispatch(toggleTodo({id : todo.id}))}
+    onChange={()=>{
+      dispatch(toggleTodo({id : todo.id}))
+      setHasChanges(true);
+    }}
 />
   <input
     type="text"
@@ -35,6 +38,7 @@ function TodoItem({todo}){
         if (isTaskEditable) {
           dispatch(updateTodo({id:todo.id,text:text}));
           setIsTaskEditable((prev) => !prev);
+          setHasChanges(true);
         } else setIsTaskEditable((prev) => !prev);
     }}
     disabled={todo.completed}
@@ -42,7 +46,10 @@ function TodoItem({todo}){
     {isTaskEditable ? "📁" : "✏️"}
 </button>
   <button
-   onClick={() => dispatch(deleteTodo({id : todo.id}))}
+   onClick={() =>{
+    dispatch(deleteTodo({id : todo.id}))
+    setHasChanges(true);
+   }}
     className="text-white bg-red-500 border-0 py-1 px-4 focus:outline-none hover:bg-red-600 rounded text-md"
   >
     <svg
@@ -64,14 +71,14 @@ function TodoItem({todo}){
   )
 }
 
-function Todos() {
+function Todos({setHasChanges}) {
  const todos = useSelector(state => state.todoList.todos)||[]
   
   return (
     <>
     <ul className="list-none">
         {todos?.map((todo) => (
-         <TodoItem key={todo.id} todo={todo}/>
+         <TodoItem key={todo.id} todo={todo} setHasChanges={setHasChanges}/>
         ))}
       </ul>
     </>

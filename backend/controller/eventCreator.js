@@ -151,3 +151,29 @@ export async function handleEventFetchDashBoard(req,res){
   res.status(500).json({ message: 'Internal server error' });
  }
 }
+
+export async function handleTodoParticipantsUpdate(req, res)  {
+  const { id } = req.params;
+  const { participants, todos } = req.body;
+
+  if (!todos && !participants) {
+    return res.status(400).json({ success: false, message: 'No data provided for update.' });
+  }
+
+  try {
+    const updatedEvent = await Event.findByIdAndUpdate(
+      id,
+      { participants, todos },
+      { new: true }
+    );
+
+    if (!updatedEvent) {
+      return res.status(404).json({ success: false, message: 'Event not found' });
+    }
+
+    res.status(200).json({ success: true, event: updatedEvent });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: 'Failed to update event' });
+}
+}

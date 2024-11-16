@@ -15,20 +15,12 @@ function DetailedEventDisplayer({ event, isCreating = false, servicesAPI }) {
   const router = useRouter();
   const dispatch = useDispatch();
 
-  const [participants, setParticipants] = useState(event?.participants || []);
+  const [hasChanges, setHasChanges] = useState(false);
+  const participants = useSelector(state => state.participantsList.participantList);
   const todos = useSelector((state) => state.todoList.todos);
   const { userData } = useSelector((state) => state.auth);
   const [sending, setSending] = useState(false);
 
-
-  const addParticipant = (participant) => {
-    if (participants.some((p) => p.name === participant.name || p.phone === participant.phone)) {
-      Swal.fire('Error', 'Duplicate participant name or phone number!', 'error');
-      return;
-    }
-    const updatedParticipants = [...participants, participant];
-    setParticipants(updatedParticipants);
-  };
 
   const designInCanva = () => {
     if (canvaLink[event.eventType]) {
@@ -70,12 +62,39 @@ function DetailedEventDisplayer({ event, isCreating = false, servicesAPI }) {
             dispatch(resetTodo());
           }
         } catch (error) {
+          console.error("Error creating event :: detailed event Display :: frontend", error);
           Swal.fire('Error', 'Event creation failed.', 'error');
         } finally {
           setSending(false);
         }
       }
     });
+  };
+
+  
+const handleSave = async () => {
+    setSending(true);
+    try {
+      const response = await eventCreatorService.updateEventDetails(event._id, {
+        participants,
+        todos,
+      });
+      if (response) {
+        Swal.fire('Success', 'Changes saved successfully.', 'success');
+        setHasChanges(false); 
+      } 
+      else if( response.status === 401 || response.status === 403){
+        router.replace('/login')
+      }
+      else {
+        throw new Error('Failed to save changes');
+      }
+    } catch (error) {
+      console.error("Error updating todo participants details :: detailed event Display :: frontend", error);
+      Swal.fire('Error', 'Failed to save changes. Please try again.', 'error');
+    } finally {
+      setSending(false);
+    }
   };
 
   if (sending) return <Loading />;
@@ -95,12 +114,13 @@ function DetailedEventDisplayer({ event, isCreating = false, servicesAPI }) {
         <ServicesList services={servicesAPI} />
 
         <h2 className="text-gray-800 text-2xl lg:text-3xl font-semibold mt-8">Invitees List</h2>
-        <ParticipantList participants={participants} onAddParticipant={addParticipant} />
+        <ParticipantList setHasChanges={setHasChanges}/>
 
         <h2 className="text-gray-800 text-2xl lg:text-3xl font-semibold mt-8">Todo List</h2>
-        <TodoList />
+        <TodoList setHasChanges={setHasChanges}/>
 
-        {isCreating && (
+       
+        {isCreating ? (
           <>
             <Button className="flex items-center justify-center gap-2 mt-4 bg-zinc-800" onClick={designInCanva}>
               <span>
@@ -112,6 +132,12 @@ function DetailedEventDisplayer({ event, isCreating = false, servicesAPI }) {
               Confirm
             </Button>
           </>
+        ) : (
+          hasChanges && (
+            <Button className="font-bold md:px-12 md:py-2" onClick={handleSave}>
+              Save
+            </Button>
+          )
         )}
       </div>
     </Container>

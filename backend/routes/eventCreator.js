@@ -1,6 +1,6 @@
 import express from 'express'
 const router = express.Router();
-import { handleCreateEvent, handleEventFetchDashBoard, handleGetCategoryServices, handleGetServiceDetails, handleGetServicesDetailsBatch } from '../controller/eventCreator.js';
+import { handleCreateEvent, handleEventFetchDashBoard, handleGetCategoryServices, handleGetServiceDetails, handleGetServicesDetailsBatch, handleTodoParticipantsUpdate } from '../controller/eventCreator.js';
 
 // fetch all services from serviceCategory
 router.get('/categoryServices/:serviceCategory', handleGetCategoryServices);
@@ -12,6 +12,8 @@ router.post('/services/batch',handleGetServicesDetailsBatch);
 router.post('/event/createEvent',handleCreateEvent);
 // based on event id get the event details
 router.get('/event/:id',handleEventFetchDashBoard);
+// update todo & participants
+router.patch('/event/updateTodoParticipants/:id',handleTodoParticipantsUpdate);
 
 
 export default router;
