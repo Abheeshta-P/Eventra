@@ -5,6 +5,7 @@ import { mongoDB } from './conf.js';
 import { connectMongoDB } from './connection.js';
 import authRouter from './routes/auth.js'
 import eventCreatorRouter from './routes/eventCreator.js'
+import serviceProviderRouter from './routes/serviceProvider.js'
 import handleContactUs from './controller/contact-us.js'
 import { verifyToken } from './middleware/index.js';
 
@@ -29,6 +30,8 @@ app.post('/api/contact-us', handleContactUs);
 app.use('/api/auth',authRouter)
 // event creator
 app.use('/api/eventCreator',verifyToken,eventCreatorRouter)
+// service provider
+app.use('/api/serviceProvider',verifyToken,serviceProviderRouter)
 
 
 app.listen(5000, () => {

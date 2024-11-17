@@ -2,12 +2,19 @@
 import React, { useState,useRef,useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { MdEdit, MdSave } from 'react-icons/md'; 
+import serviceProviderService from '@/utils/serviceProvider';
+import { useRouter } from 'next/navigation';
+import { DashboardLayout } from '@/components';
+import Swal from 'sweetalert2';
 
 function DetailsOfService() {
   const {userData}= useSelector(state => state.auth);
   const [isEditing,setisEditing] = useState(false);
   const [details,setDetails] = useState(userData?.details);
   const textareaRef = useRef(null);
+  const router = useRouter();
+  const [error, setError] = useState(null);
+
   const adjustHeight = () => {
     if (textareaRef.current) {
       textareaRef.current.style.height = 'auto'; 
@@ -16,17 +23,46 @@ function DetailsOfService() {
   };
   const editDetails = ()=>{
     if(isEditing){
-      // call db
-      // after that update the redux as well
-      console.log("called db")
+      ;( async () => {
+        try {
+          const response = await serviceProviderService.updateServiceDetails(JSON.stringify({ details }));
+          if (response.status === 403 || response.status === 401) {
+            router.push('/login'); 
+            return;
+          }
+          if (response) {
+            setDetails(details);
+            Swal.fire('success','Service details updated !', 'success');
+          }    
+          else {
+            setError("service details not updated.");
+          }  
+        } catch (error) {
+          console.log("edit details :: details of Service :: frontend :: error", error);
+          Swal.fire('Error', 'Service details update failed.', 'error');
+          setError("Failed to update service details. Please try again later.");
+        }
+      })()
     }
     setisEditing(prev=>!prev)
   }
+
   useEffect(() => {
     if (isEditing) {
       adjustHeight(); 
     }
   }, [details, isEditing]);
+
+  if (error) {
+    return (
+      <DashboardLayout>
+        <div className="flex justify-center items-center h-full">
+          <p className="text-xl text-red-500">{error}</p>
+        </div>
+      </DashboardLayout>
+    );
+  }
+
   return (
     <div>
       {/* Edit button */}

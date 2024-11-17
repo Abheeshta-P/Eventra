@@ -25,7 +25,6 @@ function EventDetails({ params }) {
         }
         else {
           setEvent(data.event);
-          console.log(data.event)
           dispatch(setInitialParticipants(data.event.participants));
           dispatch(setInitialTodos(data.event.todos));
         }
