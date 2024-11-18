@@ -13,7 +13,7 @@ const ProviderSchema = new mongoose.Schema({
   },
   details: { type: String, required: true },
   cost: { type: String, required: true },
-  gallery: [{ type: String }], // URLs or image IDs
+  gallery: [{ type: String ,required: false }], // URLs or image IDs
   password: { type: String, required: true },
   userType: { 
     type: String, 

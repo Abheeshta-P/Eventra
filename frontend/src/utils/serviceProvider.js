@@ -26,6 +26,28 @@ const serviceProviderService = {
       return null; 
     }
   },
+  getGalleryImages : async ()=>{
+    try {
+      const response = await fetch(`${url}/api/serviceProvider/getGalleryImages`, {
+        method: 'GET',
+        credentials: 'include', 
+      });
+  
+      if (response.ok) {
+        const data = await response.json();
+        return data; 
+      } 
+      else if (response.status === 403 || response.status === 401){
+        return response;
+      } 
+      else {
+        return null; 
+      }
+    } catch (error) {
+      console.error('Error fetching gallery iamges :', error);
+      return null; 
+    }
+  },
 }
 
 export default serviceProviderService;

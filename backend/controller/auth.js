@@ -26,27 +26,40 @@ export async function handleSignupEventCreator(req,res) {
     }
 }
 
-export async function handleSignupServiceProvider(req,res) {
-    try {
-      const { name, email, phone, location, category, details, cost, password } = req.body;
-  
-      const existingUserEmail = await serviceProvider.findOne({ name, email });
-      const existingUserPhone = await serviceProvider.findOne({ name , phone})
-      if (existingUserEmail || existingUserPhone) {
-        return res.status(400).send({ error: 'Email or Phone already in use' });
-      }
-  
-      const hashedPassword = await bcrypt.hash(password, 10);
-  
-      const newUser = new serviceProvider({ name, email, phone, location, category, details, cost, password: hashedPassword});
-      await newUser.save();
-      if(newUser) console.log("Registered")
+export async function handleSignupServiceProvider(req, res) {
+  try {
+    const { name, email, phone, location, category, details, cost, password } = req.body;
 
-      res.send({ message: 'User created successfully!' }); 
-    } catch (error) {
-      console.error(error);
-      res.status(500).send({ error: 'Internal server error' });
+    const existingUserEmail = await serviceProvider.findOne({ email });
+    const existingUserPhone = await serviceProvider.findOne({ phone });
+    if (existingUserEmail || existingUserPhone) {
+      return res.status(400).send({ error: 'Email or Phone already in use' });
     }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const galleryImages = req.files.map((file) => file.path) || []; // File URLs returned by Cloudinary
+
+    const newUser = new serviceProvider({
+      name,
+      email,
+      phone,
+      location,
+      category,
+      details,
+      cost,
+      password: hashedPassword,
+      gallery: galleryImages, 
+    });
+
+    await newUser.save();
+    console.log('Registered');
+
+    res.send({ message: 'User created successfully!' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ error: 'Internal server error' });
+  }
 }
 
 export async function handleLogin(req, res) {

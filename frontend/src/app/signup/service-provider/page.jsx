@@ -18,65 +18,114 @@ const ServiceProviderSignup = () => {
   const dispatch = useDispatch();
   const onSubmit = async (data) => {
     try {
-      const userData = await authService.signUpUser(JSON.stringify(data),'service-provider');
-      if(userData){
-          reset({name : '', email : '', phone : '', location : '', category : '', details : '', cost : '', password : ''});
-          if (fileInputRef.current) {
-            fileInputRef.current.value = ''; 
-          }
-          setGalleryImages([]);
-          if(userData.status === 400)
-              alert("The user with current email already exists, login instead");
-          else {
-            router.push('/login');
-            Swal.fire({
-              title: 'Signup Successful!',
-              text: 'You have successfully signed up.',
-              icon: 'success',
-              confirmButtonText: 'Awesome!',
-              timer: 3000,
-              customClass: {
-                popup: 'bg-green-100 text-green-900',
-                title: 'text-green-700',
-                confirmButton: 'bg-green-600',
-              },
-              backdrop: `
-                rgba(0,255,0,0.3)
-                url("https://sweetalert2.github.io/images/success.gif")
-                left top
-                no-repeat
-              `,
-            }).then(async()=>{
-              try {
-                const response = await authService.loginUser(JSON.stringify(data));
-                console.log(response)
-                if (response) {
-                  const responseData = await response;            
-                  if (responseData && responseData.isLoggedIn) {
-                    reset({ email: '', password: '' });
-            
-                    const { userType, userData} = responseData;
-            
-                    dispatch(login({ userType, userData }));
-                  } else {
-                    alert('Login failed. Please check your credentials and try again.');
-                  }
-                } else {
-                  console.error('No response from the server');
-                  alert('No response from the server');
-                }
-              } catch (error) {
-                console.log("signup form :: loginUser :: service provider :: error", error);
-                alert('An error occurred while logging in. Please try again later.');
-              }
-            })
-          
-          }
+      // Create FormData to send data and images
+      const formData = new FormData();
+      
+      // Append regular form data
+      console.log(data)
+      formData.append("name", data.name);
+      formData.append("email", data.email);
+      formData.append("phone", data.phone);
+      formData.append("location", data.location);
+      formData.append("category", data.category);
+      formData.append("details", data.details);
+      formData.append("cost", data.cost);
+      formData.append("password", data.password);
+  
+      // Append image files
+      if (galleryImages.length > 0) {
+        galleryImages.forEach((image) => {
+          formData.append("galleryImages", image); // The key will be 'galleryImages'
+        });
       }
-    } catch (error){
+  
+      // Send the formData to the backend
+      console.log(formData)
+      const userData = await authService.signUpUser(formData, 'service-provider');
+      if (userData) {
+        reset({
+          name: '',
+          phone: '',
+          location: '',
+          category: '',
+          details: '',
+          cost: '',
+        });
+        if (fileInputRef.current) {
+          fileInputRef.current.value = '';
+        }
+        setGalleryImages([]);
+        if (userData.status === 400)
+          alert("The user with current email already exists, login instead");
+        else {
+          router.push('/login');
+          Swal.fire({
+            title: 'Signup Successful!',
+            text: 'You have successfully signed up.',
+            icon: 'success',
+            confirmButtonText: 'Awesome!',
+            timer: 3000,
+            customClass: {
+              popup: 'bg-green-100 text-green-900',
+              title: 'text-green-700',
+              confirmButton: 'bg-green-600',
+            },
+            backdrop: `
+              rgba(0,255,0,0.3)
+              url("https://sweetalert2.github.io/images/success.gif")
+              left top
+              no-repeat
+            `,
+          })
+          .then(async()=>{
+            try {
+              const response = await authService.loginUser(JSON.stringify(data));
+          
+              if (response) {
+                const responseData = await response;                  
+                if (responseData && responseData.isLoggedIn) {
+                  reset({ email: '', password: '' });
+          
+                  const { userType, userData } = responseData;
+          
+                  dispatch(login({ userType, userData }));
+          
+                  Swal.fire({
+                    title: 'Logged in Successfully!',
+                    text: 'You have successfully logged in.',
+                    icon: 'success',
+                    confirmButtonText: 'Awesome!',
+                    timer: 3000,
+                    customClass: {
+                      popup: 'bg-green-100 text-green-900',
+                      title: 'text-green-700',
+                      confirmButton: 'bg-green-600',
+                    },
+                    backdrop: `
+                      rgba(0,255,0,0.3)
+                      url("https://sweetalert2.github.io/images/success.gif")
+                      left top
+                      no-repeat
+                    `,
+                  }).then(()=> {router.replace('/');router.refresh()})
+                } else {
+                  alert('Login failed. Please check your credentials and try again.');
+                }
+              } else {
+                console.error('No response from the server');
+                alert('No response from the server');
+              }
+            } catch (error) {
+              console.log("login form :: loginUser :: error", error);
+              alert('An error occurred while logging in. Please try again later.');
+            }
+          })
+        }
+      }
+    } catch (error) {
       console.log(" Signup form :: signUpUser serviceprovider :: error ", error);
     }
-  };
+  }  
 
   const handleImageChange = (e) => {
     const files = Array.from(e.target.files);
@@ -189,6 +238,7 @@ const ServiceProviderSignup = () => {
             accept="image/*"
             multiple
             className = 'mt-2'
+            name = 'galleryImages'
             onChange={handleImageChange}
           />
           {galleryImages.length > 0 && (

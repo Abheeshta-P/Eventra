@@ -20,3 +20,20 @@ export async function handleServiceDetailsUpdate(req, res) {
     return res.status(500).json({ message: 'Server error' });
   }
 }
+
+export async function handleGetGalleryImages(req,res){
+  try {
+    const { id } = req.user; 
+
+    const provider = await serviceProvider.findById(id);
+
+    if (!provider) {
+      return res.status(404).send({ error: 'Service provider not found' });
+    }
+
+    res.send({ gallery: provider.gallery });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ error: 'Internal server error' });
+  }
+}

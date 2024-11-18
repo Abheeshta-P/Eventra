@@ -20,15 +20,25 @@ const authService = {
   },
   
   signUpUser: async (body,type) => {
-    try {
-      const response = await fetch(`${url}/api/auth/signup/${type}`, {
+    let infoFetch ;
+    if(type === 'event-creator'){
+      infoFetch = {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body
         ,
-      });
+      }
+    }
+    else if(type === 'service-provider'){
+      infoFetch = {
+        method: 'POST',
+        body,
+      }
+    }
+    try {
+      const response = await fetch(`${url}/api/auth/signup/${type}`, infoFetch);
 
       if (response.ok || response.status === 400) {
         return response;
