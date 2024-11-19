@@ -2,7 +2,7 @@
 
 import React, { useState, useRef } from 'react';
 import { useForm } from 'react-hook-form';
-import { Input, Button, Select, Container, Logo } from '@/components';
+import { Input, Button, Select, Container, Logo, Loading } from '@/components';
 import { authService } from '@/utils';
 import { useRouter } from 'next/navigation';
 import Swal from 'sweetalert2';
@@ -16,9 +16,11 @@ const ServiceProviderSignup = () => {
   const router = useRouter();
   const fileInputRef = useRef(null);
   const dispatch = useDispatch();
+  const [loading,setLoading] = useState(false); 
   const onSubmit = async (data) => {
     try {
       // Create FormData to send data and images
+      setLoading(true);
       const formData = new FormData();
       
       // Append regular form data
@@ -125,6 +127,9 @@ const ServiceProviderSignup = () => {
     } catch (error) {
       console.log(" Signup form :: signUpUser serviceprovider :: error ", error);
     }
+    finally{
+      setLoading(false);
+    }
   }  
 
   const handleImageChange = (e) => {
@@ -139,6 +144,13 @@ const ServiceProviderSignup = () => {
 
     setGalleryImages(files);
   };
+
+  if(loading) 
+    return (
+      <div className="w-full flex justify-center items-center h-full">
+        <Loading />
+      </div>
+    );
 
   return (
     <Container className={'login-bg'}>

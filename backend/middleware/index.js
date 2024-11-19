@@ -24,9 +24,9 @@ export function verifyToken(req, res, next) {
 const storage = new CloudinaryStorage({
   cloudinary,
   params: async (req, file) => {
-    const userEmail = req.body.email; 
-    const sanitizedEmail = userEmail.replace(/[^a-zA-Z0-9]/g, '_'); 
-
+    const userEmail = req.body?.email || req.query?.email;
+    const sanitizedEmail = userEmail?.replace(/[^a-zA-Z0-9]/g, '_'); 
+ 
     return {
       folder: `service_provider_gallery/${sanitizedEmail}`,
       allowed_formats: ['jpg', 'jpeg', 'png', 'webp'],
