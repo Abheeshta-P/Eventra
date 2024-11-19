@@ -120,7 +120,7 @@ export async function handleCreateEvent(req, res) {
         from: `EVENTRA.SASS 📧 ${companyEmail}`,
         to: service.email,
         subject: `Upcoming Event Inquiry: "${eventName}"`,
-        text: `Dear ${service.name},\n\nYou have been selected as a service provider for an event. Here are the details:\n\nEvent: ${eventName}\nDate: ${new Date(date).toLocaleDateString()}\nLocation: ${location}\nEvent Type: ${eventType}\n\nYou may be contacted by the client regarding bookings or additional inquiries. Please be prepared to provide your services as requested.\n\nThank you for being part of Eventera!\n\nBest,\nEventera Team`
+        text: `Dear ${service.name},\n\nYou have been selected as a service provider for an event. Here are the details:\n\nEvent: ${eventName}\nDate: ${new Date(date).toLocaleDateString()}\nLocation: ${location}\nEvent Type: ${eventType}\n\nYou may be contacted by the client regarding bookings or additional inquiries. Please be prepared to provide your services as requested.\n\nThank you for being part of Eventra!\n\nBest,\nEventra Team`
       };
 
       await transporter.sendMail(providerMailOptions);
