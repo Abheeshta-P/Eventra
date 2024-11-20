@@ -214,6 +214,7 @@ const ServiceProviderSignup = () => {
           <Select
             label="Category"
             options={serviceCategories}
+            defaultSelect = 'the category of service'
             {...register('category', { required: 'Please select a category' })}
           />
           {errors.category && <p className="text-red-500 text-sm">{errors.category.message}</p>}

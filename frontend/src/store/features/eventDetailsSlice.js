@@ -1,11 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-/*
-selectedCategories: [
-  { category: "Catering", serviceEmail: "info@deliciouscatering.com" },
-  { category: "Photography", serviceEmail: "contact@capturingmoments.com" }
-]
-*/
 
 const loadInitialState = () => {
   if (typeof window !== 'undefined') {

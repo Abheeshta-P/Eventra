@@ -1,8 +1,8 @@
 import { url } from "@/conf";
 const eventCreatorService = {
-  getServicesCategory : async (category)=>{
+  getServicesCategory : async (category,location)=>{
     try {
-      const response = await fetch(`${url}/api/eventCreator/categoryServices/${category}`, {
+      const response = await fetch(`${url}/api/eventCreator/categoryServices/${category}?location=${encodeURIComponent(location)}`, {
         method: 'GET',
         credentials: 'include', 
       });

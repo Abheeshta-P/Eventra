@@ -10,13 +10,14 @@ function CategoryServices({ params }) {
   const { categoryName, eventType } = params;
   const router = useRouter();
   const dispatch = useDispatch();
+  const { location } = useSelector(state => state.eventDetails);
 
   const [services,setServices] = useState([]);
 
   useEffect(() => {
     const fetchServices = async () => {
       try {
-        const services = await eventCreatorService.getServicesCategory(categoryName);
+        const services = await eventCreatorService.getServicesCategory(categoryName,location);
         if (services.status === 403 || services.status === 401) {
           router.push('/login'); 
           return;
@@ -105,9 +106,11 @@ function CategoryServices({ params }) {
           </div>
         ))}
       </div>
-    ) : (
+    ) : categoryName ==='Venue'? <div className="text-zinc-700 font-semibold text-lg md:text-xl lg:text-2xl text-center w-full">
+       We couldn't find any {categoryName} services in {location} at the moment. Please check back later!
+      </div> : (
       <div className="text-zinc-700 font-semibold text-lg md:text-xl lg:text-2xl text-center w-full">
-        No services available for {categoryName} at the moment.
+       We couldn't find any services for {categoryName} at the moment. Please check back later!
       </div>
     )}
   </Container>

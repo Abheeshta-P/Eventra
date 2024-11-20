@@ -6,15 +6,19 @@ import { Parser } from 'json2csv';
 
 export async function handleGetCategoryServices(req, res) {
   const { serviceCategory } = req.params;
+  const { location } = req.query;
   
   try {
-    const services = await serviceProvider.find({ category: serviceCategory }).select(
+    let services = await serviceProvider.find({ category: serviceCategory }).select(
       'category name cost email phone location'
     );
     if (services.length === 0) {
       return res.status(404).json({ message: 'No services found in this category' });
     }
-    else 
+    if(serviceCategory === 'Venue'){
+      services = services.filter(service => service.location === location)
+    }
+    
     return res.status(200).json(services);
   } catch (error) {
     console.error(error);
