@@ -154,9 +154,9 @@ const ServiceProviderSignup = () => {
 
   return (
     <Container className={'login-bg'}>
- <div className="flex items-center justify-center text-black ">
- <div className={`w-[85%] mx-auto md:w-full flex flex-col items-center justify-center md:max-w-lg bg-zinc-100 rounded-xl p-10 border border-black/10`}>
-        <Logo/>
+    <div className="flex items-center justify-center text-black ">
+    <div className={`w-[85%] mx-auto md:w-full flex flex-col items-center justify-center md:max-w-lg bg-zinc-100 rounded-xl p-10 border border-black/10`}>
+      <Logo/>
       <h2 className="text-2xl font-semibold text-gray-900 mt-3 mb-4 text-center">Service Provider Sign up</h2>
       
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6" encType='multipart/form-data'>
@@ -204,7 +204,7 @@ const ServiceProviderSignup = () => {
           <Input
             label="Location"
             type="text"
-            placeholder = 'Enter your company location'
+            placeholder = 'eg : Hampankatta, Mangalore'
             {...register('location', { required: 'Location is required' })}
           />
           {errors.location && <p className="text-red-500 text-sm">{errors.location.message}</p>}
