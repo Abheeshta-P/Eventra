@@ -24,7 +24,6 @@ const ServiceProviderSignup = () => {
       const formData = new FormData();
       
       // Append regular form data
-      console.log(data)
       formData.append("name", data.name);
       formData.append("email", data.email);
       formData.append("phone", data.phone);
@@ -42,7 +41,6 @@ const ServiceProviderSignup = () => {
       }
   
       // Send the formData to the backend
-      console.log(formData)
       const userData = await authService.signUpUser(formData, 'service-provider');
       if (userData) {
         reset({
