@@ -16,11 +16,13 @@ export async function handleGetCategoryServices(req, res) {
       return res.status(404).json({ message: 'No services found in this category' });
     }
     if(serviceCategory === 'Venue') {
-      services = services.filter(service => 
-        service.location.toLowerCase().includes(location.toLowerCase())
+      services = services.filter(service =>{ 
+       if( service.location.toLowerCase().includes(location.toLowerCase()) ||
+       location.toLowerCase().includes(service.location.toLowerCase()))
+          return service;
+      }
       );
     }    
-    
     return res.status(200).json(services);
   } catch (error) {
     console.error(error);

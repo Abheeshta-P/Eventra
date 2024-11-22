@@ -18,6 +18,11 @@ function ParticipantList({setHasChanges}) {
       return;
     }
     if (newParticipant.trim() && phone.trim()) {
+      const phoneRegex = /^[6-9]\d{9}$/;
+      if (!phoneRegex.test(phone)) {
+        alert("Please enter a valid 10-digit Indian phone number.");
+        return; 
+      }
       const participantInfo = { id: nanoid(), sno: participants.length + 1, name: newParticipant, phone };
       dispatch(addParticipant(participantInfo));
       setNewParticipant('');

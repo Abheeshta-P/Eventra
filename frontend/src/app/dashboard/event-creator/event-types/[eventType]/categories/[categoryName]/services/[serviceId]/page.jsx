@@ -54,11 +54,17 @@ function ServiceDetail({ params }) {
           </div>
           <div className="flex flex-col gap-2 md:gap-3 w-full">
             <h2 className="text-2xl lg:text-3xl font-semibold text-gray-900 text-nowrap">Gallery</h2>
-            <div className="-mt-2 -mb-2 grid grid-cols-1 sm:grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 p-4">
+            {
+              service?.galleryImages?.length === 0 ? <div className='mb-12'>
+              <p className="text-sm md:text-base text-zinc-700">
+                No gallery images yet.
+              </p>
+              </div> : <div className="-mt-2 -mb-2 grid grid-cols-1 sm:grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 p-4">
               {service?.galleryImages?.map((imgSrc) => (
                 <GalleryCard imgSrc={imgSrc} key={imgSrc} />
               ))}
             </div>
+            }
           </div>
           <div className="flex items-center mb-3">
             <p className="text-xl md:text-2xl font-semibold text-green-800">
