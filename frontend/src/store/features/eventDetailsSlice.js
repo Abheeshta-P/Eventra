@@ -14,7 +14,7 @@ const eventDetailsSlice = createSlice({
   initialState: loadInitialState(),
   reducers: {
     setEventDetails: (state, action) => {
-      console.log(action)
+      // console.log(action)
       state.eventName = action.payload.eventName;
       state.location = action.payload.location;
       state.date = action.payload.date;
@@ -42,7 +42,7 @@ const eventDetailsSlice = createSlice({
       saveToLocalStorage(state);
     },    
     resetEventDetails: (state) => {
-      console.log("reset")
+      // console.log("reset")
       state.eventName = '';
       state.location = '';
       state.date = '';

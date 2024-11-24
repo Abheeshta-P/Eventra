@@ -14,7 +14,6 @@ function LogoutBtn({className}) {
   const inputHandler = async()=>{
     try {
       const response = await authService.logoutUser();
-      console.log(response.status)
        if(response.ok){
         dispatch(logout());
         dispatch(resetEventDetails());

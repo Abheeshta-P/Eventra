@@ -18,16 +18,16 @@ function GalleryOfService() {
   const router = useRouter();
   const { userData } = useSelector(state => state.auth);
   const email = userData?.email;
+  const [changes, setChanges] = useState(false);
 
   const MAX_IMAGES = 8;
 
   const toggleEditMode = async () => {
-    if (isEditing) {
+    if (isEditing && changes) {
       try {
         const formData = new FormData();
         newImages.forEach((file) => formData.append("newImages", file));
         formData.append("deletedImages", JSON.stringify(deletedImages));
-        console.log(formData)
 
         setLoading(true);
 
@@ -61,6 +61,7 @@ function GalleryOfService() {
 
   const handleImageChange = (e) => {
     const files = Array.from(e.target.files);
+    setChanges(true);
 
     if (galleryImages?.length + newImages?.length + files?.length > MAX_IMAGES) {
       alert(`You can only upload a maximum of ${MAX_IMAGES} images.`);
@@ -74,6 +75,8 @@ function GalleryOfService() {
 
   const handleDeleteImage = (imgSrc) => {
     const newImagesIndex = newImages?.findIndex((file) => URL.createObjectURL(file) === imgSrc);
+    setChanges(true);
+    
     if (newImagesIndex !== -1) {
       setNewImages((prev) => prev.filter((_, index) => index !== newImagesIndex));
     } else {

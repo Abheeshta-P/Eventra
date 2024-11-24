@@ -14,6 +14,7 @@ function DetailsOfService() {
   const textareaRef = useRef(null);
   const router = useRouter();
   const [error, setError] = useState(null);
+  const [changes, setChanges] = useState(false);
 
   const adjustHeight = () => {
     if (textareaRef.current) {
@@ -22,7 +23,7 @@ function DetailsOfService() {
     }
   };
   const editDetails = ()=>{
-    if(isEditing){
+    if(isEditing && changes && userData?.details!==details){
       ;( async () => {
         try {
           const response = await serviceProviderService.updateServiceDetails(JSON.stringify({ details }));
@@ -74,7 +75,10 @@ function DetailsOfService() {
         <textarea
         ref={textareaRef}
         value={details}
-        onChange={(e) => setDetails(e.target.value)}
+        onChange={(e) => {
+          setChanges(true);
+          setDetails(e.target.value);
+        }}
         minLength={'20'}
         maxLength={'1000'}
         className='overflow-y-hidden rounded-lg bg-transparent text-black outline-none duration-200 border border-gray-200 w-full text-sm md:text-base resize-none'
