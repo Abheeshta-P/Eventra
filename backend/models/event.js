@@ -2,7 +2,7 @@
 import mongoose from "mongoose";
 import Service from "./service.js";
 import Participant from "./participant.js";
-import Todo from "./Todo.js";
+import Todo from "./todo.js";
 import { eventTypes } from "../constants/index.js";
 
 const eventSchema = new mongoose.Schema({

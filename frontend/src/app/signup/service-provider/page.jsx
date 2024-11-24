@@ -19,11 +19,9 @@ const ServiceProviderSignup = () => {
   const [loading,setLoading] = useState(false); 
   const onSubmit = async (data) => {
     try {
-      // Create FormData to send data and images
       setLoading(true);
       const formData = new FormData();
       
-      // Append regular form data
       formData.append("name", data.name);
       formData.append("email", data.email);
       formData.append("phone", data.phone);
@@ -33,14 +31,12 @@ const ServiceProviderSignup = () => {
       formData.append("cost", data.cost);
       formData.append("password", data.password);
   
-      // Append image files
       if (galleryImages.length > 0) {
         galleryImages.forEach((image) => {
-          formData.append("galleryImages", image); // The key will be 'galleryImages'
+          formData.append("galleryImages", image); 
         });
       }
   
-      // Send the formData to the backend
       const userData = await authService.signUpUser(formData, 'service-provider');
       if (userData) {
         reset({
