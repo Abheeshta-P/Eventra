@@ -103,7 +103,7 @@ function GalleryOfService() {
         setLoading(false);
       }
     })();
-  }, []);
+  }, [router]);
 
   if (error) {
     return (

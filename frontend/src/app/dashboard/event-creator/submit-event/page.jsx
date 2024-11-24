@@ -42,7 +42,7 @@ function SubmitEvent() {
     if (emails.length > 0) {
       fetchServiceDetails(emails);
     } 
-  },[])
+  },[router,emails])
 
   return servicesDetails.length!=0?(
    <DashboardLayout> <DetailedEventDisplayer event={event} servicesAPI={servicesDetails} isCreating/></DashboardLayout>

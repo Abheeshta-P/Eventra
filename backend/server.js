@@ -10,6 +10,7 @@ import handleContactUs from './controller/contact-us.js'
 import { verifyToken } from './middleware/index.js';
 
 const app = express();
+const port = process.env.PORT || 5000;
 
 app.use(cors({
   origin: 'http://localhost:3000', 
@@ -34,7 +35,6 @@ app.use('/api/eventCreator',verifyToken,eventCreatorRouter)
 app.use('/api/serviceProvider',verifyToken,serviceProviderRouter)
 
 
-app.listen(5000, () => {
-  console.log(`Server is running on port 5000 http://localhost:${5000}`);
+app.listen(port, () => {
+  console.log(`Server running at http://localhost:${port}/`);
 });
- 

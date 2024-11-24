@@ -37,7 +37,7 @@ function EventDetails({ params }) {
       dispatch(resetParticipants());
       dispatch(resetTodo());
     }
-  }, [eventId]);
+  }, [eventId,router,dispatch]);
 
   if (error) {
     return (

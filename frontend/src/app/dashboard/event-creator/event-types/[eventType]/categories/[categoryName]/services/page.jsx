@@ -34,7 +34,7 @@ function CategoryServices({ params }) {
     };
   
     fetchServices();
-  }, [categoryName, router]);
+  }, [categoryName, router,location]);
   
   const { selectedCategories } = useSelector((state) => state.eventDetails);
   const [selectedCategoriesState, setSelectedCategoriesState] = useState(selectedCategories || []);
@@ -69,6 +69,10 @@ function CategoryServices({ params }) {
   const handleViewDetailsClick = (serviceId) => {
     router.push(`/dashboard/event-creator/event-types/${eventType}/categories/${categoryName}/services/${serviceId}`);
   };
+
+  const fallbackMessage = categoryName === "Venue" ? `We couldn&apos;t find any ${categoryName} services in ${location} at the moment. Please check back later!`
+    : `We couldn&apos;t find any services for ${categoryName} at the moment. Please check back later!`;
+
 
   return (
    <DashboardLayout>
@@ -106,13 +110,10 @@ function CategoryServices({ params }) {
           </div>
         ))}
       </div>
-    ) : categoryName ==='Venue'? <div className="text-zinc-700 font-semibold text-lg md:text-xl lg:text-2xl text-center w-full">
-       We couldn't find any {categoryName} services in {location} at the moment. Please check back later!
-      </div> : (
-      <div className="text-zinc-700 font-semibold text-lg md:text-xl lg:text-2xl text-center w-full">
-       We couldn't find any services for {categoryName} at the moment. Please check back later!
-      </div>
-    )}
+    ) : <div className="text-zinc-700 font-semibold text-lg md:text-xl lg:text-2xl text-center w-full">
+    {fallbackMessage}
+    </div>
+    }
   </Container>
 
 

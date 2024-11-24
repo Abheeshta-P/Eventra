@@ -32,7 +32,7 @@ function ServiceDetail({ params }) {
             );
       }
     })()
-  },[])
+  },[router,serviceId])
 
 
   return (

@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import { Input, Button, Select, Container, Logo, Loading } from '@/components';
 import { authService } from '@/utils';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import Swal from 'sweetalert2';
 import { serviceCategories } from '@/constants';
 import { useDispatch } from 'react-redux';
@@ -13,10 +14,12 @@ import { login } from '@/store/features/authSlice';
 const ServiceProviderSignup = () => {
   const { register, handleSubmit, formState: { errors },reset } = useForm();
   const [galleryImages, setGalleryImages] = useState([]);
+  const [error,setError] = useState('');
   const router = useRouter();
   const fileInputRef = useRef(null);
   const dispatch = useDispatch();
   const [loading,setLoading] = useState(false); 
+
   const onSubmit = async (data) => {
     try {
       setLoading(true);
@@ -151,9 +154,18 @@ const ServiceProviderSignup = () => {
     <div className="flex items-center justify-center text-black ">
     <div className={`w-[85%] mx-auto md:w-full flex flex-col items-center justify-center md:max-w-lg bg-zinc-100 rounded-xl p-10 border border-black/10`}>
       <Logo/>
-      <h2 className="text-2xl font-semibold text-gray-900 mt-3 mb-4 text-center">Service Provider Sign up</h2>
-      
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6" encType='multipart/form-data'>
+      <h2 className="text-2xl font-semibold text-gray-900 mt-3 text-center">Service Provider Sign up</h2>
+      <p className="mt-2 text-center text-base text-black/60">
+            Already have an account?&nbsp;
+            <Link
+                href="/login"
+                className="font-medium text-primary transition-all duration-200 hover:underline"
+            >
+                Log in
+            </Link>
+        </p>
+        {error && <p className="text-red-600 mt-8 text-center">{error}</p>}
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 mt-4" encType='multipart/form-data'>
         <div>
           <Input
             label="Name"
