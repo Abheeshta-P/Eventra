@@ -2,19 +2,25 @@
 import { useRouter } from 'next/navigation';
 import React from 'react';
 import { imageSources } from '@/constants';
+import { MdCancel } from 'react-icons/md';
 
-function EventsCard({ eventId, eventName, eventType, date, location, className = '', ...props}) {
+function EventsCard({ eventId, eventName, eventType, date, location, className = '', isEditing, onDeleteEvent, ...props}) {
   const route = useRouter();
-  const displayEventDetails = () =>{
-    route.push(`/dashboard/event-creator/event/${eventId}`); 
-  }
+  const displayEventDetails = (e) => {
+    if (!e.target.classList.contains('deleteEvent')) {
+      route.push(`/dashboard/event-creator/event/${eventId}`);
+    }
+  };
   return (
-    <div
-      className={`relative flex flex-col shadow-md border border-black/10 rounded-lg w-[300px] h-[300px] bg-zinc-100 justify-between p-5 transition-opacity duration-300 cursor-pointer ${className}`}
+    <div className={`relative flex flex-col shadow-md border border-black/10 rounded-lg w-[300px] h-[300px] bg-zinc-100 justify-between p-5 transition-opacity duration-300 cursor-pointer ${className}`}
       {...props}
-      onClick={displayEventDetails}
-    >
-
+      onClick={displayEventDetails}>
+        {isEditing?<div className='absolute z-30 w-7 h-7 bg-zinc-600 text-white flex justify-center items-center rounded-full top-2 right-1 deleteEvent'>
+        <button onClick={(e) => {
+            e.stopPropagation(); 
+            onDeleteEvent(eventId);
+          }}><MdCancel className='w-4 h-4'/></button>
+        </div>:null}
       <div className="border border-black/30 w-full h-[150px]">
         <img
           src={imageSources[eventType]}

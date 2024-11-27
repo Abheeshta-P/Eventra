@@ -12,7 +12,7 @@ function GalleryCard({ imgSrc,isEditing=false,onDelete = ()=>{},...props }) {
        }
       <img 
         src={imgSrc} 
-        alt="Gallery Image" 
+        alt={`Gallery Image - ${imgSrc}`}
         className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
       />
     </div>

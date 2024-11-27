@@ -12,13 +12,23 @@ function CategoryInEventType({ params }) {
   const { eventType } = params;
   const categories = eventCategories[eventType];
   const router = useRouter();
-  const {selectedCategories }= useSelector(state => state.eventDetails)
+  const { selectedCategories }= useSelector(state => state.eventDetails)
   const [selectedCategoriesState, setSelectedCategories] = useState(selectedCategories || []);
 
 
   const handleCategoryClick = (category) => {
     router.push(`/dashboard/event-creator/event-types/${eventType}/categories/${category}/services`);
   };
+
+  const handleGotoSummaryPage = () => {
+    if(selectedCategories?.length>0){
+      router.push('/dashboard/event-creator/submit-event');
+    }
+    else {
+      alert("Add atleast one service of a category");
+      return;
+    }
+  }
 
   if (!categories) {
     console.log("No categories found for this event type");
@@ -47,18 +57,18 @@ function CategoryInEventType({ params }) {
              title={category} 
              description={`Includes various services related to ${category}`} 
              photo={`${eventCategoryImageSources[category]}`} 
-             className={`lg:text-base ${isSelected ? 'border-4 border-green-500 shadow-lg' : ''}`} // Conditionally apply background
+             className={`lg:text-base ${isSelected ? 'border-4 border-green-500 shadow-lg' : ''}`} 
            />
            {isSelected && (
              <div className="absolute inset-0 flex items-center justify-center">
-               <span className="text-white w-8 h-8 rounded-full bg-green-700 text-center text-2xl font-bold">✓</span> {/* Checkmark */}
+               <span className="text-white w-8 h-8 rounded-full bg-green-700 text-center text-2xl font-bold">✓</span> 
              </div>
            )}
          </Link>
        );
      })}
    </div>
- <Link href={'/dashboard/event-creator/submit-event'}><Button className="my-12">Go to Event Summary Page</Button> </Link>{/* The button you mentioned */}
+ <Button className="my-12" onClick={handleGotoSummaryPage}>Go to Event Summary Page</Button>
  </Container>
  </DashboardLayout>
   );

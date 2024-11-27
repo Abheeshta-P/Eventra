@@ -26,7 +26,7 @@ function GalleryOfService() {
     if (isEditing && changes) {
       try {
         const formData = new FormData();
-        newImages.forEach((file) => formData.append("newImages", file));
+        newImages.forEach((file) => formData.append("newImages", file?.file));
         formData.append("deletedImages", JSON.stringify(deletedImages));
 
         setLoading(true);
@@ -62,29 +62,36 @@ function GalleryOfService() {
   const handleImageChange = (e) => {
     const files = Array.from(e.target.files);
     setChanges(true);
-
+  
     if (galleryImages?.length + newImages?.length + files?.length > MAX_IMAGES) {
       alert(`You can only upload a maximum of ${MAX_IMAGES} images.`);
       fileInputRef.current.value = "";
       return;
     }
-
-    setNewImages((prev) => [...prev, ...files]);
+  
+    const newImageObjects = files.map((file) => ({
+      file,
+      url: URL.createObjectURL(file),
+    }));
+  
+    setNewImages((prev) => [...prev, ...newImageObjects]);
     fileInputRef.current.value = "";
   };
+  
 
   const handleDeleteImage = (imgSrc) => {
-    const newImagesIndex = newImages?.findIndex((file) => URL.createObjectURL(file) === imgSrc);
+    const newImagesIndex = newImages.findIndex(({ url }) => url === imgSrc);
     setChanges(true);
-    
+  
     if (newImagesIndex !== -1) {
       setNewImages((prev) => prev.filter((_, index) => index !== newImagesIndex));
     } else {
       setDeletedImages((prev) => [...prev, imgSrc]);
     }
-
+  
     setGalleryImages((prev) => prev.filter((src) => src !== imgSrc));
   };
+  
 
   useEffect(() => {
     (async () => {
@@ -168,14 +175,15 @@ function GalleryOfService() {
                 onDelete={() => handleDeleteImage(imgSrc)}
               />
             ))}
-            {newImages?.map((file, index) => (
-              <GalleryCard
-                imgSrc={URL.createObjectURL(file)}
-                key={`new-${index}`}
-                isEditing={isEditing}
-                onDelete={() => handleDeleteImage(URL.createObjectURL(file))}
-              />
-            ))}
+            {newImages?.map(({ url }, index) => (
+            <GalleryCard
+              imgSrc={url}
+              key={`new-${index}`}
+              isEditing={isEditing}
+              onDelete={() => handleDeleteImage(url)}
+            />
+          ))}
+
             {isEditing && galleryImages?.length + newImages?.length < MAX_IMAGES && (
               <div className="w-full h-48 flex items-center justify-center">
                 <input
