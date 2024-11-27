@@ -144,5 +144,31 @@ const eventCreatorService = {
       return null; 
     }
   },
+  deleteEvents : async (deleteEventIds)=>{
+    try {
+      const response = await fetch(`${url}/api/eventCreator/event/deleteEvents`, {
+        method: 'DELETE',
+        credentials: 'include', 
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body : deleteEventIds
+      });
+  
+      if (response.ok) {
+        const data = await response.json();
+        return data; 
+      } 
+      else if (response.status === 403 || response.status === 401){
+        return response;
+      } 
+      else {
+        return null; 
+      }
+    } catch (error) {
+      console.error('Error deleting event details :', error);
+      return null; 
+    }
+  },
 }
 export default eventCreatorService;

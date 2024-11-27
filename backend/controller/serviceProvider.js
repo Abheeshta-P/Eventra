@@ -61,7 +61,6 @@ export async function handleUpdateGalleryImages(req,res){
       const imagesToDelete = JSON.parse(deletedImages);
       for (const image of imagesToDelete) {
         const publicId = getPublicId(image); 
-        console.log(publicId)
         const result = await cloudinary.uploader.destroy(publicId, {invalidate : true});
         if (result.result !== "ok") {
           console.error(`Failed to delete image with public_id: ${publicId}`);

@@ -117,11 +117,11 @@ function GalleryOfService() {
 
   if (error) {
     return (
-      <DashboardLayout>
+      <>
         <div className="w-full flex justify-center items-center h-full">
           <p className="text-xl text-red-500">{error}</p>
         </div>
-      </DashboardLayout>
+      </>
     );
   }
 

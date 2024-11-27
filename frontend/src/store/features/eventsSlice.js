@@ -11,7 +11,7 @@ const eventsSlice = createSlice({
   reducers: {
     setEvents: (state, action) => {
       state.events = action.payload;
-      state.loading = false; // Stop loading when events are set
+      state.loading = false; 
     },
     setLoading: (state, action) => {
       state.loading = action.payload;

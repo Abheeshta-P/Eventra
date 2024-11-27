@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 import Service from "./service.js";
 import Participant from "./participant.js";
 import Todo from "./todo.js";
-import { eventTypes } from "../constants/index.js";
+import { eventTypes, status } from "../constants/index.js";
 
 const eventSchema = new mongoose.Schema({
   eventName: { type: String, required: true },
@@ -17,6 +17,11 @@ const eventSchema = new mongoose.Schema({
   services: [Service.schema], 
   participants: [Participant.schema], 
   todos: [Todo.schema], 
+  completed: { 
+    type: Boolean, 
+    default: false, 
+    enum: status
+  },
   creator: { type: mongoose.Schema.Types.ObjectId, ref: 'eventCreator', required: true }, 
 },{ timestamps: true });
 

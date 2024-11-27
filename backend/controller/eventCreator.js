@@ -185,3 +185,24 @@ export async function handleTodoParticipantsUpdate(req, res)  {
     res.status(500).json({ success: false, message: 'Failed to update event' });
 }
 }
+
+export async function handleEventDeletion(req, res) {
+  const deleteEventIds  = req.body;  
+  try {
+    const response = await Event.deleteMany({ _id: { $in: deleteEventIds } });
+
+    if (response.deletedCount > 0) {
+      const remainingEvents = await Event.find({});
+      
+      res.status(200).json({
+        message: 'Events deleted successfully',
+        remainingEvents,  
+      });
+    } else {
+      res.status(404).json({ error: 'No events found to delete' });
+    }
+  } catch (error) {
+    console.error('Error deleting events:', error);
+    res.status(500).json({ error: 'Failed to delete events' });
+  }
+}

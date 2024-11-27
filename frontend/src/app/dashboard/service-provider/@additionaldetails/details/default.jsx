@@ -22,6 +22,7 @@ function DetailsOfService() {
       textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`; 
     }
   };
+
   const editDetails = ()=>{
     if(isEditing && changes && userData?.details!==details){
       ;( async () => {
@@ -56,11 +57,11 @@ function DetailsOfService() {
 
   if (error) {
     return (
-      <DashboardLayout>
+      <>
         <div className="flex justify-center items-center h-full">
           <p className="text-xl text-red-500">{error}</p>
         </div>
-      </DashboardLayout>
+      </>
     );
   }
 
