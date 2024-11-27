@@ -83,7 +83,7 @@ function EventTypes() {
             value={date}
             onChange={(e) => setDate(e.target.value)}
             className="border rounded p-2 focus:outline-[#03089a] shadow-sm"
-            min={today}
+            // min={today}
             required
           />
           

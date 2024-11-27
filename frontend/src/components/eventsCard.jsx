@@ -5,17 +5,31 @@ import { imageSources } from '@/constants';
 import { MdCancel } from 'react-icons/md';
 
 function EventsCard({ eventId, eventName, eventType, date, location, className = '', isEditing, onDeleteEvent, ...props}) {
+  
+  const today = new Date().toISOString().split('T')[0];
+  const isCompleted = (today > date)? true : false;
+  const isToday = today === date;
+  const eventStatus =  isToday ? 'border-2 border-green-500 bg-green-50 text-green-700 font-semibold' : '';
   const route = useRouter();
+
   const displayEventDetails = (e) => {
     if (!e.target.classList.contains('deleteEvent')) {
       route.push(`/dashboard/event-creator/event/${eventId}`);
     }
   };
   return (
-    <div className={`relative flex flex-col shadow-md border border-black/10 rounded-lg w-[300px] h-[300px] bg-zinc-100 justify-between p-5 transition-opacity duration-300 cursor-pointer ${className}`}
+    <div className={`relative flex flex-col shadow-md border border-black/10 rounded-lg w-[300px] h-[300px] bg-zinc-100 justify-between p-5 transition-opacity duration-300 cursor-pointer ${eventStatus} ${className}`}
       {...props}
       onClick={displayEventDetails}>
-        {isEditing?<div className='absolute z-30 w-7 h-7 bg-zinc-600 text-white flex justify-center items-center rounded-full top-2 right-1 deleteEvent'>
+        {
+          isCompleted && (
+            <div className="absolute inset-0 flex items-center justify-center">
+              <span className="text-white w-8 h-8 rounded-full bg-green-700 text-center text-2xl font-bold">✓</span> 
+            </div>
+          )
+        }
+       <div>
+       {isEditing?<div className='absolute z-30 w-7 h-7 bg-zinc-600 text-white flex justify-center items-center rounded-full top-2 right-1 deleteEvent'>
         <button onClick={(e) => {
             e.stopPropagation(); 
             onDeleteEvent(eventId);
@@ -40,6 +54,7 @@ function EventsCard({ eventId, eventName, eventType, date, location, className =
         <h1 className="text-zinc-700 text-base font-semibold">{location}</h1>
         <h3 className="text-zinc-700 text-base font-semibold">{date}</h3>
       </div>
+       </div>
     </div>
   );
 }
