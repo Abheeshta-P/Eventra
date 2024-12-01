@@ -37,11 +37,11 @@ function Signup() {
                       confirmButton: 'bg-green-600',
                     },
                     backdrop: `
-                      rgba(0,255,0,0.3)
-                      url("https://sweetalert2.github.io/images/success.gif")
-                      left top
-                      no-repeat
-                    `,
+                    rgba(0,0,0,0.3)
+                    url("https://sweetalert2.github.io/images/success.gif")
+                    left top
+                    no-repeat
+                  `,
                   }).then(async()=>{
                     try {
                       const response = await authService.loginUser(JSON.stringify(data));
@@ -71,11 +71,11 @@ function Signup() {
                               confirmButton: 'bg-green-600',
                             },
                             backdrop: `
-                              rgba(0,255,0,0.3)
-                              url("https://sweetalert2.github.io/images/success.gif")
-                              left top
-                              no-repeat
-                            `,
+                            rgba(0,0,0,0.3)
+                            url("https://sweetalert2.github.io/images/success.gif")
+                            left top
+                            no-repeat
+                          `,
                           }).then(()=> {router.replace('/');router.refresh()})
                         } else {
                           alert('Login failed. Please check your credentials and try again.');

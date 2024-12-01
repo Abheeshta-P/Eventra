@@ -1,5 +1,5 @@
 "use client"
-import { DashboardLayout, DetailedEventDisplayer } from '@/components';
+import { DashboardLayout, DetailedEventDisplayer, Loading } from '@/components';
 import { resetParticipants, setInitialParticipants } from '@/store/features/participantSlice';
 import { resetTodo, setInitialTodos } from '@/store/features/todoSlice';
 import { eventCreatorService } from '@/utils';
@@ -13,6 +13,9 @@ function EventDetails({ params }) {
   const [event, setEvent] = useState(null);
   const [error, setError] = useState(null);
   const router = useRouter();
+  const today = new Date().toISOString().split('T')[0];
+  const isCompleted = (today > event?.date)? true : false;
+
   useEffect(() => {
     (async () => {
       try {
@@ -41,27 +44,27 @@ function EventDetails({ params }) {
 
   if (error) {
     return (
-      <DashboardLayout>
+      <>
         <div className="flex justify-center items-center h-full">
           <p className="text-xl text-red-500">{error}</p>
         </div>
-      </DashboardLayout>
+      </>
     );
   }
 
   if (!event) {
     return (
-      <DashboardLayout>
-        <div className="flex justify-center items-center h-full">
-          <p className="text-xl text-gray-500">Loading event details...</p>
+      <>
+        <div className="flex w-full justify-center items-center h-full">
+        <Loading/>
         </div>
-      </DashboardLayout>
+      </>
     );
   }
 
   return (
     <DashboardLayout>
-      <DetailedEventDisplayer event={event} servicesAPI={event.services} participantsAPI={event.participants}/>
+      <DetailedEventDisplayer event={event} servicesAPI={event.services} participantsAPI={event.participants} isDisabled = {isCompleted}/>
     </DashboardLayout>
   );
 }

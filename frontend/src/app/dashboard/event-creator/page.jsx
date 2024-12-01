@@ -90,10 +90,10 @@ function EventCreator() {
       return <div className="text-zinc-700 font-semibold text-lg md:text-xl lg:text-2xl text-center w-full">No events yet</div>;
     } else {
       return (
-        <div className='relative transition-all bg-zinc-200 w-full p-4 py-12'>
+        <div className='relative transition-all w-full p-4 py-12'>
           <div className='absolute w-7 h-7 bg-zinc-600 text-white flex justify-center items-center rounded-full top-2 right-1'>
-        <button onClick={editEvents}> {isEditing?<MdSave className='w-4 h-4'/>:<MdEdit className='w-4 h-4'/>}</button>
-      </div>
+          <button onClick={editEvents}> {isEditing?<MdSave className='w-4 h-4'/>:<MdEdit className='w-4 h-4'/>}</button>
+        </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 justify-items-center w-full transition-all">
           {eventsPlanned?.map(event => (
             <EventsCard eventId={event._id} eventName={event.eventName} eventType={event.eventType} location={event.location} date={event.date} key={event.eventName + event.date} isEditing={isEditing} onDeleteEvent={onDeleteEvent}/>

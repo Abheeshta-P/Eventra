@@ -10,9 +10,11 @@ function AddTodo({ setHasChanges }) {
   const addTodoHandler = (e)=>{
     e.preventDefault();
     if(input!=''&&input!=' ')
-    dispatch(addTodo({text : input}));
+    {
+      dispatch(addTodo({text : input}));
+      setHasChanges(true);
+    }
     setInput("");
-    setHasChanges(true);
   }
 
   return (

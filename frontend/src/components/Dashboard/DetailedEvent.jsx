@@ -11,7 +11,7 @@ import { useRouter } from 'next/navigation';
 import { eventCreatorService } from '@/utils';
 import { setEvents } from '@/store/features/eventsSlice';
 
-function DetailedEventDisplayer({ event, isCreating = false, servicesAPI }) {
+function DetailedEventDisplayer({ event, isCreating = false, servicesAPI, isDisabled = false }) {
   const router = useRouter();
   const dispatch = useDispatch();
 
@@ -114,10 +114,10 @@ const handleSave = async () => {
         <ServicesList services={servicesAPI} />
 
         <h2 className="text-gray-800 text-2xl lg:text-3xl font-semibold mt-8">Invitees List</h2>
-        <ParticipantList setHasChanges={setHasChanges}/>
+        <ParticipantList setHasChanges={setHasChanges} isDisabled={isDisabled}/>
 
         <h2 className="text-gray-800 text-2xl lg:text-3xl font-semibold mt-8">Todo List</h2>
-        <TodoList setHasChanges={setHasChanges}/>
+        <TodoList setHasChanges={setHasChanges} isDisabled={isDisabled}/>
 
        
         {isCreating ? (
