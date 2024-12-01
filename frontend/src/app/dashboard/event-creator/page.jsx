@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from 'react'
-import { Button, Container,ProfileSection,EventsCard,Loading, DashboardLayout } from '@/components'
+import { Button, Container,ProfileSection, Loading, DashboardLayout } from '@/components'
 import Link from 'next/link'
 import { useDispatch, useSelector } from 'react-redux'
 import { MdEdit,MdSave } from 'react-icons/md'
@@ -8,6 +8,7 @@ import { eventCreatorService } from '@/utils'
 import { setEvents } from '@/store/features/eventsSlice'
 import Swal from 'sweetalert2'
 import { useRouter } from 'next/navigation'
+import EventsCard from '@/components/EventsCard'
 
 function EventCreator() {
   const { events, loading } = useSelector(state => state.events);

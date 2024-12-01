@@ -27,7 +27,7 @@ function EventsCard({ eventId, eventName, eventType, date, location, className =
         {
           isCompleted && (
             <div className="absolute z-30 inset-0 flex items-center justify-center">
-              <span className="text-white w-8 h-8 rounded-full bg-green-700 opacity-65 text-center text-2xl font-bold">✓</span> 
+              <span className="text-white w-8 h-8 rounded-full bg-green-700 opacity-70 text-center text-2xl font-bold">✓</span> 
             </div>
           )
         }

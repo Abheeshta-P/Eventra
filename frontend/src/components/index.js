@@ -6,7 +6,6 @@ import Container from "./Container/Container.jsx";
 import Loading from "./Loading.jsx";
 import Input from "./Input.jsx";
 import Card from "./Card.jsx";
-import EventsCard from "./EventsCard.jsx";
 import Select from "./Select.jsx";
 import ProfileSection from "./Dashboard/ProfileCommon.jsx";
 import ServicesCard from "./ServicesCard.jsx";
@@ -37,7 +36,6 @@ export {
   Card,
   Select,
   ProfileSection,
-  EventsCard,
   ServicesCard,
   DetailedEventDisplayer,
   ServicesList,
