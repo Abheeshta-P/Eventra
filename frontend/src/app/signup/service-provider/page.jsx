@@ -8,17 +8,27 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Swal from 'sweetalert2';
 import { serviceCategories } from '@/constants';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { login } from '@/store/features/authSlice';
 
 const ServiceProviderSignup = () => {
   const { register, handleSubmit, formState: { errors },reset } = useForm();
   const [galleryImages, setGalleryImages] = useState([]);
+  const { isLoggedIn } = useSelector(state => state.auth);
   const [error,setError] = useState('');
   const router = useRouter();
   const fileInputRef = useRef(null);
   const dispatch = useDispatch();
   const [loading,setLoading] = useState(false); 
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      router.back(); 
+    } else {
+      setLoading(false); 
+    }
+  }, [isLoggedIn, router]);
+
 
   const onSubmit = async (data) => {
     try {
@@ -210,7 +220,7 @@ const ServiceProviderSignup = () => {
           <Input
             label="Location"
             type="text"
-            placeholder = 'eg : Hampankatta, Mangalore'
+            placeholder = 'eg : Hampankatta, Mangalore give complete address'
             {...register('location', { required: 'Location is required' })}
           />
           {errors.location && <p className="text-red-500 text-sm">{errors.location.message}</p>}

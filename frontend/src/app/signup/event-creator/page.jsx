@@ -1,7 +1,7 @@
 "use client"
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { Button,Container,Input,Logo } from '@/components';
+import { Button,Container,Input,Logo,Loading } from '@/components';
 import Link from 'next/link';
 import { authService } from '@/utils';
 import { useDispatch } from 'react-redux';
@@ -9,8 +9,23 @@ import { login } from '@/store/features/authSlice';
 import { setEvents } from '@/store/features/eventsSlice';
 import Swal from 'sweetalert2';
 import { useRouter } from 'next/navigation';
+import { useSelector } from 'react-redux';
 
 function Signup() {
+  const { isLoggedIn } = useSelector(state => state.auth);
+  const [loading, setLoading] = React.useState(true); 
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      router.back(); 
+    } else {
+      setLoading(false); 
+    }
+  }, [isLoggedIn, router]);
+
+  if (loading) {
+    return <div className="flex justify-center items-center min-h-screen"><Loading/></div>;
+  }
   const [error,setError] = useState('');
   const dispatch = useDispatch();
   const {register,handleSubmit, reset, formState: { errors } } = useForm();

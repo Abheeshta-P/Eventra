@@ -1,8 +1,8 @@
 "use client"
-import React from 'react'
+import React, {useEffect} from 'react'
 import Link from 'next/link';
 import { useForm } from 'react-hook-form'
-import { Button,Container,Input,Logo } from '@/components';
+import { Button,Container,Input,Logo,Loading } from '@/components';
 import { authService } from '@/utils';
 import { useDispatch } from 'react-redux';
 import { login } from '@/store/features/authSlice';
@@ -11,11 +11,27 @@ import Swal from 'sweetalert2';
 import { useRouter } from 'next/navigation';
 import { resetEventDetails } from '@/store/features/eventDetailsSlice';
 import { resetTodo } from '@/store/features/todoSlice';
+import { useSelector } from 'react-redux';
 
 function Login() {
   const {register,handleSubmit,formState:{error},reset} = useForm();
   const dispatch = useDispatch();
   const router = useRouter();
+  const { isLoggedIn } = useSelector(state => state.auth);
+  const [loading, setLoading] = React.useState(true); 
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      router.back(); 
+    } else {
+      setLoading(false); 
+    }
+  }, [isLoggedIn, router]);
+
+  if (loading) {
+    return <div className="flex justify-center items-center min-h-screen"><Loading/></div>;
+  }
+
   const Login = async (data) => {
     try {
       dispatch(resetEventDetails());
