@@ -28,7 +28,6 @@ function GalleryCard({ imgSrc, isEditing = false, onDelete = () => {}, ...props 
           isLoading ? 'hidden' : 'block'
         }`}
         onLoad={handleImageLoad}
-        loading="lazy"
       />
     </div>
   );

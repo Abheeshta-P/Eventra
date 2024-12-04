@@ -251,7 +251,7 @@ const ServiceProviderSignup = () => {
 
         <div>
           <Input
-            label="Cost of Service (Rupees)"
+            label="Estimated Cost of Service (Rupees)"
             type="number"
             placeholder = 'Enter estimated cost '
             {...register('cost', { required: 'Cost is required', min: { value: 0, message: 'Cost must be positive' } })}

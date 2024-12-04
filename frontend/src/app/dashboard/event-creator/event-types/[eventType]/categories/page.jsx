@@ -14,8 +14,6 @@ function CategoryInEventType({ params }) {
   const router = useRouter();
   const { selectedCategories }= useSelector(state => state.eventDetails)
   const [selectedCategoriesState, setSelectedCategories] = useState(selectedCategories || []);
-
-
   const handleCategoryClick = (category) => {
     router.push(`/dashboard/event-creator/event-types/${eventType}/categories/${category}/services`);
   };

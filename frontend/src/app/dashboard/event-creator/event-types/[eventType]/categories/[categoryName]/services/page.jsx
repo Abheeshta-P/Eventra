@@ -1,5 +1,5 @@
 "use client";
-import { Container, ServicesCard,Button, DashboardLayout } from '@/components';
+import { Container, ServicesCard,Button, DashboardLayout, Loading } from '@/components';
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useRouter } from 'next/navigation';
@@ -11,12 +11,14 @@ function CategoryServices({ params }) {
   const router = useRouter();
   const dispatch = useDispatch();
   const { location } = useSelector(state => state.eventDetails);
-
   const [services,setServices] = useState([]);
+  const [loading,setLoading] =useState(false);
+
 
   useEffect(() => {
     const fetchServices = async () => {
       try {
+        setLoading(true);
         const services = await eventCreatorService.getServicesCategory(categoryName,location);
         if (services.status === 403 || services.status === 401) {
           router.push('/login'); 
@@ -30,6 +32,8 @@ function CategoryServices({ params }) {
         }
       } catch (error) {
         console.error("Error fetching services :: serviceCategory Display :: frontend", error);
+      } finally {
+        setLoading(false);
       }
     };
   
@@ -70,6 +74,8 @@ function CategoryServices({ params }) {
     router.push(`/dashboard/event-creator/event-types/${eventType}/categories/${categoryName}/services/${serviceId}`);
   };
 
+  if(loading) return <div className="flex justify-center items-center w-full h-full"><Loading/></div>
+  
   const fallbackMessage = categoryName === "Venue" ? `We couldn&apos;t find any ${categoryName} services in ${location} at the moment. Please check back later!`
     : `We couldn&apos;t find any services for ${categoryName} at the moment. Please check back later!`;
 
