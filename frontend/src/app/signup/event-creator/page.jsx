@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { Button,Container,Input,Logo,Loading } from '@/components';
 import Link from 'next/link';
@@ -13,7 +13,11 @@ import { useSelector } from 'react-redux';
 
 function Signup() {
   const { isLoggedIn } = useSelector(state => state.auth);
-  const [loading, setLoading] = React.useState(true); 
+  const [loading, setLoading] = useState(true); 
+  const [error,setError] = useState('');
+  const dispatch = useDispatch();
+  const {register,handleSubmit, reset, formState: { errors } } = useForm();
+  const router = useRouter();
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -26,10 +30,7 @@ function Signup() {
   if (loading) {
     return <div className="flex justify-center items-center min-h-screen"><Loading/></div>;
   }
-  const [error,setError] = useState('');
-  const dispatch = useDispatch();
-  const {register,handleSubmit, reset, formState: { errors } } = useForm();
-  const router = useRouter();
+  
   const signup = async (data) =>{
     try {
         const userData = await authService.signUpUser(JSON.stringify(data),'event-creator');
