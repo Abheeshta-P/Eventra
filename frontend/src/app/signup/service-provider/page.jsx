@@ -220,7 +220,7 @@ const ServiceProviderSignup = () => {
           <Input
             label="Location"
             type="text"
-            placeholder = 'eg : Hampankatta, Mangalore give complete address'
+            placeholder = 'Provide complete address'
             {...register('location', { required: 'Location is required' })}
           />
           {errors.location && <p className="text-red-500 text-sm">{errors.location.message}</p>}
