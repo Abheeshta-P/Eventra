@@ -187,12 +187,13 @@ export async function handleTodoParticipantsUpdate(req, res)  {
 }
 
 export async function handleEventDeletion(req, res) {
-  const deleteEventIds  = req.body;  
+  const deleteEventIds  = req.body;
+  const { id } = req.user;
   try {
     const response = await Event.deleteMany({ _id: { $in: deleteEventIds } });
 
     if (response.deletedCount > 0) {
-      const remainingEvents = await Event.find({});
+      const remainingEvents = await Event.find({creator : id});
       
       res.status(200).json({
         message: 'Events deleted successfully',

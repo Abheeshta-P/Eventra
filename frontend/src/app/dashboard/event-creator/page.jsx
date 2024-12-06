@@ -99,11 +99,11 @@ const completedEvents = eventsPlanned.filter(event => (today > event?.date));
       );
     }
 
-    if (eventsPlanned?.length === 0) {
+    if (eventsPlanned?.length === 0 &&!changes) {
       return <div className="text-zinc-700 font-semibold text-lg md:text-xl lg:text-2xl text-center w-full">No events yet</div>;
     } else {
       return (
-        <div className='relative transition-all w-full p-4 py-12 bg-zinc-300 login-bg'>
+        <div className='relative transition-all w-full p-4 py-12 bg-zinc-300 login-bg min-h-80'>
           <div className='absolute w-7 h-7 bg-zinc-600 text-white flex justify-center items-center rounded-full top-2 right-1'>
           <button onClick={editEvents}> {isEditing?<MdSave className='w-4 h-4'/>:<MdEdit className='w-4 h-4'/>}</button>
         </div>

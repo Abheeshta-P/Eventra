@@ -82,10 +82,10 @@ function DetailsOfService() {
         }}
         minLength={'20'}
         maxLength={'1000'}
-        className='overflow-y-hidden rounded-lg bg-transparent text-black outline-none duration-200 border border-gray-200 w-full text-sm md:text-base resize-none'
+        className='overflow-y-hidden rounded-lg bg-transparent text-black outline-none duration-200 border border-gray-200 w-full text-sm md:text-base resize-none min-h-48'
       />
       ) : (
-        <div className='text-zinc-950 whitespace-pre-wrap text-sm md:text-base '>
+        <div className='text-zinc-950 whitespace-pre-wrap text-sm md:text-base min-h-48'>
           {details}
         </div>
       )}

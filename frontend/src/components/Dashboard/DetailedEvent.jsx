@@ -10,6 +10,7 @@ import { canvaLink } from '@/constants';
 import { useRouter } from 'next/navigation';
 import { eventCreatorService } from '@/utils';
 import { setEvents } from '@/store/features/eventsSlice';
+import { resetParticipants } from '@/store/features/participantSlice';
 
 function DetailedEventDisplayer({ event, isCreating = false, servicesAPI, isDisabled = false }) {
   const router = useRouter();
@@ -60,6 +61,7 @@ function DetailedEventDisplayer({ event, isCreating = false, servicesAPI, isDisa
             router.replace('/dashboard/event-creator');
             dispatch(resetEventDetails());
             dispatch(resetTodo());
+            dispatch(resetParticipants());
           }
         } catch (error) {
           console.error("Error creating event :: detailed event Display :: frontend", error);
