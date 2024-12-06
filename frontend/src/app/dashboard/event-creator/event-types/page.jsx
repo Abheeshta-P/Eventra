@@ -91,7 +91,7 @@ function EventTypes() {
             type="submit"
             className="bg-[#03089a] text-white rounded p-2 shadow hover:bg-[#010569]"
           >
-            Continue
+            Next ➡️
           </button>
         </form>
       </Container>

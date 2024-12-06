@@ -33,13 +33,13 @@ function DetailedEventDisplayer({ event, isCreating = false, servicesAPI, isDisa
 
   const handleConfirm = async () => {
     Swal.fire({
-      title: 'Confirm Event Creation',
+      title: 'Submit Event Creation',
       text: "Service providers will be notified and you'll receive their details.",
       icon: 'info',
       showCancelButton: true,
       confirmButtonColor: '#03089a',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, Confirm',
+      confirmButtonText: 'Yes, Submit',
       cancelButtonText: 'Cancel',
     }).then(async (result) => {
       if (result.isConfirmed) {
@@ -131,7 +131,7 @@ const handleSave = async () => {
               <p>Create Design</p>
             </Button>
             <Button className="font-bold md:px-12 md:py-2" onClick={handleConfirm}>
-              Confirm
+              Submit
             </Button>
           </>
         ) : (
