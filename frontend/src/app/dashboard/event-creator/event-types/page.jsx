@@ -7,6 +7,7 @@ import { setEventDetails } from '@/store/features/eventDetailsSlice';
 
 function EventTypes() {
   const EventDetails = useSelector((state) => state.eventDetails);
+  const { events } = useSelector(state => state.events);
   const [eventName, setEventName] = useState('' || EventDetails.eventName);
   const [location, setLocation] = useState('' || EventDetails.location);
   const [date, setDate] = useState('' || EventDetails.date);
@@ -26,8 +27,21 @@ function EventTypes() {
       return;
     }
 
-    const formattedDate =
-      typeof date === 'string' ? date.slice(0, 10) : new Date(date).toISOString().slice(0, 10);
+     const formattedDate =typeof date === 'string' ? date.slice(0, 10) : new Date(date).toISOString().slice(0, 10);
+     const isDuplicate = events?.some(
+      (event) =>
+        event.eventName === eventName &&
+        event.location === location?.toLowerCase() &&
+        event.date === formattedDate &&
+        event.eventType === eventType
+    );
+
+    if (isDuplicate) {
+      setError('An event with the same details already exists.');
+      alert('An event with the same details already exists.');
+      return;
+    }
+
     dispatch(setEventDetails({ eventName, location, date: formattedDate, eventType }));
     route.push(`/dashboard/event-creator/event-types/${eventType}/categories`);
   };
