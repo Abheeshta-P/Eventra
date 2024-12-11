@@ -1,11 +1,11 @@
 "use client"
 import React, { useState,useRef,useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { MdEdit, MdSave } from 'react-icons/md'; 
 import serviceProviderService from '@/utils/serviceProvider';
 import { useRouter } from 'next/navigation';
-import { DashboardLayout } from '@/components';
 import Swal from 'sweetalert2';
+import { updateDetails } from '@/store/features/authSlice';
 
 function DetailsOfService() {
   const {userData}= useSelector(state => state.auth);
@@ -15,6 +15,7 @@ function DetailsOfService() {
   const router = useRouter();
   const [error, setError] = useState(null);
   const [changes, setChanges] = useState(false);
+  const dispatch = useDispatch();
 
   const adjustHeight = () => {
     if (textareaRef.current) {
@@ -33,7 +34,8 @@ function DetailsOfService() {
             return;
           }
           if (response) {
-            setDetails(details);
+            dispatch(updateDetails(response?.details));
+            setDetails(response?.details);
             Swal.fire('success','Service details updated !', 'success');
           }    
           else {

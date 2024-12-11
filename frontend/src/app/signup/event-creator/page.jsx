@@ -140,6 +140,7 @@ function Signup() {
               required: true,
           })}
           />
+          {errors.name && <p className="text-red-500">{errors.name.message}</p>}
           <Input
           label="Email: "
           placeholder="Enter your email"
@@ -153,14 +154,14 @@ function Signup() {
               }
           })}
           />
+          {errors.email && <p className="text-red-500">{errors.email.message}</p>}
           <Input
-          label="Password: "
-          type="password"
-          required
-          placeholder="Enter your password"
-          {...register("password", {
-              required: true,})}
+            label="Password"
+            type="password"
+            placeholder = 'Enter password'
+            {...register('password', { required: 'Password is required', minLength: { value: 6, message: 'Password must be at least 6 characters' } })}
           />
+          {errors.password && <p className="text-red-500">{errors.password.message}</p>}
           <Button type = 'submit' className={'w-full'}>Sign up</Button>
           </div>
         </form>
