@@ -13,7 +13,7 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 app.use(cors({
-  origin: 'http://localhost:3000', 
+  origin: ['http://localhost:3000', 'https://eventra-frontend.onrender.com'],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'], 
   credentials: true, 
 }));
