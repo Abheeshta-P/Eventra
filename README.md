@@ -28,8 +28,7 @@
 
 | **Landing page**                         | **Sign Up (Service Provider)**              |
 |------------------------------------------|------------------------------------------|
-| <img src="https://github.com/user-attachments/assets/6bb88440-4acf-42c3-9bd9-9074df33a8cb" width="400" height="auto" style="object-fit: cover;">
- | <img src="https://github.com/user-attachments/assets/ab741b92-b595-4c77-b54c-f08de0b709b0" width="500" height="auto"> |
+| <img src="https://github.com/user-attachments/assets/6bb88440-4acf-42c3-9bd9-9074df33a8cb" width="500" height="auto">| <img src="https://github.com/user-attachments/assets/ab741b92-b595-4c77-b54c-f08de0b709b0" width="500" height="auto"> |
 
 | **Sign Up (Event Creator)**           | **Login**                                |
 |------------------------------------------|------------------------------------------|
