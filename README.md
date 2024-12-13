@@ -26,13 +26,13 @@
 
 ## 📸 Screenshots
 
-| **Landing page**                         | **Sign Up (Event Creator)**              |
+| **Landing page**                         | **Sign Up (Service Provider)**              |
 |------------------------------------------|------------------------------------------|
-| <img src="https://github.com/user-attachments/assets/6bb88440-4acf-42c3-9bd9-9074df33a8cb" width="500" height="auto"> | <img src="https://github.com/user-attachments/assets/2b2dce36-b124-4081-8ae0-78233afb6873" width="500" height="auto"> |
+| <img src="https://github.com/user-attachments/assets/6bb88440-4acf-42c3-9bd9-9074df33a8cb" width="500" height="auto"> | <img src="https://github.com/user-attachments/assets/ab741b92-b595-4c77-b54c-f08de0b709b0" width="500" height="auto"> |
 
-| **Sign Up (Service Provider)**           | **Login**                                |
+| **Sign Up (Event Creator)**           | **Login**                                |
 |------------------------------------------|------------------------------------------|
-| <img src="https://github.com/user-attachments/assets/ab741b92-b595-4c77-b54c-f08de0b709b0" width="500" height="auto"> | <img src="https://github.com/user-attachments/assets/581a5c93-605e-44c5-aadb-cbe46a57bbe4" width="500" height="auto"> |
+| <img src="https://github.com/user-attachments/assets/2b2dce36-b124-4081-8ae0-78233afb6873" width="500" height="auto"> | <img src="https://github.com/user-attachments/assets/581a5c93-605e-44c5-aadb-cbe46a57bbe4" width="500" height="auto"> |
 
 | **Dashboard (Event Creator)**            | **Dashboard (Service Provider)**         |
 |------------------------------------------|------------------------------------------|
