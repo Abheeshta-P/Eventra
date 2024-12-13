@@ -28,16 +28,15 @@
 
 | **Landing page**                         | **Sign Up (Service Provider)**              |
 |------------------------------------------|------------------------------------------|
-| <img src="https://github.com/user-attachments/assets/6bb88440-4acf-42c3-9bd9-9074df33a8cb" width="500" height="auto"> | <img src="https://github.com/user-attachments/assets/ab741b92-b595-4c77-b54c-f08de0b709b0" width="500" height="auto"> |
+| <img src="https://github.com/user-attachments/assets/6bb88440-4acf-42c3-9bd9-9074df33a8cb" width="500" height="100%"> | <img src="https://github.com/user-attachments/assets/ab741b92-b595-4c77-b54c-f08de0b709b0" width="500" height="auto"> |
 
 | **Sign Up (Event Creator)**           | **Login**                                |
 |------------------------------------------|------------------------------------------|
-| <img src="https://github.com/user-attachments/assets/2b2dce36-b124-4081-8ae0-78233afb6873" width="500" height="auto"> | <img src="https://github.com/user-attachments/assets/581a5c93-605e-44c5-aadb-cbe46a57bbe4" width="500" height="auto"> |
+| <img src="https://github.com/user-attachments/assets/2b2dce36-b124-4081-8ae0-78233afb6873" width="500" height="auto"> | <img src="https://github.com/user-attachments/assets/7e7456b6-1b94-4549-bc2e-1421d023c616" width="500" height="auto"> |
 
 | **Dashboard (Event Creator)**            | **Dashboard (Service Provider)**         |
 |------------------------------------------|------------------------------------------|
 | <img src="https://github.com/user-attachments/assets/b5c1f72a-902d-4d15-8f8d-4774c50b7b4b" width="500" height="auto"> | <img src="https://github.com/user-attachments/assets/034d1044-cfb6-4350-8647-aa10fca662c8" width="500" height="auto"> |
-
 
 
 ## 🛠️ How to Run the Project
