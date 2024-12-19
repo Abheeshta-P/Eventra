@@ -111,7 +111,7 @@ const completedEvents = eventsPlanned.filter(event => (today > event?.date));
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 justify-items-center w-full transition-all">
           {filteredEvents?.map(event => (
-            <div>check</div>
+            <div key={event}>check</div>
           ))}
         </div>
 
