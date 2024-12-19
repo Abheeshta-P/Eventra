@@ -98,7 +98,7 @@ export async function handleLogin(req, res) {
 
     res.cookie('jwt', token, { 
       httpOnly: true, 
-      sameSite: 'Strict', 
+      sameSite: 'None', 
       secure: process.env.NODE_ENV === 'production',
       maxAge: 24 * 60 * 60 * 1000, 
     });
@@ -131,7 +131,7 @@ export async function handleLogout(req,res){
   try {
     res.clearCookie('jwt', {
       httpOnly: true,
-      sameSite: 'Strict', 
+      sameSite: 'None', 
       secure: process.env.NODE_ENV === 'production', 
     });
 
