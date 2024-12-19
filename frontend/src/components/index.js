@@ -14,6 +14,7 @@ import DetailedEventDisplayer from "./Dashboard/DetailedEvent.jsx";
 import ParticipantList from "./ParticipantsList.jsx";
 import TodoList from "./Todo/TodoList.jsx";
 import GalleryCard from "./GalleryCard.jsx";
+import EventsCard from "./EventsCard.jsx";
 
 import HomePage from "./Home/HomePage.jsx";
 
@@ -34,6 +35,7 @@ export {
   Loading,
   Input,
   Card,
+  EventsCard,
   Select,
   ProfileSection,
   ServicesCard,

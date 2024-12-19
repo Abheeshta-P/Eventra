@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from 'react'
-import { Button, Container,ProfileSection,Loading, DashboardLayout } from '@/components'
+import { Button, Container,ProfileSection,Loading,EventsCard,DashboardLayout } from '@/components'
 import Link from 'next/link'
 import { useDispatch, useSelector } from 'react-redux'
 import { MdEdit,MdSave } from 'react-icons/md'
@@ -111,7 +111,7 @@ const completedEvents = eventsPlanned.filter(event => (today > event?.date));
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 justify-items-center w-full transition-all">
           {filteredEvents?.map(event => (
-            <div key={event}>check</div>
+            <EventsCard eventId={event._id} eventName={event.eventName} eventType={event.eventType} location={event.location} date={event.date} key={event._id} isEditing={isEditing} onDeleteEvent={onDeleteEvent}/>
           ))}
         </div>
 
