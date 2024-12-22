@@ -4,7 +4,7 @@ import { features } from '@/constants';
 
 const BentoGrid = () => {
   return (
- <Container><section className="bento-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4 sm:-mt-24 md:mt-0">
+ <Container className={'min-h-screen sm:min-h-full'}><section className="bento-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4 ">
  {features.map((feature) => (
    <div
      key={feature.title}

@@ -71,7 +71,7 @@ function NavItems (){
   else{
     return (
       <>
-        <div className='flex gap-2 md:gap-3 text-sm md:text-base'>
+        <div className='flex gap-1 sm:gap-2 md:gap-3 text-sm md:text-base ml-1 mr-1'>
       {linksNotLoggedIn.map((link) => {   
      return (
           <Link key={link.name} href={link.href}>
@@ -86,7 +86,7 @@ function NavItems (){
         )
       })}
     </div>
-        <div className='flex gap-2 md:gap-3'>
+        <div className='flex gap-1 sm:gap-2 md:gap-3'>
          
            <Button bgColor='bg-zinc-300' textColor='text-zinc-900' className='px-3'> <Link key={'login'} href={'/login'}>
            Login
@@ -103,7 +103,7 @@ function NavItems (){
 function Header() {
   return (
     <nav className="fixed top-0 left-0 w-full h-14 bg-[#fcfcfc55] backdrop-blur-sm border-b border-gray-200 shadow-md z-50 ">
-  <div className="container mx-auto flex items-center justify-between h-full px-4 ">
+  <div className="container mx-auto flex items-center justify-between h-full px-1 sm:px-4 ">
         <Link href={'/'}><Logo/></Link>
       {
         <NavItems/>

@@ -25,8 +25,9 @@ function Hero() {
       router.push('/login');
   }
   return (
-    <Container className={'px-7'}><section className='flex flex-col sm:flex-row justify-evenly w-full min-h-screen items-center sm:-mt-16'>
-    <div className='flex flex-col gap-6 w-[400px] lg:w-[600px]'>
+    <Container className={'px-7 sm:min-h-full sm:mt-28'}>
+    <section className='flex flex-col sm:flex-row justify-evenly w-full min-h-screen sm:min-h-full items-center'>
+    <div className='flex flex-col gap-6 lg:w-[600px]'>
       <h1 className='text-[#03089a] text-3xl md:text-4xl font-bold lg:text-5xl'>Plan with Ease, Celebrate with Joy!</h1>
       <h2 className='text-zinc-800 text-sm md:text-base max-w-72 lg:max-w-96'>From weddings to parties, find everything you need to create an unforgettable event.</h2>
       <div className='flex gap-2 md:gap-3'>

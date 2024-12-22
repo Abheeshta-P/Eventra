@@ -9,7 +9,7 @@ function HomePage() {
       <section id="features">
         <Features />
       </section>
-      <section id="contact" className = 'mt-8 sm:-mt-10 md:mt-0 lg:-mt-28'>
+      <section id="contact" className = 'mt-20 sm:-mt-1 md:mt-12 lg:mt-14 '>
         <Contact />
       </section>
     </main>

@@ -9,7 +9,7 @@ function Footer() {
           <Logo />
         </div>
         <div>
-          <p className="text-xs md:text-sm ">
+          <p className="text-xs md:text-sm text-center">
             &copy; Copyright 2024. All Rights Reserved Eventra
           </p>
         </div>
