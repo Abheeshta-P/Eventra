@@ -105,4 +105,4 @@ Ensure you have the following installed:
    Open [http://localhost:3000](http://localhost:3000) in your browser.  
 
 
-> **Note**: The project is still under development. 
+> **Note**: The project is still under development. **Works best in modern browsers!**
