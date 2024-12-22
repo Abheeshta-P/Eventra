@@ -25,7 +25,7 @@ function Hero() {
       router.push('/login');
   }
   return (
-    <Container className={'px-7 sm:min-h-full sm:mt-28'}>
+    <Container className={'px-7 sm:min-h-full sm:mt-28 lg:-mt-3'}>
     <section className='flex flex-col sm:flex-row justify-evenly w-full min-h-screen sm:min-h-full items-center'>
     <div className='flex flex-col gap-6 lg:w-[600px]'>
       <h1 className='text-[#03089a] text-3xl md:text-4xl font-bold lg:text-5xl'>Plan with Ease, Celebrate with Joy!</h1>
