@@ -38,6 +38,10 @@
 |------------------------------------------|------------------------------------------|
 | <img src="https://github.com/user-attachments/assets/b5c1f72a-902d-4d15-8f8d-4774c50b7b4b" width="500" height="auto"> | <img src="https://github.com/user-attachments/assets/034d1044-cfb6-4350-8647-aa10fca662c8" width="500" height="auto"> |
 
+| **Email (Event Creator)**            | **Email (Service Provider)**         |
+|------------------------------------------|------------------------------------------|
+| <img src="https://github.com/user-attachments/assets/0346c37c-2fc5-4b62-a605-e80f214f3926" width="500" height="auto"> | <img src="https://github.com/user-attachments/assets/aae27536-d0c6-4060-a989-f809b68a8b6e" width="500" height="auto"> |
+
 
 ## 🛠️ How to Run the Project
 
