@@ -38,6 +38,9 @@
 |------------------------------------------|------------------------------------------|
 | <img src="https://github.com/user-attachments/assets/b5c1f72a-902d-4d15-8f8d-4774c50b7b4b" width="500" height="auto"> | <img src="https://github.com/user-attachments/assets/034d1044-cfb6-4350-8647-aa10fca662c8" width="500" height="auto"> |
 
+| **Email (Event Creator)**            | **Email (Service Provider)**         |
+|------------------------------------------|------------------------------------------|
+| <img src="https://github.com/user-attachments/assets/6cd5a39c-46a0-4fb2-a535-9103ce8553be" width="500" height="auto"> | <img src="https://github.com/user-attachments/assets/fc859802-2a2c-4f5c-9812-8af167f79485" width="500" height="auto"> |
 
 ## 🛠️ How to Run the Project
 
@@ -102,7 +105,13 @@ Ensure you have the following installed:
    ```
 
 7. **Access the application**  
-   Open [http://localhost:3000](http://localhost:3000) in your browser.  
+   Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 
-> **Note**: The project is still under development. 
+## 📎Contact
+Feel free to reach out if you have questions or suggestions!
+
+## 📜 License
+**All Rights Reserved**
+
+> **Note**: The project is still under development. **Works best in modern browsers!**
