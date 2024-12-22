@@ -105,7 +105,13 @@ Ensure you have the following installed:
    ```
 
 7. **Access the application**  
-   Open [http://localhost:3000](http://localhost:3000) in your browser.  
+   Open [http://localhost:3000](http://localhost:3000) in your browser.
 
+
+## 📎Contact
+Feel free to reach out if you have questions or suggestions!
+
+## 📜 License
+**All Rights Reserved**
 
 > **Note**: The project is still under development. **Works best in modern browsers!**
