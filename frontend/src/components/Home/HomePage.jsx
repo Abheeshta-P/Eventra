@@ -4,12 +4,12 @@ import { Hero,Features,Contact} from '.'
 // grouping
 function HomePage() {
   return (
-    <main>
+    <main className='flex flex-col gap-12 sm:gap-20'>
       <Hero />
       <section id="features">
         <Features />
       </section>
-      <section id="contact" className = 'mt-20 sm:-mt-1 md:mt-12 lg:mt-14 '>
+      <section id="contact" >
         <Contact />
       </section>
     </main>

@@ -32,7 +32,7 @@ function ContactForm(){
     }
   }
   return(
-   <Container className={'flex flex-col items-center min-h-fit sm:min-h-full mb-24'}>
+   <Container className={'flex flex-col items-center min-h-fit -mb-10 sm:min-h-full sm:mb-24'}>
     <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-center mb-8 text-[#03089a]">Contact Us</h2>      
     <section>
     <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col items-center w-[300px] gap-4'>
