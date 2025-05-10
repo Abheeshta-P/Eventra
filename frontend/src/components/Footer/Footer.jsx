@@ -10,7 +10,7 @@ function Footer() {
         </div>
         <div>
           <p className="text-xs md:text-sm text-center">
-            &copy; Copyright 2024. All Rights Reserved Eventra
+            &copy; Copyright {new Date().getFullYear()} - All Rights Reserved Eventra.
           </p>
         </div>
       </div>
