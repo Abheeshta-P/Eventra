@@ -1,11 +1,11 @@
 
 
-<h1 align='center'> 🎉 Eventra - Event Management Portal 🎉</h1>
+<h1 align='center'> Eventra - Event Management Portal </h1>
 
 **Eventra** is a comprehensive event management platform that connects users with service providers like caterers, decorators, and venues. Users can create events, manage guest lists, send invitations, and much more—all through a seamless, user-friendly interface.
 
 
-## 🚀 Features
+## Features
 
 - **Event Planning**: Create and plan events with ease.  
 - **Service Listings**: Find and connect with nearby service providers based on event types.  
@@ -14,7 +14,7 @@
 - **Service Provider Dashboard**: Upload galleries, update details!  
 
 
-## ⚙️ Tech Stack
+## Tech Stack
 
 - **Frontend**: Next.js, React, Tailwind CSS  
 - **Backend**: Node.js, Express.js  
@@ -24,7 +24,7 @@
 - **Styling**: Tailwind CSS
 
 
-## 📸 Screenshots
+## Screenshots
 
 | **Landing page**                         | **Sign Up (Service Provider)**              |
 |------------------------------------------|------------------------------------------|
@@ -42,7 +42,7 @@
 |------------------------------------------|------------------------------------------|
 | <img src="https://github.com/user-attachments/assets/6cd5a39c-46a0-4fb2-a535-9103ce8553be" width="500" height="auto"> | <img src="https://github.com/user-attachments/assets/fc859802-2a2c-4f5c-9812-8af167f79485" width="500" height="auto"> |
 
-## 🛠️ How to Run the Project
+## How to Run the Project
 
 ### Prerequisites
 
@@ -108,10 +108,23 @@ Ensure you have the following installed:
    Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 
-## 📎Contact
+## Eventra 2.0 Features
+
+Eventra 2.0 transforms the portal into a complete end-to-end Event Operating System and Vendor Marketplace:
+
+- **Vendor Booking & Inquiries Hub**: In-app booking management for service providers with real-time status transitions (`Pending`, `Confirmed`, `Declined`, `Completed`).
+- **Public Digital RSVP Portal**: Shareable `/rsvp/:eventId` links allowing guests to confirm attendance, headcount (+1s), and dietary requirements in real time.
+- **Smart Event Budget Tracker**: Dynamic cost calculator tracking target budget vs. actual booked services, with category-wise expenditure breakdowns.
+- **Service Provider Ratings & Verified Reviews**: 5-star rating system with client feedback on service cards and provider profiles.
+- **Advanced Discovery & Smart Filtering**: Filter service providers by budget range, location, category, and average ratings with instant keyword search.
+- **Event Command Center & Countdown Widget**: Real-time event countdown, checklist completion rates, and an overall event readiness index.
+- **Calendar Sync & PDF Export**: Instant "Add to Google Calendar" (.ics export) and downloadable event schedule briefs.
+
+
+## Contact
 Feel free to reach out if you have questions or suggestions!
 
-## 📜 License
-**All Rights Reserved**
+## License
+**All Rights Reserved to Abheeshta-P**
 
-> **Note**: The project is still under development. **Works best in modern browsers!**
+> **Note**: Project is under development for 2.0
