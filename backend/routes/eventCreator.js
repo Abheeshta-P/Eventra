@@ -8,8 +8,12 @@ import {
   handleGetServiceDetails, 
   handleGetServicesDetailsBatch, 
   handleTodoParticipantsUpdate,
-  handleUpdateServiceStatusByCreator
+  handleUpdateServiceStatusByCreator,
+  handleGetCreatorPendingRequests
 } from '../controller/eventCreator.js';
+
+// pending delivery & payment requests for creator dashboard
+router.get('/pending-requests', handleGetCreatorPendingRequests);
 
 // fetch all services from serviceCategory
 router.get('/categoryServices/:serviceCategory', handleGetCategoryServices);

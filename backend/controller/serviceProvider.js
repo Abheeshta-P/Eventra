@@ -165,6 +165,11 @@ export async function handleUpdateBookingStatus(req, res) {
       return res.status(404).json({ error: "Booking not found or not assigned to this provider" });
     }
 
+    const today = new Date().toISOString().split('T')[0];
+    if (status === 'confirmed' && event.date < today) {
+      return res.status(400).json({ error: "Cannot accept a booking for an event whose date has already passed" });
+    }
+
     targetService.status = status;
     await event.save();
 

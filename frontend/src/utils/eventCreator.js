@@ -210,5 +210,26 @@ const eventCreatorService = {
       return null;
     }
   },
+  getPendingRequests: async () => {
+    try {
+      const response = await fetch(`${url}/api/eventCreator/pending-requests`, {
+        method: 'GET',
+        headers: {
+          ...getAuthHeaders(),
+        },
+        credentials: 'include',
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        return data.pendingRequests || [];
+      } else {
+        return [];
+      }
+    } catch (error) {
+      console.error('Error fetching creator pending requests:', error);
+      return [];
+    }
+  },
 }
 export default eventCreatorService;

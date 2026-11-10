@@ -271,3 +271,42 @@ export async function handleUpdateServiceStatusByCreator(req, res) {
   }
 }
 
+export async function handleGetCreatorPendingRequests(req, res) {
+  try {
+    const creatorId = req.user.id;
+    // Find all events created by this creator with services awaiting completion/settlement acknowledgment
+    const events = await Event.find({
+      creator: creatorId,
+      "services.status": "completion_requested"
+    }).select("eventName eventType date location services");
+
+    const pendingRequests = [];
+    events.forEach(event => {
+      event.services.forEach(service => {
+        if (service.status === 'completion_requested') {
+          pendingRequests.push({
+            eventId: event._id,
+            eventName: event.eventName,
+            eventType: event.eventType,
+            eventDate: event.date,
+            location: event.location,
+            serviceId: service._id,
+            serviceName: service.name,
+            serviceCategory: service.category,
+            cost: service.cost,
+            phone: service.phone,
+            email: service.email,
+            status: service.status
+          });
+        }
+      });
+    });
+
+    res.status(200).json({ pendingRequests });
+  } catch (error) {
+    console.error("Error fetching creator pending requests:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+}
+
+
