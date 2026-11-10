@@ -19,7 +19,7 @@ const handleContactUs = async (req, res) => {
   });
 
   const mailOptions = {
-    from: `EVENTRA.SASS 📧 ${companyEmail}`,
+    from: `Eventra <${companyEmail}>`,
     to: companyEmail, 
     subject: `Contact Form Submission from ${name}`,
     text: `From ${name} (${email}):\n\n${message}`,

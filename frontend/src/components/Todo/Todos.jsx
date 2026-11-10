@@ -2,6 +2,7 @@
 import { useSelector,useDispatch } from "react-redux"
 import { deleteTodo,updateTodo,toggleTodo } from "@/store/features/todoSlice"
 import { useState } from "react";
+import { HiPencil, HiCheck } from 'react-icons/hi';
 
 function TodoItem({todo,setHasChanges}){
   const dispatch = useDispatch();
@@ -43,7 +44,7 @@ function TodoItem({todo,setHasChanges}){
     }}
     disabled={todo.completed}
 >
-    {isTaskEditable ? "📁" : "✏️"}
+    {isTaskEditable ? <HiCheck className="text-green-700" size={16} /> : <HiPencil className="text-zinc-700" size={16} />}
 </button>
   <button
    onClick={() =>{

@@ -12,16 +12,19 @@ export async function handleGetCategoryServices(req, res) {
     let services = await serviceProvider.find({ category: serviceCategory }).select(
       'category name cost email phone location'
     );
-    if (services.length === 0) {
-      return res.status(404).json({ message: 'No services found in this category' });
+    if (!services || services.length === 0) {
+      return res.status(200).json([]);
     }
-    if(serviceCategory === 'Venue') {
-      services = services.filter(service =>{ 
-       if( service.location.toLowerCase().includes(location.toLowerCase()) ||
-       location.toLowerCase().includes(service.location.toLowerCase()))
-          return service;
+    if (serviceCategory === 'Venue' && location && location.trim() !== '' && location !== 'undefined') {
+      const filtered = services.filter(service => { 
+        if (!service.location) return false;
+        return service.location.toLowerCase().includes(location.toLowerCase()) ||
+               location.toLowerCase().includes(service.location.toLowerCase());
+      });
+      // If venues match this location, prioritize them; otherwise keep all so user can choose
+      if (filtered.length > 0) {
+        services = filtered;
       }
-      );
     }    
     return res.status(200).json(services);
   } catch (error) {
@@ -109,7 +112,7 @@ export async function handleCreateEvent(req, res) {
     const csvData = json2csvParser.parse(services);
 
     const mailOptions = {
-      from: `EVENTRA.SASS 📧 ${companyEmail}`,
+      from: `Eventra <${companyEmail}>`,
       to: creatorEmail, 
       subject: `Your Event "${eventName}" Has Been Created!`,
       text: `Dear User, \n\nYour event "${eventName}" scheduled for ${new Date(date).toLocaleDateString()} has been successfully created.\n\nLocation: ${location}\nEvent Type: ${eventType}\n\nPlease find attached the service details for your event.\n\nThank you for using our service!\n\nBest,\nEventra Team`,
@@ -125,7 +128,7 @@ export async function handleCreateEvent(req, res) {
     await transporter.sendMail(mailOptions);
     for (const service of services) {
       const providerMailOptions = {
-        from: `EVENTRA.SASS 📧 ${companyEmail}`,
+        from: `Eventra <${companyEmail}>`,
         to: service.email,
         subject: `Upcoming Event Inquiry: "${eventName}"`,
         text: `Dear ${service.name},\n\nYou have been selected as a service provider for an event. Here are the details:\n\nEvent: ${eventName}\nDate: ${new Date(date).toLocaleDateString()}\nLocation: ${location}\nEvent Type: ${eventType}\n\nYou may be contacted by the client regarding bookings or additional inquiries. Please be prepared to provide your services as requested.\n\nThank you for being part of Eventra!\n\nBest,\nEventra Team`
@@ -207,3 +210,103 @@ export async function handleEventDeletion(req, res) {
     res.status(500).json({ error: 'Failed to delete events' });
   }
 }
+
+export async function handleUpdateServiceStatusByCreator(req, res) {
+  try {
+    const { id } = req.user;
+    const { eventId, serviceId } = req.params;
+    const { status } = req.body;
+
+    const allowedStatuses = ['completed', 'confirmed'];
+    if (!allowedStatuses.includes(status)) {
+      return res.status(400).json({ error: "Invalid status update" });
+    }
+
+    const updatedEvent = await Event.findOneAndUpdate(
+      { _id: eventId, creator: id, "services._id": serviceId },
+      { $set: { "services.$.status": status } },
+      { new: true }
+    );
+
+    if (!updatedEvent) {
+      return res.status(404).json({ error: "Event or service not found or unauthorized" });
+    }
+
+    // Find the affected service to get provider email
+    const affectedService = updatedEvent.services.id(serviceId);
+    if (companyEmail && pass && affectedService?.email) {
+      try {
+        const transporter = nodemailer.createTransport({
+          service: 'gmail',
+          auth: { user: companyEmail, pass: pass }
+        });
+
+        const subject = status === 'completed'
+          ? `Service Completed & Settled: "${updatedEvent.eventName}"`
+          : `Service Status Updated: "${updatedEvent.eventName}"`;
+
+        const text = status === 'completed'
+          ? `Dear ${affectedService.name},\n\nThe event creator has confirmed completion and payment settlement for your ${affectedService.category} service for "${updatedEvent.eventName}".\n\nThank you for providing your services on Eventra!\n\nBest,\nEventra Team`
+          : `Dear ${affectedService.name},\n\nThe event creator has marked your service for "${updatedEvent.eventName}" as still active/in progress.\n\nPlease connect with the client regarding any remaining deliverables or payment.\n\nBest,\nEventra Team`;
+
+        await transporter.sendMail({
+          from: `Eventra <${companyEmail}>`,
+          to: affectedService.email,
+          subject,
+          text
+        });
+      } catch (mailErr) {
+        console.warn("Could not send creator status update email:", mailErr.message);
+      }
+    }
+
+    res.status(200).json({
+      message: `Service status updated to ${status} successfully`,
+      event: updatedEvent,
+      status
+    });
+  } catch (error) {
+    console.error("Error updating service status by creator:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+}
+
+export async function handleGetCreatorPendingRequests(req, res) {
+  try {
+    const creatorId = req.user.id;
+    // Find all events created by this creator with services awaiting completion/settlement acknowledgment
+    const events = await Event.find({
+      creator: creatorId,
+      "services.status": "completion_requested"
+    }).select("eventName eventType date location services");
+
+    const pendingRequests = [];
+    events.forEach(event => {
+      event.services.forEach(service => {
+        if (service.status === 'completion_requested') {
+          pendingRequests.push({
+            eventId: event._id,
+            eventName: event.eventName,
+            eventType: event.eventType,
+            eventDate: event.date,
+            location: event.location,
+            serviceId: service._id,
+            serviceName: service.name,
+            serviceCategory: service.category,
+            cost: service.cost,
+            phone: service.phone,
+            email: service.email,
+            status: service.status
+          });
+        }
+      });
+    });
+
+    res.status(200).json({ pendingRequests });
+  } catch (error) {
+    console.error("Error fetching creator pending requests:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+}
+
+
