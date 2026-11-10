@@ -104,13 +104,17 @@ function CategoryServices({ params }) {
         {services.map((service) => (
           <div
             key={service.email}
-            className={`relative flex flex-col items-center space-y-4 p-4 ${isSelected(service) ? 'border-4 border-green-500 shadow-lg rounded-xl' : ''}`}
+            className={`relative flex flex-col items-center space-y-3 p-2 rounded-xl transition-all ${
+              isSelected(service) ? 'ring-2 ring-[#03089a] shadow-xs' : ''
+            }`}
           >
             <ServicesCard service={service} />
 
             {isSelected(service) && (
-              <div className="absolute top-2 right-2 z-20">
-                <span className="bg-green-700 text-white text-xs px-2.5 py-1 rounded-full font-bold shadow">Selected</span>
+              <div className="absolute top-4 right-4 z-20">
+                <span className="bg-[#03089a] text-zinc-100 text-xs px-2.5 py-0.5 rounded-md font-semibold shadow-xs">
+                  Selected
+                </span>
               </div>
             )}
 

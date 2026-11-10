@@ -3,7 +3,7 @@ import { HiOutlineMail, HiOutlinePhone, HiOutlineLocationMarker, HiOutlineTag } 
 
 function ServicesCard({ service, onCreatorAction, ...props }) {
   const statusConfig = service?.status ? {
-    pending: { bg: 'bg-amber-100', text: 'text-amber-800', border: 'border-amber-300', label: 'Pending Response' },
+    pending: { bg: 'bg-amber-100', text: 'text-amber-800', border: 'border-amber-300', label: 'Pending' },
     confirmed: { bg: 'bg-green-100', text: 'text-green-800', border: 'border-green-300', label: 'Confirmed' },
     completion_requested: { bg: 'bg-purple-100', text: 'text-purple-800', border: 'border-purple-300', label: 'Delivery Acknowledgment Needed' },
     declined: { bg: 'bg-red-100', text: 'text-red-800', border: 'border-red-300', label: 'Declined' },
@@ -49,37 +49,22 @@ function ServicesCard({ service, onCreatorAction, ...props }) {
         )}
       </div>
 
-      {onCreatorAction && (
+      {onCreatorAction && service?.status === 'completion_requested' && (
         <div className="pt-3 mt-3 border-t border-zinc-200">
-          {service?.status === 'completion_requested' && (
-            <div className="flex gap-2">
-              <button
-                onClick={() => onCreatorAction(service._id, service.name, 'completed')}
-                className="flex-1 bg-green-600 hover:bg-green-700 text-white text-xs font-bold py-2 px-3 rounded-lg transition shadow-sm"
-              >
-                Confirm & Settle
-              </button>
-              <button
-                onClick={() => onCreatorAction(service._id, service.name, 'confirmed')}
-                className="bg-zinc-200 hover:bg-zinc-300 text-zinc-800 text-xs py-2 px-3 rounded-lg transition"
-              >
-                Not Yet
-              </button>
-            </div>
-          )}
-          {service?.status === 'confirmed' && (
+          <div className="flex gap-2">
             <button
               onClick={() => onCreatorAction(service._id, service.name, 'completed')}
-              className="w-full bg-[#03089a] hover:bg-blue-900 text-white text-xs font-semibold py-2 px-3 rounded-lg transition"
+              className="flex-1 bg-green-700 hover:bg-green-800 text-zinc-100 text-xs font-semibold py-2 px-3 rounded-lg transition shadow-xs"
             >
-              Mark Delivered & Settle Offline Payment
+              Confirm & Settle
             </button>
-          )}
-          {service?.status === 'completed' && (
-            <div className="text-center text-xs font-bold text-green-700 bg-green-50 py-1.5 rounded-lg border border-green-200">
-              Service Completed & Settled
-            </div>
-          )}
+            <button
+              onClick={() => onCreatorAction(service._id, service.name, 'confirmed')}
+              className="bg-zinc-200 hover:bg-zinc-300 text-zinc-800 text-xs py-2 px-3 rounded-lg transition"
+            >
+              Not Yet
+            </button>
+          </div>
         </div>
       )}
     </div>

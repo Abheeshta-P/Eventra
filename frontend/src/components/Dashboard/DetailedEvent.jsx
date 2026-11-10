@@ -145,7 +145,6 @@ const handleSave = async () => {
     }
   };
 
-  if (sending) return <Loading />;
   return (
     <Container className="mb-5">
       <div className="flex flex-col px-3 md:px-8 w-full justify-center items-center gap-6">
@@ -226,14 +225,22 @@ const handleSave = async () => {
               </span>
               <p>Create Design</p>
             </Button>
-            <Button className="font-bold md:px-12 md:py-2" onClick={handleConfirm}>
-              Submit
+            <Button 
+              className="font-bold md:px-12 md:py-2 disabled:opacity-60" 
+              onClick={handleConfirm}
+              disabled={sending}
+            >
+              {sending ? 'Creating Event...' : 'Submit'}
             </Button>
           </>
         ) : (
           hasChanges && (
-            <Button className="font-bold md:px-12 md:py-2" onClick={handleSave}>
-              Save
+            <Button 
+              className="font-bold md:px-12 md:py-2 disabled:opacity-60" 
+              onClick={handleSave}
+              disabled={sending}
+            >
+              {sending ? 'Saving...' : 'Save'}
             </Button>
           )
         )}
