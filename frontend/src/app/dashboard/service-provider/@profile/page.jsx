@@ -39,7 +39,7 @@ function ServiceProviderDashBoardProfile() {
   const userNameFirstLetter = userData?.name?.charAt(0).toUpperCase() || 'P';
 
   return (
-    <div className="flex flex-col xl:flex-row items-center justify-between w-full bg-zinc-200 p-6 rounded-2xl mb-6 border border-zinc-300/80 shadow-xs gap-6">
+    <div className="flex flex-col xl:flex-row items-center justify-between w-full bg-zinc-200 p-5 rounded-2xl mb-3 border border-zinc-300/80 shadow-xs gap-5">
       {/* Left: Avatar & SP Details */}
       <div className="flex flex-col sm:flex-row items-center gap-6">
         <div className="text-4xl sm:text-6xl rounded-full w-24 h-24 sm:w-28 sm:h-28 flex items-center justify-center text-zinc-100 font-bold bg-[#03089a] shadow-sm shrink-0">
