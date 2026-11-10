@@ -1,6 +1,15 @@
 import express from 'express'
 const router = express.Router();
-import { handleCreateEvent, handleEventDeletion, handleEventFetchDashBoard, handleGetCategoryServices, handleGetServiceDetails, handleGetServicesDetailsBatch, handleTodoParticipantsUpdate } from '../controller/eventCreator.js';
+import { 
+  handleCreateEvent, 
+  handleEventDeletion, 
+  handleEventFetchDashBoard, 
+  handleGetCategoryServices, 
+  handleGetServiceDetails, 
+  handleGetServicesDetailsBatch, 
+  handleTodoParticipantsUpdate,
+  handleUpdateServiceStatusByCreator
+} from '../controller/eventCreator.js';
 
 // fetch all services from serviceCategory
 router.get('/categoryServices/:serviceCategory', handleGetCategoryServices);
@@ -14,8 +23,9 @@ router.post('/event/createEvent',handleCreateEvent);
 router.get('/event/:id',handleEventFetchDashBoard);
 // update todo & participants
 router.patch('/event/updateTodoParticipants/:id',handleTodoParticipantsUpdate);
+// update service status by event creator (confirm/acknowledge completion)
+router.patch('/event/:eventId/service/:serviceId/status', handleUpdateServiceStatusByCreator);
 // delete the events
 router.delete('/event/deleteEvents',handleEventDeletion);
-
 
 export default router;

@@ -3,7 +3,7 @@ import React, { useRef } from 'react';
 import { ServicesCard } from '.';
 import { HiChevronLeft, HiChevronRight } from 'react-icons/hi';
 
-function ServicesList({ services }) {
+function ServicesList({ services, onCreatorAction }) {
   const scrollContainerRef = useRef(null);
 
   const scrollLeft = () => {
@@ -37,9 +37,14 @@ function ServicesList({ services }) {
         style={{ scrollBehavior: 'smooth' }}
       >
         {services?.map((service) => (
-          <ServicesCard service={service} key={service.email} />
+          <ServicesCard 
+            service={service} 
+            key={service.email || service._id} 
+            onCreatorAction={onCreatorAction} 
+          />
         ))}
       </div>
+
       {
         services?.length>1 ?  
         <button

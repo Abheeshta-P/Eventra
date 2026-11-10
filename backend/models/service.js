@@ -9,10 +9,17 @@ const serviceSchema = new mongoose.Schema({
     enum: serviceCategories
   },
   name: { type: String, required: true },
-  cost: { type: Number, required: true },
+  cost: { type: String, required: true },
   email: { type: String, required: true },
-  phone: { type: String, required: true }
+  phone: { type: String, required: true },
+  location: { type: String, required: false },
+  status: {
+    type: String,
+    enum: ['pending', 'confirmed', 'declined', 'completion_requested', 'completed'],
+    default: 'pending'
+  }
 });
 
-const Service = mongoose.model('Service', serviceSchema)
+const Service = mongoose.model('Service', serviceSchema);
 export default Service;
+

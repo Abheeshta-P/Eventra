@@ -19,26 +19,28 @@ function CategoryServices({ params }) {
     const fetchServices = async () => {
       try {
         setLoading(true);
-        const services = await eventCreatorService.getServicesCategory(categoryName,location);
-        if (services.status === 403 || services.status === 401) {
+        const services = await eventCreatorService.getServicesCategory(categoryName, location);
+        if (services?.status === 403 || services?.status === 401) {
           router.push('/login'); 
           return;
         }
   
-        if (services) {
+        if (services && Array.isArray(services)) {
           setServices(services);
         } else {
-          alert("No services found for this category.");
+          setServices([]);
         }
       } catch (error) {
         console.error("Error fetching services :: serviceCategory Display :: frontend", error);
+        setServices([]);
       } finally {
         setLoading(false);
       }
     };
   
     fetchServices();
-  }, [categoryName, router,location]);
+  }, [categoryName, router, location]);
+
   
   const { selectedCategories } = useSelector((state) => state.eventDetails);
   const [selectedCategoriesState, setSelectedCategoriesState] = useState(selectedCategories || []);
@@ -83,7 +85,17 @@ function CategoryServices({ params }) {
   return (
    <DashboardLayout>
    <Container className="flex flex-col justify-center items-center">
-    <h1 className="mb-10 text-2xl md:text-3xl lg:text-4xl text-zinc-900 font-semibold">
+    <div className="w-full flex items-center justify-between mb-6">
+      <button 
+        onClick={() => router.push(`/dashboard/event-creator/event-types/${eventType}/categories`)}
+        className="text-sm text-[#03089a] hover:underline font-bold flex items-center gap-1"
+      >
+        ← Back to Categories
+      </button>
+      <span className="text-xs uppercase tracking-wider font-bold text-zinc-500">{eventType}</span>
+    </div>
+
+    <h1 className="mb-6 text-2xl md:text-3xl lg:text-4xl text-zinc-900 font-semibold text-center">
       Services for {categoryName}
     </h1>
 
@@ -92,13 +104,13 @@ function CategoryServices({ params }) {
         {services.map((service) => (
           <div
             key={service.email}
-            className={`relative flex flex-col items-center space-y-4 p-4 ${isSelected(service) ? 'border-4 border-green-500 shadow-lg' : ''}`}
+            className={`relative flex flex-col items-center space-y-4 p-4 ${isSelected(service) ? 'border-4 border-green-500 shadow-lg rounded-xl' : ''}`}
           >
             <ServicesCard service={service} />
 
             {isSelected(service) && (
-              <div className="absolute inset-0 flex items-center justify-center">
-                <span className="text-white w-8 h-8 rounded-full bg-green-700 text-center text-2xl font-bold">✓</span>
+              <div className="absolute top-2 right-2 z-20">
+                <span className="bg-green-700 text-white text-xs px-2.5 py-1 rounded-full font-bold shadow">✓ Selected</span>
               </div>
             )}
 
@@ -116,11 +128,21 @@ function CategoryServices({ params }) {
           </div>
         ))}
       </div>
-    ) : <div className="text-zinc-700 font-semibold text-lg md:text-xl lg:text-2xl text-center w-full">
+    ) : <div className="text-zinc-700 font-semibold text-lg md:text-xl lg:text-2xl text-center w-full py-8">
     {fallbackMessage}
     </div>
     }
+
+    <div className="mt-8 flex gap-4">
+      <Button 
+        className="font-bold px-8 py-3 bg-[#03089a]" 
+        onClick={() => router.push(`/dashboard/event-creator/event-types/${eventType}/categories`)}
+      >
+        Done, Back to Categories
+      </Button>
+    </div>
   </Container>
+
 
 
    </DashboardLayout>

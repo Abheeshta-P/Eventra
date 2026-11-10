@@ -1,5 +1,8 @@
 import serviceProvider from '../models/serviceProvider.js';
 import cloudinary from '../utils/cloudinary.js';
+import Event from '../models/event.js';
+import nodemailer from 'nodemailer';
+import { companyEmail, pass } from '../conf.js';
 
 export async function handleServiceDetailsUpdate(req, res) {
   const { id } = req.user; 
@@ -85,3 +88,110 @@ export async function handleUpdateGalleryImages(req,res){
     res.status(500).json({ error: "Internal server error" });
   }
 }
+
+export async function handleGetProviderBookings(req, res) {
+  try {
+    const { id } = req.user;
+    const provider = await serviceProvider.findById(id);
+    if (!provider) {
+      return res.status(404).json({ error: "Service provider not found" });
+    }
+
+    const events = await Event.find({ "services.email": provider.email })
+      .populate('creator', 'name email')
+      .sort({ createdAt: -1 });
+
+    const bookings = [];
+    events.forEach(event => {
+      event.services.forEach(service => {
+        if (service.email === provider.email) {
+          bookings.push({
+            bookingId: service._id,
+            eventId: event._id,
+            eventName: event.eventName,
+            eventType: event.eventType,
+            date: event.date,
+            location: event.location,
+            creator: {
+              name: event.creator?.name || 'Client',
+              email: event.creator?.email || ''
+            },
+            serviceName: service.name,
+            category: service.category,
+            cost: service.cost,
+            status: service.status || 'pending',
+            completed: event.completed,
+            createdAt: event.createdAt
+          });
+        }
+      });
+    });
+
+    res.status(200).json({ bookings });
+  } catch (error) {
+    console.error("Error fetching provider bookings:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+}
+
+export async function handleUpdateBookingStatus(req, res) {
+  try {
+    const { id } = req.user;
+    const { eventId, serviceId } = req.params;
+    const { status } = req.body;
+
+    const allowedStatuses = ['pending', 'confirmed', 'declined', 'completion_requested', 'completed'];
+    if (!allowedStatuses.includes(status)) {
+      return res.status(400).json({ error: "Invalid booking status" });
+    }
+
+    const provider = await serviceProvider.findById(id);
+    if (!provider) {
+      return res.status(404).json({ error: "Service provider not found" });
+    }
+
+    const event = await Event.findById(eventId).populate('creator', 'name email');
+    if (!event) {
+      return res.status(404).json({ error: "Event not found" });
+    }
+
+    const targetService = event.services.find(
+      (s) =>
+        s._id?.toString() === serviceId.toString() &&
+        s.email?.toLowerCase().trim() === provider.email?.toLowerCase().trim()
+    );
+
+    if (!targetService) {
+      return res.status(404).json({ error: "Booking not found or not assigned to this provider" });
+    }
+
+    targetService.status = status;
+    await event.save();
+
+    // Try sending email notification to the creator
+    if (companyEmail && pass && event.creator?.email) {
+      try {
+        const transporter = nodemailer.createTransport({
+          service: 'gmail',
+          auth: { user: companyEmail, pass: pass }
+        });
+
+        const statusLabel = status.toUpperCase();
+        await transporter.sendMail({
+          from: `EVENTRA.SASS 📧 ${companyEmail}`,
+          to: event.creator.email,
+          subject: `Booking Update: ${provider.name} has marked your request as ${statusLabel}`,
+          text: `Dear ${event.creator.name},\n\nYour service provider ${provider.name} (${provider.category}) for event "${event.eventName}" has updated their booking status to: ${statusLabel}.\n\nEvent Date: ${event.date}\nLocation: ${event.location}\n\nYou can review your full event status on your Eventra dashboard.\n\nBest,\nEventra Team`
+        });
+      } catch (mailErr) {
+        console.warn("Could not send status update email:", mailErr.message);
+      }
+    }
+
+    res.status(200).json({ message: "Booking status updated successfully", status });
+  } catch (error) {
+    console.error("Error updating booking status:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+}
+

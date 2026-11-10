@@ -5,7 +5,10 @@ import { CloudinaryStorage } from 'multer-storage-cloudinary';
 import cloudinary from '../utils/cloudinary.js';
 
 export function verifyToken(req, res, next) {
-  const token = req.cookies.jwt;
+  const authHeader = req.headers.authorization;
+  const bearerToken = authHeader && authHeader.startsWith('Bearer ') ? authHeader.slice(7) : null;
+  const token = req.cookies?.jwt || bearerToken;
+
   if (!token) {
     return res.status(401).json({ message: 'No token provided' });
   }
@@ -19,6 +22,7 @@ export function verifyToken(req, res, next) {
     return res.status(403).json({ message: 'Failed to authenticate token' });
   }
 }
+
 
 
 const storage = new CloudinaryStorage({
