@@ -112,7 +112,7 @@ export async function handleCreateEvent(req, res) {
     const csvData = json2csvParser.parse(services);
 
     const mailOptions = {
-      from: `EVENTRA.SASS 📧 ${companyEmail}`,
+      from: `Eventra <${companyEmail}>`,
       to: creatorEmail, 
       subject: `Your Event "${eventName}" Has Been Created!`,
       text: `Dear User, \n\nYour event "${eventName}" scheduled for ${new Date(date).toLocaleDateString()} has been successfully created.\n\nLocation: ${location}\nEvent Type: ${eventType}\n\nPlease find attached the service details for your event.\n\nThank you for using our service!\n\nBest,\nEventra Team`,
@@ -128,7 +128,7 @@ export async function handleCreateEvent(req, res) {
     await transporter.sendMail(mailOptions);
     for (const service of services) {
       const providerMailOptions = {
-        from: `EVENTRA.SASS 📧 ${companyEmail}`,
+        from: `Eventra <${companyEmail}>`,
         to: service.email,
         subject: `Upcoming Event Inquiry: "${eventName}"`,
         text: `Dear ${service.name},\n\nYou have been selected as a service provider for an event. Here are the details:\n\nEvent: ${eventName}\nDate: ${new Date(date).toLocaleDateString()}\nLocation: ${location}\nEvent Type: ${eventType}\n\nYou may be contacted by the client regarding bookings or additional inquiries. Please be prepared to provide your services as requested.\n\nThank you for being part of Eventra!\n\nBest,\nEventra Team`
@@ -250,7 +250,7 @@ export async function handleUpdateServiceStatusByCreator(req, res) {
           : `Dear ${affectedService.name},\n\nThe event creator has marked your service for "${updatedEvent.eventName}" as still active/in progress.\n\nPlease connect with the client regarding any remaining deliverables or payment.\n\nBest,\nEventra Team`;
 
         await transporter.sendMail({
-          from: `EVENTRA.SASS 📧 ${companyEmail}`,
+          from: `Eventra <${companyEmail}>`,
           to: affectedService.email,
           subject,
           text

@@ -110,7 +110,7 @@ function CategoryServices({ params }) {
 
             {isSelected(service) && (
               <div className="absolute top-2 right-2 z-20">
-                <span className="bg-green-700 text-white text-xs px-2.5 py-1 rounded-full font-bold shadow">✓ Selected</span>
+                <span className="bg-green-700 text-white text-xs px-2.5 py-1 rounded-full font-bold shadow">Selected</span>
               </div>
             )}
 

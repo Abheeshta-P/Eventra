@@ -11,6 +11,7 @@ import { useRouter } from 'next/navigation';
 import { eventCreatorService } from '@/utils';
 import { setEvents } from '@/store/features/eventsSlice';
 import { resetParticipants } from '@/store/features/participantSlice';
+import { HiBell } from 'react-icons/hi';
 
 function DetailedEventDisplayer({ event, isCreating = false, servicesAPI, isDisabled = false }) {
   const router = useRouter();
@@ -161,7 +162,7 @@ const handleSave = async () => {
         {!isCreating && pendingConfirmations.length > 0 && (
           <div className="w-full bg-amber-50 border-2 border-amber-300 rounded-2xl p-5 shadow-sm space-y-3">
             <div className="flex items-center gap-2 text-amber-900 font-bold text-base">
-              <span className="text-xl">🔔</span>
+              <HiBell className="text-amber-800 shrink-0" size={20} />
               <span>Vendor Delivery & Offline Payment Acknowledgment</span>
             </div>
             <p className="text-xs text-amber-800">
@@ -181,13 +182,13 @@ const handleSave = async () => {
                       onClick={() => handleUpdateServiceStatus(service._id, service.name, 'completed')}
                       className="px-3.5 py-1.5 bg-green-600 hover:bg-green-700 text-white rounded-lg text-xs font-bold transition shadow-sm"
                     >
-                      Confirm Delivery & Settle ✅
+                      Confirm Delivery & Settle
                     </button>
                     <button
                       onClick={() => handleUpdateServiceStatus(service._id, service.name, 'confirmed')}
                       className="px-3 py-1.5 bg-zinc-100 hover:bg-zinc-200 text-zinc-700 rounded-lg text-xs font-medium transition"
                     >
-                      Not Yet ⏳
+                      Not Yet
                     </button>
                   </div>
                 </div>

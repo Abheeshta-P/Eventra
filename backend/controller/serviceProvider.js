@@ -178,7 +178,7 @@ export async function handleUpdateBookingStatus(req, res) {
 
         const statusLabel = status.toUpperCase();
         await transporter.sendMail({
-          from: `EVENTRA.SASS 📧 ${companyEmail}`,
+          from: `Eventra <${companyEmail}>`,
           to: event.creator.email,
           subject: `Booking Update: ${provider.name} has marked your request as ${statusLabel}`,
           text: `Dear ${event.creator.name},\n\nYour service provider ${provider.name} (${provider.category}) for event "${event.eventName}" has updated their booking status to: ${statusLabel}.\n\nEvent Date: ${event.date}\nLocation: ${event.location}\n\nYou can review your full event status on your Eventra dashboard.\n\nBest,\nEventra Team`

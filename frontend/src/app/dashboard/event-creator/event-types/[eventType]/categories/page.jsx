@@ -7,6 +7,7 @@ import { Container, Card,Button, DashboardLayout } from "@/components";
 // import { resetEventDetails } from "@/store/features/eventDetailsSlice";
 import Link from "next/link"; 
 import { eventCategoryImageSources } from "@/constants";
+import { HiCheck } from "react-icons/hi";
 
 function CategoryInEventType({ params }) {
   const { eventType } = params;
@@ -59,7 +60,9 @@ function CategoryInEventType({ params }) {
            />
            {isSelected && (
              <div className="absolute inset-0 flex items-center justify-center bg-green-50/20 rounded-lg">
-               <span className="text-white w-10 h-10 rounded-full bg-green-700 text-center text-2xl font-bold flex items-center justify-center shadow-lg">✓</span> 
+               <span className="text-white w-10 h-10 rounded-full bg-green-700 flex items-center justify-center shadow-lg">
+                 <HiCheck size={24} />
+               </span> 
              </div>
            )}
          </Link>

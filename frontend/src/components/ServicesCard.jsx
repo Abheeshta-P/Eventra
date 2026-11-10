@@ -57,13 +57,13 @@ function ServicesCard({ service, onCreatorAction, ...props }) {
                 onClick={() => onCreatorAction(service._id, service.name, 'completed')}
                 className="flex-1 bg-green-600 hover:bg-green-700 text-white text-xs font-bold py-2 px-3 rounded-lg transition shadow-sm"
               >
-                Confirm & Settle ✅
+                Confirm & Settle
               </button>
               <button
                 onClick={() => onCreatorAction(service._id, service.name, 'confirmed')}
                 className="bg-zinc-200 hover:bg-zinc-300 text-zinc-800 text-xs py-2 px-3 rounded-lg transition"
               >
-                Not Yet ⏳
+                Not Yet
               </button>
             </div>
           )}
@@ -77,7 +77,7 @@ function ServicesCard({ service, onCreatorAction, ...props }) {
           )}
           {service?.status === 'completed' && (
             <div className="text-center text-xs font-bold text-green-700 bg-green-50 py-1.5 rounded-lg border border-green-200">
-              ✓ Service Completed & Settled
+              Service Completed & Settled
             </div>
           )}
         </div>

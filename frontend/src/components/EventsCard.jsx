@@ -3,6 +3,7 @@ import { useRouter } from 'next/navigation';
 import React from 'react';
 import { imageSources } from '@/constants';
 import { MdCancel } from 'react-icons/md';
+import { HiCheck } from 'react-icons/hi';
 function EventsCard({ eventId, eventName, eventType, date, location, className = '', isEditing, onDeleteEvent, ...props}) {
   
   const today = new Date().toISOString().split('T')[0];
@@ -15,7 +16,6 @@ function EventsCard({ eventId, eventName, eventType, date, location, className =
       route.push(`/dashboard/event-creator/event/${eventId}`);
     }
   };
-  const decore = eventType === 'party'?'🥳':eventType === 'wedding'?'🌸':'⚡'
   return (
     <div className={`relative flex flex-col shadow-md border border-black/10 rounded-lg w-[300px] h-[300px] bg-zinc-200 justify-between p-5 transition-opacity duration-300 cursor-pointer ${eventStatus} ${className}`}
       {...props}
@@ -23,7 +23,9 @@ function EventsCard({ eventId, eventName, eventType, date, location, className =
         {
           isCompleted && (
             <div className="absolute z-30 inset-0 flex items-center justify-center">
-              <span className="text-white w-8 h-8 rounded-full bg-green-700 opacity-70 text-center text-2xl font-bold">✓</span> 
+              <span className="text-white w-8 h-8 rounded-full bg-green-700 opacity-90 flex items-center justify-center shadow">
+                <HiCheck size={20} />
+              </span> 
             </div>
           )
         }
@@ -46,7 +48,7 @@ function EventsCard({ eventId, eventName, eventType, date, location, className =
         <h1 className="font-semibold text-zinc-950 text-lg md:text-xl text-center">
           {eventName}
         </h1>
-        <h3 className="text-zinc-800 text-base text-center">{eventType}{decore}</h3>
+        <h3 className="text-zinc-800 text-base text-center capitalize">{eventType}</h3>
       </div>
       <div className="flex justify-between w-full text-zinc-800 text-base font-semibold">
         <h1>{location}</h1>

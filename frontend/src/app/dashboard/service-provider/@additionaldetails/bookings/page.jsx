@@ -259,19 +259,19 @@ function ServiceProviderBookings() {
 
                   {booking.status === 'completion_requested' && (
                     <div className="text-center py-2 px-3 text-xs font-semibold text-purple-900 bg-purple-100/70 rounded-xl border border-purple-300">
-                      ⏳ Service delivered. Awaiting client to confirm & settle offline payment.
+                      Service delivered. Awaiting client to confirm and settle offline payment.
                     </div>
                   )}
 
                   {booking.status === 'completed' && (
                     <div className="text-center py-1.5 text-xs font-semibold text-emerald-900 bg-emerald-100/70 rounded-xl border border-emerald-300">
-                      ✓ Service Completed & Settled with Client
+                      Service Completed & Settled with Client
                     </div>
                   )}
 
                   {booking.status === 'declined' && (
                     <div className="text-center py-1.5 text-xs font-semibold text-rose-900 bg-rose-100/70 rounded-xl border border-rose-300">
-                      ✕ You declined this inquiry
+                      You declined this inquiry
                     </div>
                   )}
                 </div>
