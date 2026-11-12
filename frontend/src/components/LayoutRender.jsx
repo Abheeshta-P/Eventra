@@ -10,7 +10,8 @@ import { setEvents } from '@/store/features/eventsSlice';
 // at first when app loads get the user status
 function LayoutRender({children}) {
   const pathName = usePathname();
-  const isStandalone = pathName.includes('/login') || pathName.includes('/signup') || pathName.includes('/rsvp');
+  const isStandalone = pathName?.includes('/login') || pathName?.includes('/signup') || pathName?.includes('/rsvp');
+  const isProtected = pathName?.startsWith('/dashboard');
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
   useEffect(() => {
@@ -31,11 +32,8 @@ function LayoutRender({children}) {
           throw new Error('No valid response');
         }
       } catch (error) {
-        console.error("Retrying to fetch user data due to error: not logged in", error);
-        // if (isFetching) {
-        //   setTimeout(fetchCurrentUser, 3000); 
-        // }
-      }finally{
+        // Unauthenticated visitor (expected on public pages)
+      } finally {
         setLoading(false); 
       }
     }
@@ -47,19 +45,20 @@ function LayoutRender({children}) {
     };
   }, [dispatch]);
 
-  if(loading) return <Loading/>;
+  // Only block the screen if visiting a protected dashboard route
+  if (loading && isProtected) return <Loading/>;
   
-  return isStandalone?(
+  return isStandalone ? (
     children
-  ):(
+  ) : (
     <>
-    <Header/>
-    <div className='mt-20'>
-    {children}
-    </div>
-    <Footer/>
+      <Header/>
+      <div className='mt-20'>
+        {children}
+      </div>
+      <Footer/>
     </>
-  )
+  );
 }
 
 export default LayoutRender
