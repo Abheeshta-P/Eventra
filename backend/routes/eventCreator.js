@@ -9,11 +9,15 @@ import {
   handleGetServicesDetailsBatch, 
   handleTodoParticipantsUpdate,
   handleUpdateServiceStatusByCreator,
-  handleGetCreatorPendingRequests
+  handleGetCreatorPendingRequests,
+  handleSendEventInvites
 } from '../controller/eventCreator.js';
 
 // pending delivery & payment requests for creator dashboard
 router.get('/pending-requests', handleGetCreatorPendingRequests);
+
+// send email invitations to event participants
+router.post('/event/:eventId/send-invites', handleSendEventInvites);
 
 // fetch all services from serviceCategory
 router.get('/categoryServices/:serviceCategory', handleGetCategoryServices);

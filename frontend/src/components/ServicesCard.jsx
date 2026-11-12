@@ -3,11 +3,11 @@ import { HiOutlineMail, HiOutlinePhone, HiOutlineLocationMarker, HiOutlineTag } 
 
 function ServicesCard({ service, onCreatorAction, ...props }) {
   const statusConfig = service?.status ? {
-    pending: { bg: 'bg-amber-100', text: 'text-amber-800', border: 'border-amber-300', label: 'Pending' },
-    confirmed: { bg: 'bg-green-100', text: 'text-green-800', border: 'border-green-300', label: 'Confirmed' },
-    completion_requested: { bg: 'bg-purple-100', text: 'text-purple-800', border: 'border-purple-300', label: 'Delivery Acknowledgment Needed' },
+    pending: { bg: 'bg-zinc-200', text: 'text-zinc-700', border: 'border-zinc-300', label: 'Requested' },
+    confirmed: { bg: 'bg-green-100', text: 'text-green-800', border: 'border-green-300', label: 'Booked' },
+    completion_requested: { bg: 'bg-amber-100', text: 'text-amber-800', border: 'border-amber-300', label: 'Unsettled' },
     declined: { bg: 'bg-red-100', text: 'text-red-800', border: 'border-red-300', label: 'Declined' },
-    completed: { bg: 'bg-blue-100', text: 'text-blue-800', border: 'border-blue-300', label: 'Completed' }
+    completed: { bg: 'bg-zinc-200', text: 'text-zinc-700', border: 'border-zinc-300', label: 'Settled' }
   }[service.status] : null;
 
   return (
@@ -48,29 +48,9 @@ function ServicesCard({ service, onCreatorAction, ...props }) {
           </div>
         )}
       </div>
-
-      {onCreatorAction && service?.status === 'completion_requested' && (
-        <div className="pt-3 mt-3 border-t border-zinc-200">
-          <div className="flex gap-2">
-            <button
-              onClick={() => onCreatorAction(service._id, service.name, 'completed')}
-              className="flex-1 bg-green-700 hover:bg-green-800 text-zinc-100 text-xs font-semibold py-2 px-3 rounded-lg transition shadow-xs"
-            >
-              Confirm & Settle
-            </button>
-            <button
-              onClick={() => onCreatorAction(service._id, service.name, 'confirmed')}
-              className="bg-zinc-200 hover:bg-zinc-300 text-zinc-800 text-xs py-2 px-3 rounded-lg transition"
-            >
-              Not Yet
-            </button>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
-
 
 export default ServicesCard;
 

@@ -10,7 +10,7 @@ import { setEvents } from '@/store/features/eventsSlice';
 // at first when app loads get the user status
 function LayoutRender({children}) {
   const pathName = usePathname();
-  const loginOrSignup = pathName.includes('/login')|| pathName.includes('/signup');
+  const isStandalone = pathName.includes('/login') || pathName.includes('/signup') || pathName.includes('/rsvp');
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
   useEffect(() => {
@@ -49,7 +49,7 @@ function LayoutRender({children}) {
 
   if(loading) return <Loading/>;
   
-  return loginOrSignup?(
+  return isStandalone?(
     children
   ):(
     <>

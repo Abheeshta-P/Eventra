@@ -3,9 +3,17 @@ import { useState } from 'react'
 import {useDispatch} from 'react-redux'
 import { addTodo } from '@/store/features/todoSlice';
 
-function AddTodo({ setHasChanges }) {
+function AddTodo({ setHasChanges, isDisabled }) {
   const [input,setInput] = useState('');
   const dispatch = useDispatch();
+
+  if (isDisabled) {
+    return (
+      <div className="mb-3 w-full p-2.5 bg-zinc-200/50 border border-zinc-300 rounded-lg text-xs text-zinc-500 text-center font-medium cursor-not-allowed select-none">
+        Event completed. Checklist is locked in read-only mode.
+      </div>
+    );
+  }
 
   const addTodoHandler = (e)=>{
     e.preventDefault();

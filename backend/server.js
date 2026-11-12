@@ -6,6 +6,7 @@ import { connectMongoDB } from './connection.js';
 import authRouter from './routes/auth.js'
 import eventCreatorRouter from './routes/eventCreator.js'
 import serviceProviderRouter from './routes/serviceProvider.js'
+import publicRouter from './routes/public.js'
 import handleContactUs from './controller/contact-us.js'
 import { verifyToken } from './middleware/index.js';
 
@@ -25,6 +26,8 @@ app.use(express.urlencoded({ extended: true }));
 connectMongoDB(mongoDB);
 
 // ROUTES :
+// public routes (RSVP, etc.)
+app.use('/api/public', publicRouter);
 // contact route
 app.post('/api/contact-us', handleContactUs);
 // auth routes
