@@ -10,13 +10,13 @@ function TodoItem({todo, setHasChanges, isDisabled}){
   const [text,setText] = useState(todo.text);
   return (
   <li
-  className={`flex gap-1 w-fit sm:w-full items-center sm:gap-3 p-3 bg-zinc-50 rounded-md shadow-md mb-2 ${todo.completed?'blur-[2px]':''}`}
+  className={`flex gap-1 w-full min-w-0 items-center sm:gap-3 p-3 bg-zinc-50 rounded-md shadow-md mb-2 ${todo.completed?'blur-[2px]':''}`}
   key={todo.id}
 >
    <input
     type="checkbox"
     disabled={isDisabled}
-    className={isDisabled ? "cursor-not-allowed opacity-60" : "cursor-pointer"}
+    className={isDisabled ? "cursor-not-allowed opacity-60 shrink-0" : "cursor-pointer shrink-0"}
     checked={todo.completed}
     onChange={()=>{
       if (isDisabled) return;
@@ -26,7 +26,7 @@ function TodoItem({todo, setHasChanges, isDisabled}){
 />
   <input
     type="text"
-    className={`ml-4 border outline-none w-full bg-transparent rounded-lg py-[5px] font-semibold ${
+    className={`ml-2 sm:ml-4 border outline-none w-full min-w-0 flex-1 bg-transparent rounded-lg py-[5px] font-semibold break-words [overflow-wrap:anywhere] ${
         isTaskEditable ? "border-white/10 px-2" : "border-transparent"
     } ${todo.completed ? "line-through" : ""} ${isDisabled ? "cursor-default" : ""}`}
     value={text}

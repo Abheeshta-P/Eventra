@@ -201,16 +201,16 @@ function ServiceProviderBookings() {
             return (
               <div 
                 key={`${booking.eventId}-${booking.bookingId}`}
-                className="bg-zinc-100 rounded-xl p-3 shadow-xs hover:border-zinc-400 transition-all border border-zinc-300 flex flex-col justify-between gap-2.5"
+                className="bg-zinc-100 rounded-xl p-3 shadow-xs hover:border-zinc-400 transition-all border border-zinc-300 flex flex-col justify-between gap-2.5 min-w-0 overflow-hidden"
               >
                 {/* Header: Event Type & Name (Left) + Estimated Fee (Right) */}
-                <div>
-                  <div className="flex items-start justify-between gap-2">
+                <div className="min-w-0">
+                  <div className="flex items-start justify-between gap-2 min-w-0">
                     <div className="min-w-0 flex-1">
-                      <span className="text-[10px] uppercase tracking-wider font-bold text-zinc-500 block">
+                      <span className="text-[10px] uppercase tracking-wider font-bold text-zinc-500 block truncate">
                         {booking.eventType}
                       </span>
-                      <h3 className="text-sm font-bold text-zinc-950 truncate" title={booking.eventName}>
+                      <h3 className="text-sm font-bold text-zinc-950 truncate break-words [overflow-wrap:anywhere]" title={booking.eventName}>
                         {booking.eventName}
                       </h3>
                     </div>
@@ -227,16 +227,16 @@ function ServiceProviderBookings() {
                   </div>
 
                   {/* Side-by-Side Metadata Rows */}
-                  <div className="mt-2 pt-1.5 border-t border-zinc-200/90 flex flex-col gap-1 text-[11px]">
+                  <div className="mt-2 pt-1.5 border-t border-zinc-200/90 flex flex-col gap-1 text-[11px] min-w-0">
                     {/* Row 1: Location & Date Side by Side */}
-                    <div className="grid grid-cols-2 gap-2">
-                      <div className="truncate">
+                    <div className="grid grid-cols-2 gap-2 min-w-0">
+                      <div className="truncate min-w-0">
                         <span className="text-[9px] uppercase font-bold text-zinc-400 block">Location</span>
                         <span className="text-zinc-800 font-medium truncate block" title={booking.location}>
                           {booking.location}
                         </span>
                       </div>
-                      <div className="truncate">
+                      <div className="truncate min-w-0">
                         <span className="text-[9px] uppercase font-bold text-zinc-400 block">Date</span>
                         <span className="text-zinc-800 font-medium truncate block">
                           {new Date(booking.date).toLocaleDateString('en-US', {
@@ -249,14 +249,14 @@ function ServiceProviderBookings() {
                     </div>
 
                     {/* Row 2: Client & Client Email Side by Side */}
-                    <div className="grid grid-cols-2 gap-2 pt-1 border-t border-zinc-200/60">
-                      <div className="truncate">
+                    <div className="grid grid-cols-2 gap-2 pt-1 border-t border-zinc-200/60 min-w-0">
+                      <div className="truncate min-w-0">
                         <span className="text-[9px] uppercase font-bold text-zinc-400 block">Client</span>
-                        <span className="text-zinc-900 font-semibold truncate block">
+                        <span className="text-zinc-900 font-semibold truncate block" title={booking.creator?.name}>
                           {booking.creator?.name || 'Client'}
                         </span>
                       </div>
-                      <div className="truncate">
+                      <div className="truncate min-w-0">
                         <span className="text-[9px] uppercase font-bold text-zinc-400 block">Email</span>
                         {booking.creator?.email ? (
                           <a 

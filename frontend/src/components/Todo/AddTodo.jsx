@@ -26,17 +26,17 @@ function AddTodo({ setHasChanges, isDisabled }) {
   }
 
   return (
-    <form onSubmit={addTodoHandler} className="mb-3 w-full flex gap-3 items-center">
+    <form onSubmit={addTodoHandler} className="mb-3 w-full flex gap-3 items-center min-w-0">
       <input
         type="text"
-        className="border rounded p-2 flex-grow focus:outline-[#03089a] shadow-sm w-36 sm:w-48 h-12"
+        className="border rounded p-2 flex-1 min-w-0 focus:outline-[#03089a] shadow-sm h-12 text-zinc-900"
         placeholder="Enter a Todo"
         value={input}
         onChange={(e) => setInput(e.target.value)}
       />
       <button
         type="submit"
-        className="px-2 py-3 bg-[#03089a] text-white rounded-md shadow-sm hover:bg-[#02087c] transition-all">
+        className="px-4 py-3 bg-[#03089a] text-white rounded-md shadow-sm hover:bg-[#02087c] transition-all shrink-0 whitespace-nowrap cursor-pointer">
         Add Todo
       </button>
     </form>

@@ -9,13 +9,13 @@ const ProfileSection = ({ children }) => {
   
       <div className="flex flex-col md:flex-row items-center justify-evenly w-full h-full bg-zinc-200 py-4 mb-6 md:mb-12 md:-mt-9">
       <div
-      className='text-5xl md:text-9xl rounded-full w-28 h-28 md:w-56 md:h-56 flex items-center justify-center text-white font-semibold cursor-pointer transition-all duration-200 bg-[#03089a]'>
+      className='text-5xl md:text-9xl rounded-full w-28 h-28 md:w-56 md:h-56 flex items-center justify-center text-white font-semibold cursor-pointer transition-all duration-200 bg-[#03089a] shrink-0'>
       {userNameFirstLetter}
     </div>
-        <div className='mt-8 md:mt-0 flex flex-col  items-center md:items-start gap-1'>
-          <h2 className="text-xl md:text-2xl font-bold text-zinc-950">{userData?.name}</h2>
-          <p className="text-zinc-600 text-base ">{userType}</p>
-          <p className="text-zinc-700 text-base ">{userData?.email}</p>
+        <div className='mt-8 md:mt-0 flex flex-col items-center md:items-start gap-1 min-w-0 max-w-full px-4'>
+          <h2 className="text-xl md:text-2xl font-bold text-zinc-950 break-words [overflow-wrap:anywhere] text-center md:text-left min-w-0 max-w-full">{userData?.name}</h2>
+          <p className="text-zinc-600 text-base">{userType}</p>
+          <p className="text-zinc-700 text-base break-all text-center md:text-left min-w-0 max-w-full">{userData?.email}</p>
         {children} 
         </div>
       </div>

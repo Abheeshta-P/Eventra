@@ -39,21 +39,21 @@ function ServiceDetail({ params }) {
     <DashboardLayout>
       <Container className="mb-5">
         <div className="flex flex-col px-3 md:px-8 w-full justify-center items-center gap-6">
-          <div className="flex flex-col justify-center items-center md:gap-3">
-            <h1 className="text-3xl lg:text-4xl font-semibold text-gray-950 text-center text-nowrap">
+          <div className="flex flex-col justify-center items-center md:gap-3 min-w-0 max-w-full">
+            <h1 className="text-3xl lg:text-4xl font-semibold text-gray-950 text-center break-words [overflow-wrap:anywhere] min-w-0">
               {service?.name}
             </h1>
-            <h3 className="text-lg text-zinc-500 md:text-xl">{service?.category}</h3>
+            <h3 className="text-lg text-zinc-500 md:text-xl break-words [overflow-wrap:anywhere]">{service?.category}</h3>
           </div>
-          <div className="flex flex-col gap-2 md:gap-3 w-full">
-            <h2 className="text-2xl lg:text-3xl font-semibold text-gray-900 text-nowrap">Details</h2>
-            <div className="text-zinc-700 text-base">{service?.details}</div>
-            <div className="text-zinc-700 text-base">Based on : {service?.location}</div>
-            <div className="text-zinc-700 text-base">Phone : {service?.phone}</div>
-            <div className="text-zinc-700 text-base">Email : {service?.email}</div>
+          <div className="flex flex-col gap-2 md:gap-3 w-full min-w-0">
+            <h2 className="text-2xl lg:text-3xl font-semibold text-gray-900">Details</h2>
+            <div className="text-zinc-700 text-base break-words [overflow-wrap:anywhere] min-w-0 whitespace-pre-line">{service?.details}</div>
+            <div className="text-zinc-700 text-base break-words [overflow-wrap:anywhere]">Based on : {service?.location}</div>
+            <div className="text-zinc-700 text-base break-all">Phone : {service?.phone}</div>
+            <div className="text-zinc-700 text-base break-all">Email : {service?.email}</div>
           </div>
-          <div className="flex flex-col gap-2 md:gap-3 w-full">
-            <h2 className="text-2xl lg:text-3xl font-semibold text-gray-900 text-nowrap">Gallery</h2>
+          <div className="flex flex-col gap-2 md:gap-3 w-full min-w-0">
+            <h2 className="text-2xl lg:text-3xl font-semibold text-gray-900">Gallery</h2>
             {
               service?.galleryImages?.length === 0 ? <div className='mb-12'>
               <p className="text-sm md:text-base text-zinc-700">

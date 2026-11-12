@@ -28,13 +28,13 @@ const BentoGrid = () => {
           return (
             <div
               key={feature.title}
-              className="border border-zinc-300 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow bg-zinc-100"
+              className="border border-zinc-300 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow bg-zinc-100 min-w-0 overflow-hidden"
             >
               <div className="icon text-[#03089a] mb-4">
                 <IconComponent size={32} />
               </div>
-              <h3 className="title font-bold text-base md:text-lg mb-2 text-[#03089a]">{feature.title}</h3>
-              <p className="description text-zinc-600 text-sm md:text-base">{feature.description}</p>
+              <h3 className="title font-bold text-base md:text-lg mb-2 text-[#03089a] break-words [overflow-wrap:anywhere] min-w-0">{feature.title}</h3>
+              <p className="description text-zinc-600 text-sm md:text-base break-words [overflow-wrap:anywhere] min-w-0">{feature.description}</p>
             </div>
           );
         })}

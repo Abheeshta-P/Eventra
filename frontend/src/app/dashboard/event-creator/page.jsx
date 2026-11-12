@@ -373,15 +373,15 @@ function EventCreator() {
                     return (
                       <div
                         key={`${req.eventId}-${req.serviceId}`}
-                        className="bg-zinc-100 rounded-xl p-3.5 shadow-xs hover:border-zinc-400 transition-all border border-zinc-300 flex flex-col justify-between gap-2.5"
+                        className="bg-zinc-100 rounded-xl p-3.5 shadow-xs hover:border-zinc-400 transition-all border border-zinc-300 flex flex-col justify-between gap-2.5 min-w-0 overflow-hidden"
                       >
-                        <div>
-                          <div className="flex items-start justify-between gap-2">
+                        <div className="min-w-0">
+                          <div className="flex items-start justify-between gap-2 min-w-0">
                             <div className="min-w-0 flex-1">
-                              <span className="text-[10px] uppercase tracking-wider font-bold text-zinc-500 block">
+                              <span className="text-[10px] uppercase tracking-wider font-bold text-zinc-500 block truncate">
                                 {req.eventName} • {req.eventType}
                               </span>
-                              <h3 className="text-sm font-bold text-zinc-950 truncate" title={req.serviceName}>
+                              <h3 className="text-sm font-bold text-zinc-950 truncate break-words [overflow-wrap:anywhere]" title={req.serviceName}>
                                 {req.serviceName}
                               </h3>
                               <p className="text-xs text-zinc-600 truncate mt-0.5">
@@ -398,13 +398,13 @@ function EventCreator() {
                             </div>
                           </div>
 
-                          <div className="mt-2 pt-1.5 border-t border-zinc-200/90 flex flex-col gap-1 text-[11px]">
-                            <div className="grid grid-cols-2 gap-2">
-                              <div className="truncate">
+                          <div className="mt-2 pt-1.5 border-t border-zinc-200/90 flex flex-col gap-1 text-[11px] min-w-0">
+                            <div className="grid grid-cols-2 gap-2 min-w-0">
+                              <div className="truncate min-w-0">
                                 <span className="text-[9px] uppercase font-bold text-zinc-400 block">Location</span>
-                                <span className="text-zinc-800 font-medium truncate block">{req.location}</span>
+                                <span className="text-zinc-800 font-medium truncate block" title={req.location}>{req.location}</span>
                               </div>
-                              <div className="truncate">
+                              <div className="truncate min-w-0">
                                 <span className="text-[9px] uppercase font-bold text-zinc-400 block">Event Date</span>
                                 <span className="text-zinc-800 font-medium truncate block">
                                   {new Date(req.eventDate).toLocaleDateString('en-US', {
