@@ -1,130 +1,126 @@
+<h1 align='center'>Eventra - Digital Event Management & Vendor Marketplace</h1>
+
+<p align="center">
+  <strong>The all-in-one Event Operating System: Plan events, discover and book verified vendors, collect digital RSVPs, and manage guest lists seamlessly.</strong>
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/version-2.0.0-blue.svg" alt="Version 2.0.0" />
+  <img src="https://img.shields.io/badge/Next.js-14-black.svg" alt="Next.js" />
+  <img src="https://img.shields.io/badge/Node.js-Express-green.svg" alt="Node.js" />
+  <img src="https://img.shields.io/badge/MongoDB-Mongoose-emerald.svg" alt="MongoDB" />
+  <img src="https://img.shields.io/badge/TailwindCSS-Zinc-zinc.svg" alt="Tailwind CSS" />
+  <img src="https://img.shields.io/badge/License-All_Rights_Reserved-red.svg" alt="License" />
+</p>
 
 
-<h1 align='center'> Eventra - Event Management Portal </h1>
+## What is Eventra?
 
-**Eventra** is a comprehensive event management platform that connects users with service providers like caterers, decorators, and venues. Users can create events, manage guest lists, send invitations, and much more—all through a seamless, user-friendly interface.
+**Eventra** simplifies event planning by bringing hosts and service providers together under one unified digital platform. 
 
-
-## Features
-
-- **Event Planning**: Create and plan events with ease.  
-- **Service Listings**: Find and connect with nearby service providers based on event types.  
-- **Guest List Management**: Organize your event guests within the same platform to make everything digital.  
-- **Notifications**: Allowed event creators to plan events and receiving a **CSV** of selected services via email. Notifications are sent to service providers when selected by event creators via email.
-- **Service Provider Dashboard**: Upload galleries, update details!  
+Whether you are hosting a wedding, corporate conference, or birthday celebration, Eventra helps you organize every detail: from booking caterers, decorators, and venues, to sending branded digital invitations and tracking guest RSVPs in real time.
 
 
-## Tech Stack
+## Tech Stack & Architecture
 
-- **Frontend**: Next.js, React, Tailwind CSS  
-- **Backend**: Node.js, Express.js  
-- **Database**: MongoDB  
-- **Authentication**: JWT  
-- **Email**: Nodemailer  
-- **Styling**: Tailwind CSS
+Eventra is built as a decoupled full-stack web application designed for fast page loads, real-time coordination, and scalable state management:
+
+```
+┌────────────────────────────────────────────────────────┐
+│                   Next.js 14 Client                    │
+│   (App Router • Tailwind CSS • Redux Toolkit • Icons)   │
+└───────────────────────────┬────────────────────────────┘
+                            │  HTTP / REST (JSON)
+                            ▼
+┌────────────────────────────────────────────────────────┐
+│                 Express.js Backend API                 │
+│  (JWT Auth • Role-based Middleware • Nodemailer Utils) │
+└─────────────┬──────────────────────────┬───────────────┘
+              │                          │
+              ▼                          ▼
+     ┌─────────────────┐       ┌──────────────────┐
+     │ MongoDB Cluster │       │ Cloudinary Media │
+     │  (Mongoose ODM) │       │ (Provider Gallery│
+     └─────────────────┘       └──────────────────┘
+```
+
+* **Frontend**: Next.js 14 (App Router) with React 18 and Tailwind CSS for responsive styling. Redux Toolkit manages complex client-side state across multi-step event wizards and door check-ins.
+* **Backend**: Node.js & Express.js with ES Modules. Routes are segmented into public unauthenticated portals (RSVP), role-protected event creator routes, and service provider management routes.
+* **Authentication & Security**: Secure JSON Web Tokens (JWT) stored in HTTP-only cookies to prevent client-side script tampering, coupled with server-side role verification.
+* **Database**: MongoDB with Mongoose ODM modeling users, events, service catalogs, and invitee subdocuments with optimized schema normalization.
+* **Automated Mailer**: Centralized Nodemailer utility with Gmail SMTP and branded HTML templates for event confirmations, booking alerts, and invitation dispatches.
 
 
 ## Screenshots
 
-| **Landing page**                         | **Sign Up (Service Provider)**              |
-|------------------------------------------|------------------------------------------|
-| <img src="https://github.com/user-attachments/assets/6bb88440-4acf-42c3-9bd9-9074df33a8cb" width="500" height="auto">| <img src="https://github.com/user-attachments/assets/ab741b92-b595-4c77-b54c-f08de0b709b0" width="500" height="auto"> |
+| **Landing Page** | **Sign Up (Service Provider)** |
+|---|---|
+| <img src="https://github.com/user-attachments/assets/6bb88440-4acf-42c3-9bd9-9074df33a8cb" width="500" alt="Landing page"> | <img src="https://github.com/user-attachments/assets/ab741b92-b595-4c77-b54c-f08de0b709b0" width="500" alt="Sign Up"> |
 
-| **Sign Up (Event Creator)**           | **Login**                                |
-|------------------------------------------|------------------------------------------|
-| <img src="https://github.com/user-attachments/assets/2b2dce36-b124-4081-8ae0-78233afb6873" width="500" height="auto"> | <img src="https://github.com/user-attachments/assets/7e7456b6-1b94-4549-bc2e-1421d023c616" width="500" height="auto"> |
+| **Sign Up (Event Creator)** | **Login** |
+|---|---|
+| <img src="https://github.com/user-attachments/assets/2b2dce36-b124-4081-8ae0-78233afb6873" width="500" alt="Sign Up Creator"> | <img src="https://github.com/user-attachments/assets/7e7456b6-1b94-4549-bc2e-1421d023c616" width="500" alt="Login"> |
 
-| **Dashboard (Event Creator)**            | **Dashboard (Service Provider)**         |
-|------------------------------------------|------------------------------------------|
-| <img src="https://github.com/user-attachments/assets/b5c1f72a-902d-4d15-8f8d-4774c50b7b4b" width="500" height="auto"> | <img src="https://github.com/user-attachments/assets/034d1044-cfb6-4350-8647-aa10fca662c8" width="500" height="auto"> |
+| **Dashboard (Event Creator)** | **Dashboard (Service Provider)** |
+|---|---|
+| <img src="https://github.com/user-attachments/assets/b5c1f72a-902d-4d15-8f8d-4774c50b7b4b" width="500" alt="Dashboard Creator"> | <img src="https://github.com/user-attachments/assets/034d1044-cfb6-4350-8647-aa10fca662c8" width="500" alt="Dashboard Provider"> |
 
-| **Email (Event Creator)**            | **Email (Service Provider)**         |
-|------------------------------------------|------------------------------------------|
-| <img src="https://github.com/user-attachments/assets/6cd5a39c-46a0-4fb2-a535-9103ce8553be" width="500" height="auto"> | <img src="https://github.com/user-attachments/assets/fc859802-2a2c-4f5c-9812-8af167f79485" width="500" height="auto"> |
-
-## How to Run the Project
-
-### Prerequisites
-
-Ensure you have the following installed:
-
-1. **Node.js** (v16 or higher)  
-2. **MongoDB** (local or cloud instance)  
-3. **Git**  
-
-### Setup Instructions
-
-1. **Clone the repository**  
-   ```bash
-   git clone https://github.com/yourusername/eventra.git
-   cd eventra
-   ```
-
-2. **Install dependencies for the frontend and backend**  
-   ```bash
-   # For the backend
-   cd backend
-   npm install
-   ```
-
-   ```bash
-   # For the frontend
-   cd frontend
-   npm install
-   ```
-
-3. **Set up environment variables**  
-   Create a `.env` file in the `backend` folder with the following:  
-   ```env
-   EMAIL = ''
-   PASS = ''
-   MONGODB = ''
-   JWT_SECRET = ''
-   CLOUDINARY_CLOUD_NAME = ''
-   CLOUDINARY_API_KEY = ''
-   CLOUDINARY_API_SECRET = ''
-   ```
-    Create a `.env` file in the `frontend` folder with the following:  
-   ```env
-   NEXT_PUBLIC_API_URL='http://localhost:5000' // port number given in backend
-   ```
-
-4. **Run MongoDB**  
-   Make sure your MongoDB instance is running.  
-
-5. **Start the backend server**  
-   In the `backend` folder:  
-   ```bash
-   npm start
-   ```
-
-6. **Start the frontend server**  
-   In the `frontend` folder:  
-   ```bash
-   npm run dev
-   ```
-
-7. **Access the application**  
-   Open [http://localhost:3000](http://localhost:3000) in your browser.
+| **Email (Event Creator)** | **Email (Service Provider)** |
+|---|---|
+| <img src="https://github.com/user-attachments/assets/6cd5a39c-46a0-4fb2-a535-9103ce8553be" width="500" alt="Email Creator"> | <img src="https://github.com/user-attachments/assets/fc859802-2a2c-4f5c-9812-8af167f79485" width="500" alt="Email Provider"> |
 
 
-## Eventra 2.0 Features
+## Core Platform Features
 
-Eventra 2.0 transforms the portal into a complete end-to-end Event Operating System and Vendor Marketplace:
+### For Event Creators
+* **Guided Event Setup**: Plan events by type, location, and date with tailored vendor categories.
+* **Vendor Booking**: Browse and book caterers, decorators, venues, and photographers.
+* **Task Checklist**: Manage to-dos and track preparation progress directly on your event dashboard.
+* **Event Management**: Monitor active upcoming celebrations and review completed past events.
+* **Canva Integration**: Create custom flyers and invitations with Canva.
 
-- **Vendor Booking & Inquiries Hub**: In-app booking management for service providers with real-time status transitions (`Pending`, `Confirmed`, `Declined`, `Completed`).
-- **Public Digital RSVP Portal**: Shareable `/rsvp/:eventId` links allowing guests to confirm attendance, headcount (+1s), and dietary requirements in real time.
-- **Smart Event Budget Tracker**: Dynamic cost calculator tracking target budget vs. actual booked services, with category-wise expenditure breakdowns.
-- **Service Provider Ratings & Verified Reviews**: 5-star rating system with client feedback on service cards and provider profiles.
-- **Advanced Discovery & Smart Filtering**: Filter service providers by budget range, location, category, and average ratings with instant keyword search.
-- **Event Command Center & Countdown Widget**: Real-time event countdown, checklist completion rates, and an overall event readiness index.
-- **Calendar Sync & PDF Export**: Instant "Add to Google Calendar" (.ics export) and downloadable event schedule briefs.
+### For Service Providers
+* **Portfolio Showcase**: Display service offerings, pricing, location details, and photo galleries.
+* **Client Inquiries**: Receive and manage client booking requests.
+
+<h2 align="center">What's New in Eventra 2.0</h2>
+
+* **Two-Way Vendor Booking & Settlement**: Booking approvals, delivery verification, and offline payment confirmations.
+* **Digital RSVP Portal (`/rsvp/:eventId`)**: Shareable guest link to collect real-time attendance, party headcount, and dietary preferences.
+* **Smart Invitee Management**: Auto-saving guest lists with CSV bulk imports, live door check-ins, and batch email or send WhatsApp invites.
+* **Polished UI**: Clean, zinc theme design.
 
 
-## Contact
-Feel free to reach out if you have questions or suggestions!
+## Eventra 2.0 Roadmap
+
+- [x] **Feature 1**: Vendor Booking & Offline Settlement Flow
+- [x] **Feature 2**: Public Digital RSVP Portal & Invitee Management Hub
+- [ ] **Feature 3**: Smart Event Budget Tracker (Track target budget vs. actual costs with visual breakdown)
+- [ ] **Feature 4**: Service Provider Ratings & Verified Reviews (5-star rating system with client feedback)
+- [ ] **Feature 5**: Advanced Discovery & Smart Filtering (Filter by price range, distance, category, and minimum rating)
+- [ ] **Feature 6**: Event Countdown & Readiness Widget (Real-time countdown timer, checklist progress, and readiness score)
+- [ ] **Feature 7**: Calendar Sync (.ics export & Google Calendar) & Downloadable Schedule PDF
+
+
+## Getting Started
+
+To install dependencies and run the project locally, refer to the complete guide:
+
+**[DEVELOPMENT.md](./DEVELOPMENT.md)**
+
+
+## Contact & Support
+
+Feel free to reach out if you have questions, feedback, or suggestions!
+
+## Collaboration & Contribution Notice
+
+> [!NOTE]  
+> **Currently not open to collaboration.**  
+> This repository is a personal project and is currently not accepting external pull requests or contributions. Please do not raise PRs.
 
 ## License
-**All Rights Reserved to Abheeshta-P**
+
+**©Abheeshta-P. All Rights Reserved.**  
 
 > **Note**: Project is under development for 2.0

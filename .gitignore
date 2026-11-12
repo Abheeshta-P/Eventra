@@ -1,0 +1,9 @@
+# Release drafts (for GitHub Releases only)
+release.md
+RELEASE.md
+
+# OS & Editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

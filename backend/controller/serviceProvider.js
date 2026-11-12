@@ -1,8 +1,7 @@
 import serviceProvider from '../models/serviceProvider.js';
 import cloudinary from '../utils/cloudinary.js';
 import Event from '../models/event.js';
-import nodemailer from 'nodemailer';
-import { companyEmail, pass } from '../conf.js';
+import { sendMail, renderEmailTemplate } from '../utils/mailer.js';
 
 export async function handleServiceDetailsUpdate(req, res) {
   const { id } = req.user; 
@@ -173,24 +172,29 @@ export async function handleUpdateBookingStatus(req, res) {
     targetService.status = status;
     await event.save();
 
-    // Try sending email notification to the creator
-    if (companyEmail && pass && event.creator?.email) {
-      try {
-        const transporter = nodemailer.createTransport({
-          service: 'gmail',
-          auth: { user: companyEmail, pass: pass }
-        });
+    // Send email notification to the creator with branded template
+    if (event.creator?.email) {
+      const statusLabel = status.toUpperCase();
+      const html = renderEmailTemplate({
+        preheader: 'Booking Status Update',
+        title: `Service Status: ${statusLabel}`,
+        subtitle: `Event: <strong>${event.eventName}</strong>`,
+        contentHtml: `
+          <p style="margin: 0 0 10px 0;">Dear <strong>${event.creator.name || 'Event Host'}</strong>,</p>
+          <p style="margin: 0 0 14px 0;">Your service provider <strong>${provider.name}</strong> (${provider.category}) has updated their booking status to: <span style="font-weight: 700; color: #03089a;">${statusLabel}</span>.</p>
+          <div style="background-color: #f4f4f5; padding: 12px 16px; border-radius: 8px; font-size: 12px; color: #27272a; line-height: 1.6;">
+            <p style="margin: 0;"><strong>Event Date:</strong> ${event.date}</p>
+            <p style="margin: 4px 0 0 0;"><strong>Location:</strong> ${event.location}</p>
+          </div>
+        `
+      });
 
-        const statusLabel = status.toUpperCase();
-        await transporter.sendMail({
-          from: `Eventra <${companyEmail}>`,
-          to: event.creator.email,
-          subject: `Booking Update: ${provider.name} has marked your request as ${statusLabel}`,
-          text: `Dear ${event.creator.name},\n\nYour service provider ${provider.name} (${provider.category}) for event "${event.eventName}" has updated their booking status to: ${statusLabel}.\n\nEvent Date: ${event.date}\nLocation: ${event.location}\n\nYou can review your full event status on your Eventra dashboard.\n\nBest,\nEventra Team`
-        });
-      } catch (mailErr) {
-        console.warn("Could not send status update email:", mailErr.message);
-      }
+      sendMail({
+        to: event.creator.email,
+        subject: `Booking Update: ${provider.name} has marked your request as ${statusLabel}`,
+        text: `Dear ${event.creator.name},\n\nYour service provider ${provider.name} (${provider.category}) for event "${event.eventName}" has updated their booking status to: ${statusLabel}.\n\nEvent Date: ${event.date}\nLocation: ${event.location}\n\nBest,\nEventra Team`,
+        html
+      }).catch(mailErr => console.warn("Could not send status update email:", mailErr.message));
     }
 
     res.status(200).json({ message: "Booking status updated successfully", status });

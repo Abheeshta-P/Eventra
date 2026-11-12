@@ -231,5 +231,29 @@ const eventCreatorService = {
       return [];
     }
   },
+  sendEventInvites: async (eventId, recipientIds) => {
+    try {
+      const response = await fetch(`${url}/api/eventCreator/event/${eventId}/send-invites`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          ...getAuthHeaders(),
+        },
+        credentials: 'include',
+        body: JSON.stringify({ recipientIds }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        return data;
+      } else {
+        const errorData = await response.json().catch(() => ({}));
+        return { error: errorData.error || 'Failed to send invitations' };
+      }
+    } catch (error) {
+      console.error('Error sending event invites:', error);
+      return { error: 'Network error while sending invitations' };
+    }
+  },
 }
 export default eventCreatorService;

@@ -136,15 +136,6 @@ function CategoryServices({ params }) {
     {fallbackMessage}
     </div>
     }
-
-    <div className="mt-8 flex gap-4">
-      <Button 
-        className="font-bold px-8 py-3 bg-[#03089a]" 
-        onClick={() => router.push(`/dashboard/event-creator/event-types/${eventType}/categories`)}
-      >
-        Done, Back to Categories
-      </Button>
-    </div>
   </Container>
 
 

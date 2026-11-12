@@ -16,10 +16,10 @@ function EventsCard({ eventId, eventName, eventType, date, location, className =
     }
   };
   return (
-    <div className={`relative flex flex-col shadow-xs hover:border-zinc-400 border border-zinc-300 rounded-xl w-full max-w-[320px] bg-zinc-100 justify-between p-3.5 transition-all duration-200 cursor-pointer ${eventStatus} ${className}`}
+    <div className={`relative flex flex-col shadow-xs hover:border-zinc-400 border border-zinc-300 rounded-xl w-full max-w-[320px] min-w-0 overflow-hidden bg-zinc-100 justify-between p-3.5 transition-all duration-200 cursor-pointer ${eventStatus} ${className}`}
       {...props}
       onClick={displayEventDetails}>
-       <div>
+       <div className="min-w-0">
        {isEditing?<div className='absolute z-30 w-7 h-7 bg-zinc-600 text-white flex justify-center items-center rounded-full top-2 right-1 deleteEvent'>
         <button onClick={(e) => {
             e.stopPropagation(); 
@@ -34,14 +34,14 @@ function EventsCard({ eventId, eventName, eventType, date, location, className =
           className="object-cover w-full h-full"
         />
         </div>
-      <div className="flex flex-col mt-2">
-        <h1 className="font-bold text-zinc-950 text-base text-center truncate">
+      <div className="flex flex-col mt-2 min-w-0">
+        <h1 className="font-bold text-zinc-950 text-base text-center break-words [overflow-wrap:anywhere] min-w-0 line-clamp-1" title={eventName}>
           {eventName}
         </h1>
-        <h3 className="text-zinc-600 text-xs text-center capitalize">{eventType}</h3>
+        <h3 className="text-zinc-600 text-xs text-center capitalize truncate min-w-0">{eventType}</h3>
       </div>
-      <div className="flex justify-between items-center w-full text-zinc-600 text-xs font-medium pt-2 mt-2 border-t border-zinc-200">
-        <span className="truncate">{location}</span>
+      <div className="flex justify-between items-center w-full min-w-0 text-zinc-600 text-xs font-medium pt-2 mt-2 border-t border-zinc-200 gap-2">
+        <span className="truncate min-w-0 flex-1" title={location}>{location}</span>
         <span className="shrink-0 font-semibold text-zinc-800">{date}</span>
       </div>
        </div>

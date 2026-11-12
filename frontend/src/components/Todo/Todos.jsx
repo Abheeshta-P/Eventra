@@ -4,54 +4,59 @@ import { deleteTodo,updateTodo,toggleTodo } from "@/store/features/todoSlice"
 import { useState } from "react";
 import { HiPencil, HiCheck } from 'react-icons/hi';
 
-function TodoItem({todo,setHasChanges}){
+function TodoItem({todo, setHasChanges, isDisabled}){
   const dispatch = useDispatch();
   const [isTaskEditable,setIsTaskEditable] = useState(false)
   const [text,setText] = useState(todo.text);
   return (
   <li
-  className={`flex gap-1 w-fit sm:w-full items-center sm:gap-3 p-3 bg-zinc-50 rounded-md shadow-md mb-2 ${todo.completed?'blur-[2px]':''}`}
+  className={`flex gap-1 w-full min-w-0 items-center sm:gap-3 p-3 bg-zinc-50 rounded-md shadow-md mb-2 ${todo.completed?'blur-[2px]':''}`}
   key={todo.id}
 >
    <input
     type="checkbox"
-    className="cursor-pointer"
+    disabled={isDisabled}
+    className={isDisabled ? "cursor-not-allowed opacity-60 shrink-0" : "cursor-pointer shrink-0"}
     checked={todo.completed}
     onChange={()=>{
+      if (isDisabled) return;
       dispatch(toggleTodo({id : todo.id}))
       setHasChanges(true);
     }}
 />
   <input
     type="text"
-    className={`ml-4 border outline-none w-full bg-transparent rounded-lg py-[5px] font-semibold ${
+    className={`ml-2 sm:ml-4 border outline-none w-full min-w-0 flex-1 bg-transparent rounded-lg py-[5px] font-semibold break-words [overflow-wrap:anywhere] ${
         isTaskEditable ? "border-white/10 px-2" : "border-transparent"
-    } ${todo.completed ? "line-through" : ""}`}
+    } ${todo.completed ? "line-through" : ""} ${isDisabled ? "cursor-default" : ""}`}
     value={text}
     onChange={(e) => setText(e.target.value)}
-    readOnly={!isTaskEditable}
+    readOnly={!isTaskEditable || isDisabled}
 />
-<button
-    className="mx-2 inline-flex w-8 h-8 rounded-lg text-sm border border-black/10 justify-center items-center bg-gray-50 hover:bg-gray-100 shrink-0 disabled:opacity-50"
-    onClick={() => {
-        if (todo.completed) return;
+{!isDisabled && (
+  <button
+      className="mx-2 inline-flex w-8 h-8 rounded-lg text-sm border border-black/10 justify-center items-center bg-gray-50 hover:bg-gray-100 shrink-0 disabled:opacity-50 cursor-pointer"
+      onClick={() => {
+          if (todo.completed) return;
 
-        if (isTaskEditable) {
-          dispatch(updateTodo({id:todo.id,text:text}));
-          setIsTaskEditable((prev) => !prev);
-          setHasChanges(true);
-        } else setIsTaskEditable((prev) => !prev);
-    }}
-    disabled={todo.completed}
->
-    {isTaskEditable ? <HiCheck className="text-green-700" size={16} /> : <HiPencil className="text-zinc-700" size={16} />}
-</button>
+          if (isTaskEditable) {
+            dispatch(updateTodo({id:todo.id,text:text}));
+            setIsTaskEditable((prev) => !prev);
+            setHasChanges(true);
+          } else setIsTaskEditable((prev) => !prev);
+      }}
+      disabled={todo.completed}
+  >
+      {isTaskEditable ? <HiCheck className="text-green-700" size={16} /> : <HiPencil className="text-zinc-700" size={16} />}
+  </button>
+)}
+{!isDisabled && (
   <button
    onClick={() =>{
     dispatch(deleteTodo({id : todo.id}))
     setHasChanges(true);
    }}
-    className="text-white bg-red-500 border-0 py-1 px-4 focus:outline-none hover:bg-red-600 rounded text-md"
+    className="text-white bg-red-500 border-0 py-1 px-4 focus:outline-none hover:bg-red-600 rounded text-md cursor-pointer"
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -68,18 +73,19 @@ function TodoItem({todo,setHasChanges}){
       />
     </svg>
   </button>
+)}
 </li>
   )
 }
 
-function Todos({setHasChanges}) {
+function Todos({setHasChanges, isDisabled}) {
  const todos = useSelector(state => state.todoList.todos)||[]
   
   return (
     <>
     <ul className="list-none">
         {todos?.map((todo) => (
-         <TodoItem key={todo.id} todo={todo} setHasChanges={setHasChanges}/>
+         <TodoItem key={todo.id} todo={todo} setHasChanges={setHasChanges} isDisabled={isDisabled}/>
         ))}
       </ul>
     </>
